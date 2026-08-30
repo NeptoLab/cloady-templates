@@ -1,0 +1,13 @@
+{
+  "envSchema": {
+    "GOTIFY_DEFAULTUSER_NAME": {
+      "title": "Gotify username"
+    },
+    "GOTIFY_DEFAULTUSER_PASS": {
+      "title": "Gotify password",
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.png"
+}

@@ -1,0 +1,29 @@
+{
+  "envSchema": {
+    "APP_PROTOCOL": {
+      "default": "http"
+    },
+    "GHOST_MAIL_HOST": {
+      "title": "SMTP Host"
+    },
+    "GHOST_MAIL_PORT": {
+      "title": "SMTP Port"
+    },
+    "GHOST_MAIL_USER": {
+      "title": "SMTP Username"
+    },
+    "GHOST_MAIL_SERVICE": {
+      "title": "Mail Service name"
+    },
+    "GHOST_MAIL_PASSWORD": {
+      "title": "SMTP Password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "GHOST_DATABASE_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

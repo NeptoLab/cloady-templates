@@ -1,0 +1,31 @@
+{
+  "envSchema": {
+    "INTERNAL_IP": {
+      "title": "INTERNAL_IP",
+      "default": ""
+    },
+    "APP_PROTOCOL": {
+      "default": "http"
+    },
+    "LIBREPHOTOS_EMAIL": {
+      "title": "LibrePhotos admin email"
+    },
+    "LIBREPHOTOS_PASSWORD": {
+      "title": "LibrePhotos admin password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "LIBREPHOTOS_USERNAME": {
+      "title": "LibrePhotos admin username"
+    },
+    "LIBREPHOTOS_SECRET_KEY": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "LIBREPHOTOS_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

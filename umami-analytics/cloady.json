@@ -1,0 +1,13 @@
+{
+  "envSchema": {
+    "UMAMI_ANALYTICS_APP_SECRET": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "UMAMI_ANALYTICS_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

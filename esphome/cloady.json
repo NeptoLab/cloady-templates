@@ -1,0 +1,21 @@
+{
+  "envSchema": {
+    "TZ": {
+      "title": "Timezone",
+      "default": "UTC"
+    },
+    "ESPHOME_PING": {
+      "title": "Use ping for devices availability ? (default to mDNS)"
+    },
+    "ESPHOME_PASSWORD": {
+      "title": "Password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "ESPHOME_USERNAME": {
+      "title": "Username",
+      "default": ""
+    }
+  },
+  "icon": "./icon.png"
+}

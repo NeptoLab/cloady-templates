@@ -1,0 +1,24 @@
+{
+  "envSchema": {
+    "TZ": {
+      "title": "Timezone",
+      "default": "UTC"
+    },
+    "EMAIL": {
+      "title": "Your email"
+    },
+    "APP_KEY": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "MYSQL_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "STATIC_CRON_TOKEN": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

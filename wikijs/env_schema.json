@@ -1,6 +1,0 @@
-{
-  "WIKI_JS_DB_PASS": {
-    "secret": true,
-    "generate": "password:32"
-  }
-}

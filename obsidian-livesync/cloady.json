@@ -1,0 +1,17 @@
+{
+  "envSchema": {
+    "OBSIDIAN_LIVESYNC_USER": {
+      "title": "CouchDB username"
+    },
+    "OBSIDIAN_LIVESYNC_PASSWORD": {
+      "title": "CouchDB password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "CUSTOM_PORTOBSIDIAN_LIVESYNC_PORT": {
+      "title": "CouchDB port",
+      "default": "5984"
+    }
+  },
+  "icon": "./icon.png"
+}

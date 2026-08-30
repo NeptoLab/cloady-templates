@@ -1,0 +1,13 @@
+{
+  "envSchema": {
+    "TANDOOR_SECRET_KEY": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "TANDOOR_POSTGRESS_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

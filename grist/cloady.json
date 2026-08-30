@@ -1,0 +1,11 @@
+{
+  "envSchema": {
+    "APP_PROTOCOL": {
+      "default": "http"
+    },
+    "GRIST_SANDBOX_FLAVOR": {
+      "title": "GRIST_SANDBOX_FLAVOR"
+    }
+  },
+  "icon": "./icon.png"
+}

@@ -1,8 +1,0 @@
-{
-  "PUBLIC_URL": {
-    "default": "${CLOADY_PRIMARY_URL}"
-  },
-  "PUBLIC_HOST": {
-    "default": "${CLOADY_PRIMARY_HOST}"
-  }
-}

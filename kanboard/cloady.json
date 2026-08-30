@@ -1,0 +1,8 @@
+{
+  "envSchema": {
+    "PLUGIN_INSTALLER": {
+      "title": "Enable Plugin Installer"
+    }
+  },
+  "icon": "./icon.png"
+}

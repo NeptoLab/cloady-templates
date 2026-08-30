@@ -1,0 +1,21 @@
+{
+  "envSchema": {
+    "DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "APP_PROTOCOL": {
+      "default": "http"
+    },
+    "DB_ROOT_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "PHOTOPRISM_ADMIN_PASSWORD": {
+      "title": "Photoprism admin password",
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.png"
+}

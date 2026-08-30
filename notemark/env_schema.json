@@ -1,6 +1,0 @@
-{
-  "NOTEMARK_SERVICE_SECRET": {
-    "secret": true,
-    "generate": "password:32"
-  }
-}

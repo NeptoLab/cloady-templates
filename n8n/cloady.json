@@ -1,0 +1,16 @@
+{
+  "envSchema": {
+    "PUBLIC_URL": {
+      "default": "${CLOADY_PRIMARY_URL}"
+    },
+    "PUBLIC_HOST": {
+      "default": "${CLOADY_PRIMARY_HOST}"
+    },
+    "N8N_ENCRYPTION_KEY": {
+      "title": "Encryption key",
+      "secret": true,
+      "generate": "hex:32"
+    }
+  },
+  "icon": "./icon.svg"
+}

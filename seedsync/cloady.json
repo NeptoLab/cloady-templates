@@ -1,0 +1,15 @@
+{
+  "envSchema": {
+    "TZ": {
+      "title": "Timezone",
+      "default": "UTC"
+    },
+    "SEEDSYNC_PGID": {
+      "title": "GUID"
+    },
+    "SEEDSYNC_PUID": {
+      "title": "UID"
+    }
+  },
+  "icon": "./icon.png"
+}

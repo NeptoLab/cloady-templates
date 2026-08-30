@@ -1,0 +1,8 @@
+{
+  "envSchema": {
+    "TASKS_MD_TITLE": {
+      "title": "Board Title"
+    }
+  },
+  "icon": "./icon.png"
+}

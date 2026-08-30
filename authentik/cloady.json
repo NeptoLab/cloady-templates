@@ -1,0 +1,16 @@
+{
+  "envSchema": {
+    "PG_DB": {
+      "default": "authentik"
+    },
+    "PG_PASS": {
+      "default": "authentik"
+    },
+    "PG_USER": {
+      "default": "authentik"
+    },
+    "AUTHENTIK_SECRET_KEY": {
+      "default": "authentiksupersecretkey"
+    }
+  }
+}

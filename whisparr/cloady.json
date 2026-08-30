@@ -1,0 +1,18 @@
+{
+  "envSchema": {
+    "TZ": {
+      "title": "Timezone",
+      "default": "UTC"
+    },
+    "WHISPARR_PGID": {
+      "title": "GUID"
+    },
+    "WHISPARR_PUID": {
+      "title": "UID"
+    },
+    "WHISPARR_UMASK": {
+      "title": "UMASK"
+    }
+  },
+  "icon": "./icon.png"
+}

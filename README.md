@@ -9,7 +9,9 @@ after its catalog slug:
 supabase/
   docker-compose.yml   the template - vanilla compose, no custom extensions
   configs/             files referenced by the compose configs section
-  env_schema.json      Cloady sidecar: env var titles, secrets, generate directives
+  cloady.json          Cloady manifest: envSchema (titles, secrets, generate
+                       directives) and an icon reference - extensible; any
+                       deployed repo may carry one too
   icon.png             catalog tile icon
 ```
 

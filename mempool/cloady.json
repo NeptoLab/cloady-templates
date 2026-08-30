@@ -1,0 +1,22 @@
+{
+  "envSchema": {
+    "BITCOIND_DIR": {
+      "title": "Custom Bitcoin data folder location (for .cookie file)"
+    },
+    "CORE_RPC_HOST": {
+      "title": "Custom Bitcoin node host address"
+    },
+    "ELECTRUM_HOST": {
+      "title": "Custom Electrs host address"
+    },
+    "ELECTRUM_PORT": {
+      "title": "Custom Electrs host port",
+      "default": "50001"
+    },
+    "MEMPOOL_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

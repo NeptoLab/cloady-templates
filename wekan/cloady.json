@@ -1,0 +1,13 @@
+{
+  "envSchema": {
+    "MAIL_ADDRESS": {
+      "title": "Email Address"
+    },
+    "MAIL_PASSWORD": {
+      "title": "Email Password",
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.png"
+}

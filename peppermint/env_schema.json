@@ -1,9 +1,0 @@
-{
-  "PEPPERMINT_DOMAIN_API": {
-    "title": "API URL"
-  },
-  "PEPPERMINT_DB_PASSWORD": {
-    "secret": true,
-    "generate": "password:32"
-  }
-}

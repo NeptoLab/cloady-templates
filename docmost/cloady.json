@@ -1,0 +1,16 @@
+{
+  "envSchema": {
+    "APP_PROTOCOL": {
+      "default": "http"
+    },
+    "DOCMOST_APP_SECRET": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "DOCMOST_PG_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

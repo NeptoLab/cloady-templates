@@ -1,0 +1,22 @@
+{
+  "envSchema": {
+    "PUBLIC_URL": {
+      "default": "${CLOADY_PRIMARY_URL}"
+    },
+    "POSTGRES_HOST": {
+      "default": "${CLOADY_HOST_DB}"
+    },
+    "CLICKHOUSE_HOST": {
+      "default": "${CLOADY_HOST_EVENTS}"
+    },
+    "SECRET_KEY_BASE": {
+      "secret": true,
+      "generate": "hex:64"
+    },
+    "POSTGRES_PASSWORD": {
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.svg"
+}

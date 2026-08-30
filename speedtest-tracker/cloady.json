@@ -1,0 +1,26 @@
+{
+  "envSchema": {
+    "TZ": {
+      "title": "Timezone",
+      "default": "UTC"
+    },
+    "SPEEDTEST_APP_KEY": {
+      "title": "Application Key",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "SPEEDTEST_SERVERS": {
+      "title": "Speedtest Servers (comma-separated IDs)",
+      "default": ""
+    },
+    "SPEEDTEST_SCHEDULE": {
+      "title": "Speedtest Schedule (cron format)",
+      "default": "30 * * * *"
+    },
+    "SPEEDTEST_TRACKER_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

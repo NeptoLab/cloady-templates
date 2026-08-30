@@ -1,0 +1,31 @@
+{
+  "envSchema": {
+    "CROSSPLAY": {
+      "type": "boolean",
+      "title": "Crossplay",
+      "default": true,
+      "description": "Players join by the code in the server log."
+    },
+    "WORLD_NAME": {
+      "title": "World name",
+      "default": "Dedicated",
+      "description": "Save file name \u2014 changing it later starts a new world."
+    },
+    "SERVER_NAME": {
+      "title": "Server name",
+      "default": "A Cloady Valheim server"
+    },
+    "SERVER_PASS": {
+      "title": "Server password",
+      "secret": true,
+      "generate": "password:12",
+      "description": "Valheim requires at least 5 characters."
+    },
+    "SERVER_PUBLIC": {
+      "type": "boolean",
+      "title": "List in community browser",
+      "default": false
+    }
+  },
+  "icon": "./icon.png"
+}

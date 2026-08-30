@@ -1,0 +1,8 @@
+{
+  "envSchema": {
+    "GRAMPSWEB_TREE": {
+      "title": "Gramps tree name"
+    }
+  },
+  "icon": "./icon.png"
+}

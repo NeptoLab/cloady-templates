@@ -1,0 +1,14 @@
+{
+  "envSchema": {
+    "TZ": {
+      "title": "Timezone",
+      "default": "UTC"
+    },
+    "APP_PASSWORD": {
+      "title": "Password",
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.png"
+}

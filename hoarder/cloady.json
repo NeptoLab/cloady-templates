@@ -1,0 +1,21 @@
+{
+  "envSchema": {
+    "APP_PROTOCOL": {
+      "default": "http"
+    },
+    "OPENAI_API_KEY": {
+      "title": "OpenAI API Key",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "NEXTAUTH_SECRET": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "MEILI_MASTER_KEY": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

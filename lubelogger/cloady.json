@@ -1,0 +1,88 @@
+{
+  "envSchema": {
+    "TZ": {
+      "title": "Timezone",
+      "default": "UTC"
+    },
+    "LUBELOGGER_MOTD": {
+      "title": "Message of the Day"
+    },
+    "LUBELOGGER_LOCALE": {
+      "title": "Locale and Language Settings",
+      "default": "en_US.UTF-8"
+    },
+    "LUBELOGGER_EMAIL_FROM": {
+      "title": "Email > From"
+    },
+    "LUBELOGGER_EMAIL_PORT": {
+      "title": "Email > Port",
+      "default": "587"
+    },
+    "LUBELOGGER_ENABLE_AUTH": {
+      "title": "Auth > Enable ?",
+      "default": "false"
+    },
+    "LUBELOGGER_OPENID_NAME": {
+      "title": "Auth > OpenID > Name"
+    },
+    "LUBELOGGER_WEBHOOK_URL": {
+      "title": "WebHook URL"
+    },
+    "LUBELOGGER_EMAIL_SERVER": {
+      "title": "Email > Server"
+    },
+    "LUBELOGGER_OPENID_SCOPE": {
+      "title": "Auth > OpenID > Scope"
+    },
+    "LUBELOGGER_EMAIL_USE_SSL": {
+      "title": "Email > Use SSL ?"
+    },
+    "LUBELOGGER_PASSWORD_HASH": {
+      "title": "Auth > Password Hash",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "LUBELOGGER_USERNAME_HASH": {
+      "title": "Auth > Username Hash"
+    },
+    "LUBELOGGER_EMAIL_PASSWORD": {
+      "title": "Email > Password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "LUBELOGGER_EMAIL_USERNAME": {
+      "title": "Email > Username"
+    },
+    "LUBELOGGER_CUSTOM_LOGO_URL": {
+      "title": "Custom Logo URL"
+    },
+    "LUBELOGGER_OPENID_AUTH_URL": {
+      "title": "Auth > OpenID > Authorization URL"
+    },
+    "LUBELOGGER_OPENID_CLIENT_ID": {
+      "title": "Auth > OpenID > Client ID"
+    },
+    "LUBELOGGER_OPENID_TOKEN_URL": {
+      "title": "Auth > OpenID > Token URL",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "LUBELOGGER_OPENID_REDIRECT_URL": {
+      "title": "Auth > OpenID > Redirect URL"
+    },
+    "LUBELOGGER_OPENID_CLIENT_SECRET": {
+      "title": "Auth > OpenID > Client Secret",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "LUBELOGGER_OPENID_VALIDATE_STATE": {
+      "title": "Auth > OpenID > Validate State",
+      "default": "false"
+    },
+    "LUBELOGGER_ALLOWED_FILE_EXTENSIONS": {
+      "title": "Allowed File Extensions",
+      "default": "pdf"
+    }
+  },
+  "icon": "./icon.png"
+}

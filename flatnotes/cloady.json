@@ -1,0 +1,24 @@
+{
+  "envSchema": {
+    "FLATNOTES_PASSWORD": {
+      "title": "Flatnotes Password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "FLATNOTES_TOTP_KEY": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "FLATNOTES_USERNAME": {
+      "title": "Flatnotes Username"
+    },
+    "FLATNOTES_AUTH_TYPE": {
+      "title": "Flatnotes Auth Type"
+    },
+    "FLATNOTES_SECRET_KEY": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

@@ -1,0 +1,12 @@
+{
+  "envSchema": {
+    "APP_PROTOCOL": {
+      "default": "http"
+    },
+    "SEARXNG_SECRET_KEY": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

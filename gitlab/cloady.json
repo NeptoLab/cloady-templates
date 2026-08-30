@@ -1,0 +1,14 @@
+{
+  "envSchema": {
+    "PUBLIC_URL": {
+      "default": "${CLOADY_PRIMARY_URL}"
+    },
+    "GITLAB_ROOT_PASSWORD": {
+      "title": "Root password",
+      "secret": true,
+      "generate": "password:20",
+      "description": "Sign in as user 'root'. Applied on first boot only."
+    }
+  },
+  "icon": "./icon.svg"
+}

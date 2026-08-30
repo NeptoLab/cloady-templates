@@ -1,0 +1,23 @@
+{
+  "envSchema": {
+    "APP_PROTOCOL": {
+      "default": "http"
+    },
+    "NOCODB_JWT_SECRET": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "NOCODB_TABLE_ROWS": {
+      "title": "Choos the number of rows to display in a table."
+    },
+    "NOCODB_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "NOCODB_REDIS_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

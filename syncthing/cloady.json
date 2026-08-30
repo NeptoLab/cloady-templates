@@ -1,0 +1,8 @@
+{
+  "envSchema": {
+    "SYNCTHING_HOSTNAME": {
+      "title": "Hostname"
+    }
+  },
+  "icon": "./icon.png"
+}

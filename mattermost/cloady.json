@@ -1,0 +1,16 @@
+{
+  "envSchema": {
+    "PUBLIC_URL": {
+      "default": "${CLOADY_PRIMARY_URL}"
+    },
+    "DB_PASSWORD": {
+      "title": "Database password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "POSTGRES_HOST": {
+      "default": "${CLOADY_HOST_DB}"
+    }
+  },
+  "icon": "./icon.svg"
+}

@@ -1,0 +1,17 @@
+{
+  "envSchema": {
+    "JWT_SECRET": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "IMMICH_TYPESENSE_API_KEY": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

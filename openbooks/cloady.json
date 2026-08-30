@@ -1,0 +1,8 @@
+{
+  "envSchema": {
+    "OPENBOOKS_IRC_USERNAME": {
+      "title": "IRC Username"
+    }
+  },
+  "icon": "./icon.png"
+}

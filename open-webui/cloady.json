@@ -1,0 +1,13 @@
+{
+  "envSchema": {
+    "OPENWEBUI_OLLAMA_URL": {
+      "title": "Ollama Api Url"
+    },
+    "OPENWEBUI_OPENAI_KEY": {
+      "title": "Openai Api Key",
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.png"
+}

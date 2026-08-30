@@ -1,6 +1,0 @@
-{
-  "FORGEJO_DB_PASSWORD": {
-    "secret": true,
-    "generate": "password:32"
-  }
-}

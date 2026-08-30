@@ -1,9 +1,0 @@
-{
-  "APP_PROTOCOL": {
-    "default": "http"
-  },
-  "JOPLIN_DB_PASSWORD": {
-    "secret": true,
-    "generate": "password:50"
-  }
-}

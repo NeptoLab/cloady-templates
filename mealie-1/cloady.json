@@ -1,0 +1,15 @@
+{
+  "envSchema": {
+    "TZ": {
+      "title": "Timezone",
+      "default": "UTC"
+    },
+    "APP_PROTOCOL": {
+      "default": "http"
+    },
+    "MEALIE_ALLOW_SIGNUP": {
+      "title": "Allow user registration"
+    }
+  },
+  "icon": "./icon.png"
+}

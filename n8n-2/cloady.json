@@ -1,0 +1,16 @@
+{
+  "envSchema": {
+    "APP_PROTOCOL": {
+      "default": "http"
+    },
+    "N8N_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "N8N_NR_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

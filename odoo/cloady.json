@@ -1,0 +1,9 @@
+{
+  "envSchema": {
+    "ODOO_POSTGRES_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

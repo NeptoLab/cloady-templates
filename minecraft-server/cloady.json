@@ -1,0 +1,8 @@
+{
+  "envSchema": {
+    "MC_VERSION": {
+      "title": "Minecraft version"
+    }
+  },
+  "icon": "./icon.png"
+}

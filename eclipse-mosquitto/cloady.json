@@ -1,0 +1,23 @@
+{
+  "envSchema": {
+    "TZ": {
+      "title": "Timezone",
+      "default": "UTC"
+    },
+    "INTERNAL_IP": {
+      "title": "INTERNAL_IP",
+      "default": ""
+    },
+    "CEDALO_MC_PASSWORD": {
+      "title": "Cedalo Management Center Password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "MQTT_ADMIN_PASSWORD": {
+      "title": "MQTT Broker Admin Password",
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.png"
+}

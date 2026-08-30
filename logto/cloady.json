@@ -1,0 +1,12 @@
+{
+  "envSchema": {
+    "LOGTO_ADMIN_URL": {
+      "title": "Logto Admin Console URL URL"
+    },
+    "LOGTO_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

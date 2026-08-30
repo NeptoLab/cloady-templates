@@ -1,0 +1,19 @@
+{
+  "envSchema": {
+    "TZ": {
+      "title": "Timezone",
+      "default": "UTC"
+    },
+    "CODESERVER_PASSWORD": {
+      "title": "Password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "CODESERVER_SUDO_PASSWORD": {
+      "title": "Sudo Password",
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.png"
+}

@@ -1,0 +1,26 @@
+{
+  "envSchema": {
+    "APP_PROTOCOL": {
+      "default": "http"
+    },
+    "PLANKA_ADMIN_NAME": {
+      "title": "Admin name"
+    },
+    "PLANKA_SECRET_KEY": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "PLANKA_ADMIN_EMAIL": {
+      "title": "Admin email"
+    },
+    "PLANKA_ADMIN_PASSWORD": {
+      "title": "Admin password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "PLANKA_ADMIN_USERNAME": {
+      "title": "Admin username"
+    }
+  },
+  "icon": "./icon.png"
+}

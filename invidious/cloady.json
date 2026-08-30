@@ -1,0 +1,32 @@
+{
+  "envSchema": {
+    "INVIDIOUS_DOMAIN": {
+      "title": "Domain"
+    },
+    "INVIDIOUS_HMAC_KEY": {
+      "secret": true,
+      "generate": "password:20"
+    },
+    "INVIDIOUS_PO_TOKEN": {
+      "title": "INVIDIOUS_PO_TOKEN",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "INVIDIOUS_HTTPS_ONLY": {
+      "title": "https only",
+      "default": "false"
+    },
+    "INVIDIOUS_VISITOR_DATA": {
+      "title": "INVIDIOUS_VISITOR_DATA",
+      "default": ""
+    },
+    "INVIDIOUS_COMPANION_KEY": {
+      "secret": true,
+      "generate": "password:16"
+    },
+    "INVIDIOUS_EXTERNAL_PORT": {
+      "title": "External port"
+    }
+  },
+  "icon": "./icon.png"
+}

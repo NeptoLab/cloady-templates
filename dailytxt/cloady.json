@@ -1,0 +1,18 @@
+{
+  "envSchema": {
+    "DAILYTXT_SECRET_KEY": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "DAILYTXT_ADMIN_PASSWORD": {
+      "title": "Admin Password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "DAILYTXT_ALLOW_REGISTRATION": {
+      "title": "Allow User Registration",
+      "default": "true"
+    }
+  },
+  "icon": "./icon.png"
+}

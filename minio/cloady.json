@@ -1,0 +1,19 @@
+{
+  "envSchema": {
+    "APP_PROTOCOL": {
+      "default": "http"
+    },
+    "MINIO_API_URL": {
+      "title": "Minio S3 API URL (when exposed)"
+    },
+    "MINIO_ROOT_USER": {
+      "title": "Minio root username"
+    },
+    "MINIO_ROOT_PASSWORD": {
+      "title": "Minio root password",
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.png"
+}

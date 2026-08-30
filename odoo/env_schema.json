@@ -1,6 +1,0 @@
-{
-  "ODOO_POSTGRES_PASSWORD": {
-    "secret": true,
-    "generate": "password:32"
-  }
-}

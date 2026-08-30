@@ -1,0 +1,28 @@
+{
+  "envSchema": {
+    "TZ": {
+      "title": "Timezone",
+      "default": "UTC"
+    },
+    "SEMAPHORE_ADMIN_NAME": {
+      "title": "Semaphore username"
+    },
+    "SEMAPHORE_ADMIN_EMAIL": {
+      "title": "Semaphore email"
+    },
+    "SEMAPHORE_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "SEMAPHORE_ADMIN_PASSWORD": {
+      "title": "Semaphore password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "SEMAPHORE_ACCESS_KEY_ENCRYPTION": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

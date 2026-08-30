@@ -1,0 +1,9 @@
+{
+  "envSchema": {
+    "WIKI_JS_DB_PASS": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

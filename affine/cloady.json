@@ -1,0 +1,20 @@
+{
+  "envSchema": {
+    "AFFINE_ADMIN_EMAIL": {
+      "title": "Admin Email"
+    },
+    "AFFINE_ADMIN_PASSWORD": {
+      "title": "Admin Password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "AFFINE_TELEMETRY_ENABLE": {
+      "title": "Enable affine telemetry?"
+    },
+    "AFFINE_POSTGRES_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

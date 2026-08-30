@@ -1,0 +1,13 @@
+{
+  "envSchema": {
+    "TZ": {
+      "title": "Timezone",
+      "default": "UTC"
+    },
+    "LINKSTACK_CUSTOM_EMAIL": {
+      "title": "LINKSTACK_CUSTOM_EMAIL",
+      "default": ""
+    }
+  },
+  "icon": "./icon.png"
+}

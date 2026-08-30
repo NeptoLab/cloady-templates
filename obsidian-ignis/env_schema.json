@@ -1,8 +1,0 @@
-{
-  "GITSYNC_PASSWORD": {
-    "default": "gitsyncpw"
-  },
-  "GITSYNC_USERNAME": {
-    "default": "gituser"
-  }
-}

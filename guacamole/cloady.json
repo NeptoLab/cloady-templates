@@ -1,0 +1,12 @@
+{
+  "envSchema": {
+    "GUACAMOLE_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "GUACAMOLE_TOTP_ENABLED": {
+      "title": "Enable TOTP"
+    }
+  },
+  "icon": "./icon.png"
+}

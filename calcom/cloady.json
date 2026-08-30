@@ -1,0 +1,61 @@
+{
+  "envSchema": {
+    "EMAIL_FROM": {
+      "title": "Configures the global From: header whilst sending emails."
+    },
+    "ZOOM_CLIENT_ID": {
+      "title": "Zoom Client ID. Used for the Zoom integration"
+    },
+    "EMAIL_SERVER_HOST": {
+      "title": "Email server host (SMTP)"
+    },
+    "EMAIL_SERVER_PORT": {
+      "title": "Email server port (SMTP)"
+    },
+    "EMAIL_SERVER_USER": {
+      "title": "Email server username (SMTP)"
+    },
+    "POSTGRES_PASSWORD": {
+      "title": "POSTGRES_PASSWORD",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "POSTGRES_USERNAME": {
+      "title": "POSTGRES_USERNAME",
+      "default": ""
+    },
+    "MS_GRAPH_CLIENT_ID": {
+      "title": "MS Graph Client ID. Used for the Office 365 / Outlook.com Ca"
+    },
+    "ZOOM_CLIENT_SECRET": {
+      "title": "Zoom Client Secret. Used for the Zoom integration",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "EMAIL_SERVER_PASSWORD": {
+      "title": "Email server password (SMTP)",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "CALCOM_NEXTAUTH_SECRET": {
+      "title": "Next.js Auth secret. Generate one with `openssl rand -base64",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "MS_GRAPH_CLIENT_SECRET": {
+      "title": "MS Graph Client Secret. Used for the Office 365 / Outlook.co",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "CALENDSO_ENCRYPTION_KEY": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "CALCOM_GOOGLE_API_CREDENTIALS": {
+      "title": "Google API Credentials in JSON form. Used for the Google Cal",
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.png"
+}

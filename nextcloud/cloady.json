@@ -1,0 +1,25 @@
+{
+  "envSchema": {
+    "ADMIN_USER": {
+      "title": "Admin username",
+      "default": "admin"
+    },
+    "DB_PASSWORD": {
+      "title": "Database password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "PUBLIC_HOST": {
+      "default": "${CLOADY_PRIMARY_HOST}"
+    },
+    "POSTGRES_HOST": {
+      "default": "${CLOADY_HOST_DB}"
+    },
+    "ADMIN_PASSWORD": {
+      "title": "Admin password",
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.svg"
+}

@@ -1,0 +1,9 @@
+{
+  "envSchema": {
+    "FORGEJO_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

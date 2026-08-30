@@ -1,0 +1,8 @@
+{
+  "envSchema": {
+    "DAEMON_ADDRESS": {
+      "title": "Monero Daemon"
+    }
+  },
+  "icon": "./icon.png"
+}

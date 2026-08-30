@@ -1,0 +1,17 @@
+{
+  "envSchema": {
+    "CTFD_SECRET_KEY": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "CTFD_MYSQL_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "CTFD_MYSQL_ROOT_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    }
+  },
+  "icon": "./icon.png"
+}

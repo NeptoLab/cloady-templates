@@ -1,0 +1,17 @@
+{
+  "envSchema": {
+    "INTERNAL_IP": {
+      "title": "INTERNAL_IP",
+      "default": ""
+    },
+    "SPOTIFY_PUBLIC": {
+      "title": "Spotify public key"
+    },
+    "SPOTIFY_SECRET": {
+      "title": "Spotify secret key",
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.png"
+}

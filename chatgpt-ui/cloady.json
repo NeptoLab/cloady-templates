@@ -1,0 +1,24 @@
+{
+  "envSchema": {
+    "INTERNAL_IP": {
+      "title": "INTERNAL_IP",
+      "default": ""
+    },
+    "CHATGPT_UI_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "CHATGPT_UI_SUPERUSER_EMAIL": {
+      "title": "Superuser Email"
+    },
+    "CHATGPT_UI_SUPERUSER_PASSWORD": {
+      "title": "Superuser Password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "CHATGPT_UI_SUPERUSER_USERNAME": {
+      "title": "Superuser Username"
+    }
+  },
+  "icon": "./icon.png"
+}

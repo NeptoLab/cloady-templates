@@ -1,0 +1,13 @@
+{
+  "envSchema": {
+    "ATUIN_DB_PASSWORD": {
+      "secret": true,
+      "generate": "password:32"
+    },
+    "ATUIN_ALLOW_REGISTRATION": {
+      "title": "Allow User Registrastion",
+      "default": "true"
+    }
+  },
+  "icon": "./icon.png"
+}

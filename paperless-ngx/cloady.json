@@ -1,0 +1,27 @@
+{
+  "envSchema": {
+    "INTERNAL_IP": {
+      "title": "INTERNAL_IP",
+      "default": ""
+    },
+    "APP_PROTOCOL": {
+      "default": "http"
+    },
+    "LOCAL_DOMAIN": {
+      "title": "LOCAL_DOMAIN",
+      "default": ""
+    },
+    "PAPERLESS_TIKA_ENABLED": {
+      "title": "Enable Tika"
+    },
+    "PAPERLESS_ADMIN_PASSWORD": {
+      "title": "Administrator password",
+      "secret": true,
+      "generate": "password:24"
+    },
+    "PAPERLESS_ADMIN_USERNAME": {
+      "title": "Administrator Username"
+    }
+  },
+  "icon": "./icon.png"
+}

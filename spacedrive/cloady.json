@@ -1,0 +1,13 @@
+{
+  "envSchema": {
+    "SD_AUTH_USER": {
+      "title": "Spacedrive Username"
+    },
+    "SD_AUTH_PASSWORD": {
+      "title": "Spacedrive Password",
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.png"
+}

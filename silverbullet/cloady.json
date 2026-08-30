@@ -1,0 +1,13 @@
+{
+  "envSchema": {
+    "SB_USER": {
+      "title": "Username"
+    },
+    "SB_PASSWORD": {
+      "title": "Password",
+      "secret": true,
+      "generate": "password:24"
+    }
+  },
+  "icon": "./icon.png"
+}
