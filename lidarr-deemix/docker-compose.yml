@@ -1,0 +1,37 @@
+services:
+  lidarr-deemix:
+    image: youegraillot/lidarr-on-steroids:1.5.2
+    ports:
+      - 8686
+      - 6595
+    volumes:
+      - config:/config
+      - config-deemix:/config_deemix
+      - deemix:/downloads
+      - music:/music
+      - completed:/downloads/completed
+      - media:/media
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  media:
+    driver_opts:
+      size: 2Gi
+  music:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi
+  deemix:
+    driver_opts:
+      size: 2Gi
+  completed:
+    driver_opts:
+      size: 2Gi
+  config-deemix:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,46 @@
+services:
+  ghost:
+    image: ghost:5.130.6
+    environment:
+      url: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      mail__transport: SMTP
+      database__client: mysql
+      mail__options__host: ${GHOST_MAIL_HOST}
+      mail__options__port: ${GHOST_MAIL_PORT}
+      mail__options__service: ${GHOST_MAIL_SERVICE}
+      mail__options__auth__pass: ${GHOST_MAIL_PASSWORD}
+      mail__options__auth__user: ${GHOST_MAIL_USER}
+      database__connection__host: ghostdb
+      database__connection__user: tipi
+      database__connection__database: ghosttipi
+      database__connection__password: ${GHOST_DATABASE_PASSWORD}
+    ports:
+      - 2368
+    volumes:
+      - content:/var/lib/ghost/content
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  ghostdb:
+    image: mariadb:latest
+    environment:
+      MYSQL_USER: tipi
+      MYSQL_DATABASE: ghosttipi
+      MYSQL_PASSWORD: ${GHOST_DATABASE_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${GHOST_DATABASE_PASSWORD}
+    volumes:
+      - db:/var/lib/mysql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  content:
+    driver_opts:
+      size: 2Gi

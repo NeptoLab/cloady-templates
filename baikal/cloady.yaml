@@ -1,0 +1,7 @@
+name: Baïkal
+hint: Calendar + Contacts server
+version: 0.11.1
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/baikal
+  kind: runtipi

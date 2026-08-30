@@ -1,0 +1,42 @@
+{
+  "AUTH_MODE": {
+    "enum": [
+      "authenticated",
+      "offline"
+    ],
+    "title": "Authentication",
+    "default": "authenticated"
+  },
+  "MAX_MEMORY": {
+    "title": "Java heap",
+    "default": "3G",
+    "description": "JVM max heap; keep below the memory limit."
+  },
+  "MAX_PLAYERS": {
+    "type": "number",
+    "title": "Max players",
+    "default": 20
+  },
+  "SERVER_NAME": {
+    "title": "Server name",
+    "default": "A Cloady Hytale server"
+  },
+  "VIEW_DISTANCE": {
+    "type": "number",
+    "title": "View distance",
+    "default": 12,
+    "description": "Chunks. Higher needs more memory."
+  },
+  "ENABLE_BACKUPS": {
+    "type": "boolean",
+    "title": "Automatic backups",
+    "default": false,
+    "description": "Stored in the same volume."
+  },
+  "BACKUP_FREQUENCY": {
+    "type": "number",
+    "title": "Backup interval",
+    "default": 30,
+    "description": "Minutes."
+  }
+}

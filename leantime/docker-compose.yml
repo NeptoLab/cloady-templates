@@ -1,0 +1,37 @@
+services:
+  leantime:
+    image: leantime/leantime:latest
+    ports:
+      - 80
+    volumes:
+      - public-data:/var/www/html/public/userfiles
+      - data:/var/www/html/userfiles
+      - plugins:/var/www/html/app/Plugins
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  leantime-db:
+    image: mysql:8.4
+    command: --character-set-server=UTF8MB4 --collation-server=UTF8MB4_unicode_ci
+    volumes:
+      - mysql:/var/lib/mysql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  mysql:
+    driver_opts:
+      size: 2Gi
+  plugins:
+    driver_opts:
+      size: 2Gi
+  public-data:
+    driver_opts:
+      size: 2Gi

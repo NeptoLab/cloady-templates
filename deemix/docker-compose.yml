@@ -1,0 +1,32 @@
+services:
+  deemix:
+    image: registry.gitlab.com/bockiii/deemix-docker:latest
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      UMASK_SET: "022"
+    ports:
+      - 6595
+    volumes:
+      - deemix-config:/config
+      - media:/media
+      - deemix-downloads:/downloads
+      - music:/music
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  media:
+    driver_opts:
+      size: 2Gi
+  music:
+    driver_opts:
+      size: 2Gi
+  deemix-config:
+    driver_opts:
+      size: 2Gi
+  deemix-downloads:
+    driver_opts:
+      size: 2Gi

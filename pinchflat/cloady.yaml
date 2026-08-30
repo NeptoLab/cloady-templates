@@ -1,0 +1,7 @@
+name: Pinchflat
+hint: Your next YouTube media manager
+version: 2025.6.6
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/pinchflat
+  kind: runtipi

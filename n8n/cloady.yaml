@@ -1,0 +1,4 @@
+name: n8n
+hint: Workflow automation & integrations
+version: "2.28"
+sortOrder: 60

@@ -1,0 +1,26 @@
+services:
+  obsidian:
+    image: ghcr.io/sytone/obsidian-remote:latest
+    environment:
+      TZ: Europe/Berlin
+      PGID: "1000"
+      PUID: "1000"
+      KEYBOARD: de-de-qwertz
+      DOCKER_MODS: linuxserver/mods:universal-git
+    ports:
+      - 8080
+    volumes:
+      - vaults:/vaults
+      - config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi
+  vaults:
+    driver_opts:
+      size: 2Gi

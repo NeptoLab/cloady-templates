@@ -1,0 +1,27 @@
+services:
+  cheshire-cat-ai:
+    image: ghcr.io/cheshire-cat-ai/core:1.9.2
+    environment:
+      PYTHONUNBUFFERED: "1"
+      WATCHFILES_FORCE_POLLING: "true"
+    ports:
+      - 80
+    volumes:
+      - static:/app/cat/static
+      - plugins:/app/cat/plugins
+      - data:/app/cat/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  static:
+    driver_opts:
+      size: 2Gi
+  plugins:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,60 @@
+services:
+  affine:
+    image: ghcr.io/toeverything/affine:stable
+    command:
+      - sh
+      - -c
+      - node ./scripts/self-host-predeploy && node ./dist/main.js
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgres://tipi:${AFFINE_POSTGRES_PASSWORD}@affine-postgres:5432/affine
+      TELEMETRY_ENABLE: ${AFFINE_TELEMETRY_ENABLE}
+      REDIS_SERVER_HOST: affine-redis
+      AFFINE_ADMIN_EMAIL: ${AFFINE_ADMIN_EMAIL}
+      AFFINE_CONFIG_PATH: /root/.affine/config
+      AFFINE_ADMIN_PASSWORD: ${AFFINE_ADMIN_PASSWORD}
+    ports:
+      - 3010
+    volumes:
+      - config:/root/.affine/config
+      - storage:/root/.affine/storage
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  affine-redis:
+    image: redis
+    volumes:
+      - redis:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+  affine-postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: affine
+      POSTGRES_USER: tipi
+      POSTGRES_PASSWORD: ${AFFINE_POSTGRES_PASSWORD}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  redis:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi
+  storage:
+    driver_opts:
+      size: 2Gi
+  postgres:
+    driver_opts:
+      size: 2Gi

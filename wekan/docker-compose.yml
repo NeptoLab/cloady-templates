@@ -1,0 +1,38 @@
+services:
+  wekan:
+    image: ghcr.io/wekan/wekan:v9.73
+    environment:
+      MAIL_URL: smtp://${MAIL_ADDRESS}:${MAIL_PASSWORD}@smtp.gmail.com:587
+      ROOT_URL: https://${PUBLIC_HOST}
+      MAIL_FROM: Wekan Notifications <noreply.wekan@${PUBLIC_HOST}>
+      MONGO_URL: mongodb://wekan-db:27017/wekan
+    ports:
+      - 8080
+    volumes:
+      - wekan-data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  wekan-db:
+    image: mongo:6
+    command: mongod --logpath /dev/null --oplogSize 128 --quiet
+    volumes:
+      - mongo:/data/db
+      - dump:/dump
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  dump:
+    driver_opts:
+      size: 2Gi
+  mongo:
+    driver_opts:
+      size: 2Gi
+  wekan-data:
+    driver_opts:
+      size: 2Gi

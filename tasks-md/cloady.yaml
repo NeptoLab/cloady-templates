@@ -1,0 +1,7 @@
+name: Tasks.md
+hint: A self-hosted, file based task management board.
+version: 3.3.0
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/tasks-md
+  kind: runtipi

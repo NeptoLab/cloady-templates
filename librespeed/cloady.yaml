@@ -1,0 +1,7 @@
+name: LibreSpeed
+hint: No Flash, No Java, No Websocket, No Garbage
+version: 6.1.0
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/librespeed
+  kind: runtipi

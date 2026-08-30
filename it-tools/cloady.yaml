@@ -1,0 +1,7 @@
+name: IT-Tools
+hint: Collection of handy online tools for developers, with great UX.
+version: latest
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/it-tools
+  kind: runtipi

@@ -1,0 +1,14 @@
+{
+  "DB_PASSWORD": {
+    "secret": true,
+    "generate": "password:30"
+  },
+  "SECRET_KEY_BASE": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "LOCKBOX_MASTER_KEY": {
+    "secret": true,
+    "generate": "password:64"
+  }
+}

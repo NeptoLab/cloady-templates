@@ -1,0 +1,13 @@
+services:
+  posio:
+    image: l4rm4nd/posio:latest
+    environment:
+      FLASK_APP: /app/posio/game_master.py
+      POSIO_SETTINGS: /app/posio/config.py
+    ports:
+      - 5000
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

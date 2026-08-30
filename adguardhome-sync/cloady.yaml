@@ -1,0 +1,7 @@
+name: Adguard Home Sync
+hint: Synchronize AdGuard Home config to replicas
+version: 0.9.2
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/adguardhome-sync
+  kind: runtipi

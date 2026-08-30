@@ -1,0 +1,28 @@
+services:
+  redis:
+    image: redis:8-alpine
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+  vouchervault:
+    image: l4rm4nd/vouchervault:1.28.x
+    environment:
+      TZ: Europe/Berlin
+      DOMAIN: vouchervault.example.com
+      SECURE_COOKIES: "False"
+      EXPIRY_THRESHOLD_DAYS: "90"
+    ports:
+      - 8000
+    volumes:
+      - database:/opt/app/database
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  database:
+    driver_opts:
+      size: 2Gi

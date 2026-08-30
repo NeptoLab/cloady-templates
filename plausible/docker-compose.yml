@@ -1,0 +1,60 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    expose:
+      - 5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  events:
+    image: clickhouse/clickhouse-server:24.12-alpine
+    environment:
+      CLICKHOUSE_SKIP_USER_SETUP: "1"
+    expose:
+      - 8123
+    volumes:
+      - event-data:/var/lib/clickhouse
+      - event-logs:/var/log/clickhouse-server
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 1G
+  plausible:
+    image: ghcr.io/plausible/community-edition:v3.2.1
+    command: /entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run
+    environment:
+      TMPDIR: /var/lib/plausible/tmp
+      BASE_URL: ${PUBLIC_URL}
+      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/plausible_db
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      CLICKHOUSE_DATABASE_URL: http://${CLICKHOUSE_HOST}:8123/plausible_events_db
+    ports:
+      - 8000
+    volumes:
+      - plausible-data:/var/lib/plausible
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  db-data:
+    driver_opts:
+      size: 5Gi
+  event-data:
+    driver_opts:
+      size: 10Gi
+  event-logs:
+    driver_opts:
+      size: 2Gi
+  plausible-data:
+    driver_opts:
+      size: 5Gi

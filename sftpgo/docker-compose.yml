@@ -1,0 +1,54 @@
+services:
+  sftpgo:
+    image: drakkan/sftpgo:v2.7.4
+    environment:
+      SFTPGO_GRACE_TIME: ${SFTPGO_GRACE_TIME-5}
+      SFTPGO_MINIO_SHA256_SIMD: "1"
+      SFTPGO_DATA_PROVIDER__HOST: sftpgo-db
+      SFTPGO_DATA_PROVIDER__NAME: sftpgo
+      SFTPGO_DATA_PROVIDER__PORT: "5432"
+      SFTPGO_DATA_PROVIDER__DRIVER: postgresql
+      SFTPGO_DEFAULT_ADMIN_PASSWORD: ${SFTPGO_ADMIN_PASSWORD}
+      SFTPGO_DEFAULT_ADMIN_USERNAME: ${SFTPGO_ADMIN_USERNAME}
+      SFTPGO_DATA_PROVIDER__PASSWORD: ${SFTPGO_DATABASE_PASSWORD-sftpgo}
+      SFTPGO_DATA_PROVIDER__USERNAME: sftpgo
+      SFTPGO_HTTPD__BINDINGS__0__PORT: ${SFTPGO_BINDING_PORT-8080}
+      SFTPGO_DATA_PROVIDER__CREATE_DEFAULT_ADMIN: ${SFTPGO_CREATE_DEFAULT_ADMIN-1}
+    ports:
+      - 2022
+    volumes:
+      - config:/var/lib/sftpgo
+      - files:/srv/sftpgo/data
+      - backups:/srv/sftpgo/backups
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  sftpgo-db:
+    image: postgres:17.2-alpine
+    environment:
+      PGUSER: sftpgo
+      POSTGRES_DB: sftpgo
+      POSTGRES_USER: sftpgo
+      POSTGRES_PASSWORD: ${SFTPGO_DATABASE_PASSWORD-sftpgo}
+    volumes:
+      - db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  files:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi
+  backups:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,46 @@
+services:
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    environment:
+      TZ: Europe/Berlin
+      PGID: "1000"
+      PUID: "1000"
+      MYSQL_USER: snipeit
+      MYSQL_DATABASE: snipeitdb
+      MYSQL_PASSWORD: VeryStrongDatabasePassword
+      MYSQL_ROOT_PASSWORD: MyVeryStrongDatabaseRootPassword
+    volumes:
+      - mariadb-config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  snipe-it:
+    image: lscr.io/linuxserver/snipe-it:latest
+    environment:
+      TZ: Europe/Berlin
+      PGID: "1000"
+      PUID: "1000"
+      APP_URL: http://localhost:8080
+      MYSQL_USER: snipeit
+      MYSQL_DATABASE: snipeitdb
+      MYSQL_PASSWORD: VeryStrongDatabasePassword
+      MYSQL_PORT_3306_TCP_ADDR: mariadb
+      MYSQL_PORT_3306_TCP_PORT: "3306"
+    ports:
+      - 80
+    volumes:
+      - config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi
+  mariadb-config:
+    driver_opts:
+      size: 2Gi

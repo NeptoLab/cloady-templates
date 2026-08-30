@@ -1,0 +1,22 @@
+services:
+  stalwart-mail:
+    image: ghcr.io/stalwartlabs/stalwart:v0.16.11
+    ports:
+      - 8080
+      - 25
+      - 143
+      - 465
+      - 587
+      - 993
+      - 4190
+    volumes:
+      - data:/opt/stalwart-mail
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

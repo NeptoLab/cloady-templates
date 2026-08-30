@@ -1,0 +1,20 @@
+services:
+  bitcoind:
+    image: lncm/bitcoind:v28.0
+    command: -dbcache=${BITCOIND_DB_CACHE:-450} -maxmempool=${BITCOIND_MAX_MEMPOOL:-300} -listen=${BITCOIND_LISTEN:-1} -server=${BITCOIND_SERVER:-1} -rpcallowip=0.0.0.0/0 -rpcbind=0.0.0.0 -prune=${BITCOIND_PRUNING:-0} -maxconnections=${BITCOIND_MAXPEERS:-125} -txindex=${BITCOIND_TXINDEX:-1} -peerbloomfilters=${BITCOIND_BLOOM_FILTERS:-1} -blockfilterindex=${BITCOIND_BLOCK_FILTER:-1} -peerblockfilters=${BITCOIND_BLOCK_FILTER:-1}
+    ports:
+      - 8333
+      - 8332
+      - 28332
+      - 28333
+    volumes:
+      - data:/root/.bitcoin
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

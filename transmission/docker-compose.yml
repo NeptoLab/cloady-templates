@@ -1,0 +1,27 @@
+services:
+  transmission:
+    image: lscr.io/linuxserver/transmission:4.1.3
+    environment:
+      TZ: ${TZ}
+      PASS: ${TRANSMISSION_PASSWORD}
+      PGID: "1000"
+      PUID: "1000"
+      USER: ${TRANSMISSION_USERNAME}
+    ports:
+      - 9091
+      - 51413
+    volumes:
+      - config:/config
+      - torrents:/media/torrents
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi
+  torrents:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,7 @@
+name: Jackett
+hint: "API Support for your favorite torrent trackers "
+version: latest
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/jackett
+  kind: runtipi

@@ -1,0 +1,30 @@
+services:
+  hemmelig:
+    image: hemmeligapp/hemmelig:latest
+    environment:
+      SECRET_HOST: ""
+      SECRET_PORT: "3000"
+      SECRET_FILE_SIZE: "10"
+      SECRET_JWT_SECRET: "!changeme!"
+      SECRET_DISABLE_USERS: "false"
+      SECRET_MAX_TEXT_SIZE: "256"
+      SECRET_LOCAL_HOSTNAME: 0.0.0.0
+      SECRET_FORCED_LANGUAGE: en
+      SECRET_ENABLE_FILE_UPLOAD: "true"
+    ports:
+      - 3000
+    volumes:
+      - files:/var/tmp/hemmelig/upload/files
+      - database:/home/node/hemmelig/database/
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  files:
+    driver_opts:
+      size: 2Gi
+  database:
+    driver_opts:
+      size: 2Gi

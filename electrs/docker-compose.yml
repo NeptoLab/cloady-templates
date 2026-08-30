@@ -1,0 +1,41 @@
+services:
+  electrs:
+    image: getumbrel/electrs:v0.11.1
+    environment:
+      ELECTRS_DB_DIR: /data/db
+      ELECTRS_COOKIE_FILE: /data/.bitcoin/.cookie
+      ELECTRS_LOG_FILTERS: INFO
+      ELECTRS_DAEMON_P2P_ADDR: ${BITCOIND_HOST}:8333
+      ELECTRS_DAEMON_RPC_ADDR: ${BITCOIND_HOST}:8332
+      ELECTRS_ELECTRUM_RPC_ADDR: 0.0.0.0:50001
+    expose:
+      - 50001
+    volumes:
+      - data:/data/.bitcoin:ro
+      - data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  electrs-ui:
+    image: ghcr.io/montejojorge/electrs-ui:v0.10.9
+    environment:
+      BITCOIND_DIR: /data/.bitcoin
+      ELECTRS_HOST: electrs
+      BITCOIND_HOST: ${BITCOIND_HOST}
+      ELECTRUM_IP_ADDRESS: ${INTERNAL_IP}
+      ELECTRUM_LOCAL_DOMAIN: runtipi.home
+    ports:
+      - 3006
+    volumes:
+      - data:/data/.bitcoin:ro
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

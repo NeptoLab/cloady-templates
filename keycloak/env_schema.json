@@ -1,0 +1,30 @@
+{
+  "POSTGRES_DB": {
+    "title": "POSTGRES_DB",
+    "default": ""
+  },
+  "POSTGRES_USER": {
+    "title": "POSTGRES_USER",
+    "default": ""
+  },
+  "KEYCLOAK_ADMIN": {
+    "title": "KEYCLOAK_ADMIN",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "KEYCLOAK_HOSTNAME": {
+    "title": "KEYCLOAK_HOSTNAME",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "POSTGRES_PASSWORD": {
+    "title": "POSTGRES_PASSWORD",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "KEYCLOAK_ADMIN_PASSWORD": {
+    "title": "KEYCLOAK_ADMIN_PASSWORD",
+    "secret": true,
+    "generate": "password:24"
+  }
+}

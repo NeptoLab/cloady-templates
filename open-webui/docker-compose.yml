@@ -1,0 +1,19 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:v0.10.2
+    environment:
+      OPENAI_API_KEY: ${OPENWEBUI_OPENAI_KEY}
+      OLLAMA_BASE_URL: ${OPENWEBUI_OLLAMA_URL}
+    ports:
+      - 8080
+    volumes:
+      - data:/app/backend/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

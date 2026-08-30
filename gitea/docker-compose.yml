@@ -1,0 +1,23 @@
+services:
+  gitea:
+    image: gitea/gitea:1.26.4
+    environment:
+      USER_GID: "1000"
+      USER_UID: "1000"
+      GITEA__server__DOMAIN: ${PUBLIC_HOST}
+      GITEA__server__ROOT_URL: ${PUBLIC_URL}/
+      GITEA__database__DB_TYPE: sqlite3
+      GITEA__server__SSH_DOMAIN: ${PUBLIC_HOST}
+    ports:
+      - 3000
+    volumes:
+      - data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 10Gi

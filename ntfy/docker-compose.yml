@@ -1,0 +1,24 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy:v2.25.0
+    command: serve
+    environment:
+      NTFY_BASE_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      NTFY_UPSTREAM_BASE_URL: https://ntfy.sh
+    ports:
+      - 80
+    volumes:
+      - cache:/var/cache/ntfy
+      - config:/etc/ntfy
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  cache:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi

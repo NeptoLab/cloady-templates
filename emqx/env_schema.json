@@ -1,0 +1,6 @@
+{
+  "TZ": {
+    "title": "Timezone",
+    "default": "UTC"
+  }
+}

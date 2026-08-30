@@ -1,0 +1,60 @@
+services:
+  unifi-db:
+    image: docker.io/mongo:8.2
+    environment:
+      MONGO_PASS: unify
+      MONGO_USER: unifi
+      MONGO_DBNAME: unifi-db
+      MONGO_AUTHSOURCE: admin
+      MONGO_INITDB_ROOT_PASSWORD: unify
+      MONGO_INITDB_ROOT_USERNAME: root
+    volumes:
+      - mongodb-data:/data/db
+      - init-mongo-sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  unifi-network-application:
+    image: lscr.io/linuxserver/unifi-network-application:10.1.89
+    environment:
+      TZ: Etc/UTC
+      PGID: "1000"
+      PUID: "1000"
+      MEM_LIMIT: "1024"
+      MONGO_TLS: ""
+      MONGO_HOST: unifi-db
+      MONGO_PASS: unify
+      MONGO_PORT: "27017"
+      MONGO_USER: unifi
+      MEM_STARTUP: "1024"
+      MONGO_DBNAME: unifi-db
+      MONGO_AUTHSOURCE: admin
+    ports:
+      - 8443
+      - 3478/udp
+      - 10001/udp
+      - 8080
+      - 1900/udp
+      - 8843
+      - 8880
+      - 6789
+      - 5514/udp
+    volumes:
+      - config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi
+  mongodb-data:
+    driver_opts:
+      size: 2Gi
+  init-mongo-sh:
+    driver_opts:
+      size: 2Gi

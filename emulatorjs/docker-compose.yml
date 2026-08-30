@@ -1,0 +1,23 @@
+services:
+  emulatorjs:
+    image: lscr.io/linuxserver/emulatorjs:1.9.2
+    environment:
+      TZ: ${TZ}
+    ports:
+      - 80
+      - 3000
+    volumes:
+      - emulatorjs-config:/config
+      - emulatorjs-data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  emulatorjs-data:
+    driver_opts:
+      size: 2Gi
+  emulatorjs-config:
+    driver_opts:
+      size: 2Gi

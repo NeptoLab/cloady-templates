@@ -1,0 +1,8 @@
+name: Forgejo
+hint: Beyond coding. We forge. · Lightweight and performant · Guaranteed 100%
+  Free Software
+version: 15.0.3
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/forgejo
+  kind: runtipi

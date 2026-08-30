@@ -1,0 +1,4 @@
+name: WordPress
+hint: Site & blog with managed MySQL
+version: 7.0.0
+sortOrder: 10

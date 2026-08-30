@@ -1,0 +1,14 @@
+{
+  "TA_USER": {
+    "title": "Tube Archivist Username"
+  },
+  "TA_PASSWORD": {
+    "title": "Tube Archivist Password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "ELASTIC_PASSWORD": {
+    "secret": true,
+    "generate": "password:50"
+  }
+}

@@ -1,0 +1,7 @@
+name: ESP Home
+hint: Control your ESP8266/ESP32.
+version: 2026.6.4
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/esphome
+  kind: runtipi

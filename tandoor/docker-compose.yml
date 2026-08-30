@@ -1,0 +1,46 @@
+services:
+  tandoor:
+    image: ghcr.io/tandoorrecipes/recipes:2.6.12
+    environment:
+      DB_ENGINE: django.db.backends.postgresql
+      SECRET_KEY: ${TANDOOR_SECRET_KEY}
+      POSTGRES_DB: tandoordb
+      POSTGRES_HOST: tandoor-db
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: tandoor
+      GUNICORN_MEDIA: "1"
+      POSTGRES_PASSWORD: ${TANDOOR_POSTGRESS_PASSWORD}
+    ports:
+      - 80
+    volumes:
+      - staticfiles:/opt/recipes/staticfiles
+      - mediafiles:/opt/recipes/mediafiles
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  tandoor-db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: tandoordb
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: tandoor
+      POSTGRES_PASSWORD: ${TANDOOR_POSTGRESS_PASSWORD}
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  mediafiles:
+    driver_opts:
+      size: 2Gi
+  postgresql:
+    driver_opts:
+      size: 2Gi
+  staticfiles:
+    driver_opts:
+      size: 2Gi

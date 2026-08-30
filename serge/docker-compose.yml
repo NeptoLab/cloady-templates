@@ -1,0 +1,20 @@
+services:
+  serge:
+    image: ghcr.io/serge-chat/serge:0.9.0
+    ports:
+      - 8008
+    volumes:
+      - weights:/usr/src/app/weights
+      - db:/data/db/
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  weights:
+    driver_opts:
+      size: 2Gi

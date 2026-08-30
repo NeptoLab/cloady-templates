@@ -1,0 +1,25 @@
+services:
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    environment:
+      TZ: ${TZ}
+      PGID: "1000"
+      PUID: "1000"
+      AUTO_UPDATE: "true"
+    ports:
+      - 9117
+    volumes:
+      - data:/config
+      - torrents:/media/torrents
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  torrents:
+    driver_opts:
+      size: 2Gi

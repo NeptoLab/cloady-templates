@@ -1,0 +1,18 @@
+services:
+  flightlog:
+    image: perdian/flightlog:v2.1.13
+    environment:
+      FLIGHTLOG_SERVER_CONTEXT_PATH: /
+    ports:
+      - 8080
+    volumes:
+      - db:/var/flightlog/database
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi

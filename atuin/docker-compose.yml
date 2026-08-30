@@ -1,0 +1,38 @@
+services:
+  atuin:
+    image: ghcr.io/atuinsh/atuin:18.16.1
+    command: start
+    environment:
+      ATUIN_HOST: 0.0.0.0
+      ATUIN_PORT: "8888"
+      ATUIN_DB_URI: postgres://atuin:${ATUIN_DB_PASSWORD}@atuin-db/atuin
+      ATUIN_OPEN_REGISTRATION: ${ATUIN_ALLOW_REGISTRATION}
+    ports:
+      - 8888
+    volumes:
+      - config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  atuin-db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: atuin
+      POSTGRES_USER: atuin
+      POSTGRES_PASSWORD: ${ATUIN_DB_PASSWORD}
+    volumes:
+      - postgres:/var/lib/postgresql/data/
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi
+  postgres:
+    driver_opts:
+      size: 2Gi

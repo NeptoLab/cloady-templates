@@ -1,0 +1,22 @@
+services:
+  dailytxt:
+    image: phitux/dailytxt:2.6.2
+    environment:
+      SECRET_KEY: ${DAILYTXT_SECRET_KEY}
+      DATA_INDENT: "2"
+      ADMIN_PASSWORD: ${DAILYTXT_ADMIN_PASSWORD}
+      LOGOUT_AFTER_DAYS: "60"
+      ALLOW_REGISTRATION: ${DAILYTXT_ALLOW_REGISTRATION}
+    ports:
+      - 80
+    volumes:
+      - dailytxt-data:/data/
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  dailytxt-data:
+    driver_opts:
+      size: 2Gi

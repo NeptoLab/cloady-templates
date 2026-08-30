@@ -1,0 +1,71 @@
+services:
+  client:
+    image: ghcr.io/rybbit-io/rybbit-client:${IMAGE_TAG:-latest}
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_BACKEND_URL: ${BASE_URL}
+      NEXT_PUBLIC_DISABLE_SIGNUP: ${DISABLE_SIGNUP}
+    ports:
+      - 3002
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  backend:
+    image: ghcr.io/rybbit-io/rybbit-backend:${IMAGE_TAG:-latest}
+    environment:
+      BASE_URL: ${BASE_URL}
+      NODE_ENV: production
+      POSTGRES_DB: ${POSTGRES_DB}
+      MAPBOX_TOKEN: ${MAPBOX_TOKEN}
+      CLICKHOUSE_DB: ${CLICKHOUSE_DB}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: ${POSTGRES_USER}
+      DISABLE_SIGNUP: ${DISABLE_SIGNUP}
+      CLICKHOUSE_HOST: http://clickhouse:8123
+      DISABLE_TELEMETRY: ${DISABLE_TELEMETRY}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+    expose:
+      - 3001
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  clickhouse:
+    image: clickhouse/clickhouse-server:25.4.2
+    environment:
+      CLICKHOUSE_DB: ${CLICKHOUSE_DB}
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  postgres-data:
+    driver_opts:
+      size: 2Gi
+  clickhouse-data:
+    driver_opts:
+      size: 2Gi

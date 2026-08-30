@@ -1,0 +1,22 @@
+services:
+  hammond:
+    image: alfhou/hammond:v0.0.24
+    environment:
+      TZ: ${TZ}
+    ports:
+      - 3000
+    volumes:
+      - config:/config
+      - assets:/assets
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  assets:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,7 @@
+name: Emulatorjs
+hint: Self-hosted Javascript emulation for various system.
+version: 1.9.2
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/emulatorjs
+  kind: runtipi

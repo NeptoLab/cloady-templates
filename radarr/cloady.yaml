@@ -1,0 +1,7 @@
+name: Radarr
+hint: Movie collection manager for Usenet and BitTorrent users.
+version: 6.2.1
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/radarr
+  kind: runtipi

@@ -1,0 +1,20 @@
+{
+  "MYSQL_USER": {
+    "title": "Username",
+    "default": "cloady"
+  },
+  "MYSQL_DATABASE": {
+    "title": "Database",
+    "default": "app"
+  },
+  "MYSQL_PASSWORD": {
+    "title": "Password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "MYSQL_ROOT_PASSWORD": {
+    "title": "Root password",
+    "secret": true,
+    "generate": "password:24"
+  }
+}

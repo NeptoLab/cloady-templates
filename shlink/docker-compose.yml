@@ -1,0 +1,35 @@
+services:
+  shlink:
+    image: ghcr.io/shlinkio/shlink:5.1.5
+    environment:
+      DB_HOST: shlink-db
+      DB_NAME: shlink
+      DB_USER: shlink
+      DB_DRIVER: postgres
+      DB_PASSWORD: ${SHLINK_POSTGRES_PASSWORD}
+      DEFAULT_DOMAIN: ${PUBLIC_HOST}
+      IS_HTTPS_ENABLED: "true"
+    ports:
+      - 8080
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  shlink-db:
+    image: postgres:17.2-alpine
+    environment:
+      POSTGRES_DB: shlink
+      POSTGRES_USER: shlink
+      POSTGRES_PASSWORD: ${SHLINK_POSTGRES_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi

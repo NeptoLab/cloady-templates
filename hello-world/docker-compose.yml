@@ -1,0 +1,10 @@
+services:
+  hello-world:
+    image: crccheck/hello-world:latest
+    ports:
+      - 8000
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

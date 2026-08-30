@@ -1,0 +1,53 @@
+services:
+  bitmagnet:
+    image: ghcr.io/bitmagnet-io/bitmagnet:v0.10.0
+    command:
+      - worker
+      - run
+      - --keys=http_server
+      - --keys=queue_server
+      - --keys=dht_crawler
+    environment:
+      REDIS_ADDR: bitmagnet-redis:6379
+      POSTGRES_HOST: bitmagnet-db
+      POSTGRES_NAME: bitmagnet
+      POSTGRES_USER: tipi
+      POSTGRES_PASSWORD: ${BITMAGNENT_DB_PASSWORD}
+    ports:
+      - 3333
+      - 3334
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  bitmagnet-db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: bitmagnet
+      POSTGRES_USER: tipi
+      POSTGRES_PASSWORD: ${BITMAGNENT_DB_PASSWORD}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  bitmagnet-redis:
+    image: redis:alpine
+    command: --save 60 1 --loglevel warning
+    volumes:
+      - redis:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+volumes:
+  redis:
+    driver_opts:
+      size: 2Gi
+  postgres:
+    driver_opts:
+      size: 2Gi

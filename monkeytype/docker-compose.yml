@@ -1,0 +1,10 @@
+services:
+  monkeytype:
+    image: themythologist/monkeytype:frontend-latest
+    ports:
+      - 5000
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

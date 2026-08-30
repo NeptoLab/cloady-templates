@@ -1,0 +1,11 @@
+{
+  "PG_DB": {
+    "default": "jira"
+  },
+  "PG_PASS": {
+    "default": "jira"
+  },
+  "PG_USER": {
+    "default": "jira"
+  }
+}

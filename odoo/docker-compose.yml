@@ -1,0 +1,49 @@
+services:
+  odoo:
+    image: odoo:19
+    command: --
+    environment:
+      HOST: odoodb
+      USER: odoo
+      PASSWORD: ${ODOO_POSTGRES_PASSWORD}
+    ports:
+      - 8069
+    volumes:
+      - addons:/mnt/extra-addons
+      - etc:/etc/odoo
+      - odoo-web-data:/var/lib/odoo
+      - filestore:/root/.local/share
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  odoodb:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: ${ODOO_POSTGRES_PASSWORD}
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  etc:
+    driver_opts:
+      size: 2Gi
+  addons:
+    driver_opts:
+      size: 2Gi
+  filestore:
+    driver_opts:
+      size: 2Gi
+  postgresql:
+    driver_opts:
+      size: 2Gi
+  odoo-web-data:
+    driver_opts:
+      size: 2Gi

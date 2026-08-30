@@ -1,0 +1,7 @@
+name: Olivetin
+hint: Give safe and simple access to predefined shell commands from a web interface.
+version: latest
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/olivetin
+  kind: runtipi

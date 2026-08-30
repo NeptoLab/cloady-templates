@@ -1,0 +1,34 @@
+services:
+  wikijs:
+    image: ghcr.io/requarks/wiki:2.5.314
+    environment:
+      DB_HOST: wikijs-db
+      DB_NAME: wiki
+      DB_PASS: ${WIKI_JS_DB_PASS}
+      DB_PORT: "5432"
+      DB_TYPE: postgres
+      DB_USER: wikijs
+    ports:
+      - 3000
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  wikijs-db:
+    image: postgres:11-alpine
+    environment:
+      POSTGRES_DB: wiki
+      POSTGRES_USER: wikijs
+      POSTGRES_PASSWORD: ${WIKI_JS_DB_PASS}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  postgres:
+    driver_opts:
+      size: 2Gi

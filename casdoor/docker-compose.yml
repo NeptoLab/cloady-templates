@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: casdoor
+      POSTGRES_USER: casdoor
+      POSTGRES_PASSWORD: pls-changeme-to-strong-pw
+    volumes:
+      - db-postgresql:/var/lib/postgresql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  casdoor:
+    image: casbin/casdoor:2.353.0
+    environment:
+      GIN_MODE: release
+      RUNNING_IN_DOCKER: "true"
+    ports:
+      - 8000
+    volumes:
+      - conf:/conf
+      - logs:/logs
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  conf:
+    driver_opts:
+      size: 2Gi
+  logs:
+    driver_opts:
+      size: 2Gi
+  db-postgresql:
+    driver_opts:
+      size: 2Gi

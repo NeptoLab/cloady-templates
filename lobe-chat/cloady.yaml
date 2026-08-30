@@ -1,0 +1,7 @@
+name: Lobe Chat
+hint: LLM chatbot framework
+version: 1.143.3
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/lobe-chat
+  kind: runtipi

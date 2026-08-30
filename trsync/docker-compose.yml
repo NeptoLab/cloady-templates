@@ -1,0 +1,13 @@
+services:
+  trsync:
+    image: l4rm4nd/trsync:latest
+    environment:
+      DOMAIN: trsync.example.com
+      SECRET_KEY: ChooseStrongSecretKeyHere
+    ports:
+      - 8000
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

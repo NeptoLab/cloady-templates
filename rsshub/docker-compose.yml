@@ -1,0 +1,32 @@
+services:
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis-data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+  rsshub:
+    image: diygod/rsshub:2026-04-17
+    environment:
+      TZ: ${TZ}
+    ports:
+      - 1200
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  browserless:
+    image: browserless/chrome
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  redis-data:
+    driver_opts:
+      size: 2Gi

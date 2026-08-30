@@ -1,0 +1,7 @@
+name: Mongo Express
+hint: Web-based MongoDB admin interface, written with Node.js and Express
+version: 1.0.2
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/mongo-express
+  kind: runtipi

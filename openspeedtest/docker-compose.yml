@@ -1,0 +1,11 @@
+services:
+  openspeedtest:
+    image: openspeedtest/latest:latest
+    ports:
+      - 3000
+      - 3001
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

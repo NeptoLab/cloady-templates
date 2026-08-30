@@ -1,0 +1,14 @@
+{
+  "OWNCLOUD_PASSWORD": {
+    "title": "Owncloud password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "OWNCLOUD_USERNAME": {
+    "title": "Owncloud username"
+  },
+  "OWNCLOUD_DB_PASSWORD": {
+    "secret": true,
+    "generate": "password:32"
+  }
+}

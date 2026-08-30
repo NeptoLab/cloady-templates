@@ -1,0 +1,23 @@
+{
+  "ARCHIVEBOX_PASSWORD": {
+    "title": "ArchiveBox Password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "ARCHIVEBOX_USERNAME": {
+    "title": "ArchiveBox Username"
+  },
+  "ARCHIVEBOX_SEARCH_BACKEND_ENGINE": {
+    "title": "ARCHIVEBOX_SEARCH_BACKEND_ENGINE",
+    "default": ""
+  },
+  "ARCHIVEBOX_SEARCH_BACKEND_PASSWORD": {
+    "title": "ARCHIVEBOX_SEARCH_BACKEND_PASSWORD",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "ARCHIVEBOX_SEARCH_BACKEND_HOST_NAME": {
+    "title": "ARCHIVEBOX_SEARCH_BACKEND_HOST_NAME",
+    "default": ""
+  }
+}

@@ -1,0 +1,36 @@
+services:
+  crowdsec:
+    image: crowdsecurity/crowdsec:v1.7.8
+    environment:
+      GID: "1000"
+      COLLECTIONS: crowdsecurity/traefik crowdsecurity/http-cve crowdsecurity/base-http-scenarios crowdsecurity/sshd crowdsecurity/linux crowdsecurity/appsec-crs crowdsecurity/appsec-generic-rules crowdsecurity/appsec-virtual-patching
+    ports:
+      - 8080
+      - 6060
+    volumes:
+      - data:/var/lib/crowdsec/data
+      - etc:/etc/crowdsec
+      - auth-log:/var/log/auth.log:ro
+      - syslog:/var/log/syslog:ro
+      - logs:/var/log/traefik:ro
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  etc:
+    driver_opts:
+      size: 2Gi
+  data:
+    driver_opts:
+      size: 2Gi
+  logs:
+    driver_opts:
+      size: 2Gi
+  syslog:
+    driver_opts:
+      size: 2Gi
+  auth-log:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,26 @@
+services:
+  app:
+    image: ghcr.io/l4rm4nd/memelord:latest
+    environment:
+      TZ: Europe/Berlin
+      DOMAIN: memelord.example.com
+      SECURE_COOKIES: "False"
+      SESSION_COOKIE_AGE: "30"
+      SESSION_EXPIRE_AT_BROWSER_CLOSE: "False"
+    ports:
+      - 8000
+    volumes:
+      - database:/opt/app/database
+      - media:/opt/app/media
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  media:
+    driver_opts:
+      size: 2Gi
+  database:
+    driver_opts:
+      size: 2Gi

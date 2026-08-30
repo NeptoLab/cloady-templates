@@ -1,0 +1,31 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:s6
+    environment:
+      PGID: "0"
+      PUID: "0"
+    ports:
+      - 80
+    volumes:
+      - app-data:/srv/app-data
+      - media:/srv/media
+      - general:/srv/general
+      - db:/database
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  media:
+    driver_opts:
+      size: 2Gi
+  general:
+    driver_opts:
+      size: 2Gi
+  app-data:
+    driver_opts:
+      size: 2Gi

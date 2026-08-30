@@ -1,0 +1,30 @@
+services:
+  ui:
+    image: ghcr.io/open-webui/open-webui:main
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
+    ports:
+      - 8080
+    volumes:
+      - open-webui:/app/backend/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  open-webui:
+    driver_opts:
+      size: 2Gi

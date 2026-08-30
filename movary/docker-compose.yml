@@ -1,0 +1,70 @@
+services:
+  movary:
+    image: leepeuker/movary:0.72.0
+    environment:
+      TIMEZONE: ${TZ}
+      TMDB_API_KEY: ${MOVARY_TMDB_API_KEY}
+      DATABASE_MODE: mysql
+      APPLICATION_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      PLEX_IDENTIFIER: ${MOVARY_PLEX_IDENTIFIER}
+      JELLYFIN_DEVICE_ID: ${MOVARY_JELLYFIN_IDENTIFIER}
+      DATABASE_MYSQL_HOST: movary-db
+      DATABASE_MYSQL_NAME: movary
+      DATABASE_MYSQL_USER: tipi
+      DATABASE_MYSQL_PASSWORD: ${MOVARY_MYSQL_PASSWORD}
+      TMDB_ENABLE_IMAGE_CACHING: "1"
+    ports:
+      - 80
+    volumes:
+      - movary-storage:/app/storage
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  movary-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_USER: tipi
+      MYSQL_DATABASE: movary
+      MYSQL_PASSWORD: ${MOVARY_MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MOVARY_MYSQL_PASSWORD}
+    volumes:
+      - mysql:/var/lib/mysql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  movary-migration:
+    image: leepeuker/movary:0.72.0
+    command: php bin/console.php database:migration:migrate
+    environment:
+      TIMEZONE: ${TZ}
+      TMDB_API_KEY: ${MOVARY_TMDB_API_KEY}
+      DATABASE_MODE: mysql
+      APPLICATION_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      PLEX_IDENTIFIER: ${MOVARY_PLEX_IDENTIFIER}
+      JELLYFIN_DEVICE_ID: ${MOVARY_JELLYFIN_IDENTIFIER}
+      DATABASE_MYSQL_HOST: movary-db
+      DATABASE_MYSQL_NAME: movary
+      DATABASE_MYSQL_USER: tipi
+      DATABASE_MYSQL_PASSWORD: ${MOVARY_MYSQL_PASSWORD}
+      TMDB_ENABLE_IMAGE_CACHING: "1"
+    volumes:
+      - movary:/app/storage
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  mysql:
+    driver_opts:
+      size: 2Gi
+  movary:
+    driver_opts:
+      size: 2Gi
+  movary-storage:
+    driver_opts:
+      size: 2Gi

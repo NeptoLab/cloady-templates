@@ -1,0 +1,30 @@
+services:
+  kavita:
+    image: jvmilazz0/kavita:0.9.0
+    environment:
+      TZ: ${TZ}
+    ports:
+      - 5000
+    volumes:
+      - kavita-config:/kavita/config
+      - books:/books
+      - comics:/comics
+      - manga:/manga
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  books:
+    driver_opts:
+      size: 2Gi
+  manga:
+    driver_opts:
+      size: 2Gi
+  comics:
+    driver_opts:
+      size: 2Gi
+  kavita-config:
+    driver_opts:
+      size: 2Gi

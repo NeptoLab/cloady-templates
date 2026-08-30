@@ -1,0 +1,225 @@
+{
+  "REGION": {
+    "title": "Storage region",
+    "default": "stub"
+  },
+  "ANON_KEY": {
+    "generate": "jwt:anon:JWT_SECRET"
+  },
+  "KONG_HOST": {
+    "default": "${CLOADY_HOST_KONG}"
+  },
+  "META_HOST": {
+    "default": "${CLOADY_HOST_META}"
+  },
+  "REST_HOST": {
+    "default": "${CLOADY_HOST_REST}"
+  },
+  "SMTP_HOST": {
+    "title": "SMTP host",
+    "default": ""
+  },
+  "SMTP_PASS": {
+    "title": "SMTP password",
+    "secret": true,
+    "default": ""
+  },
+  "SMTP_PORT": {
+    "title": "SMTP port",
+    "default": "587"
+  },
+  "SMTP_USER": {
+    "title": "SMTP user",
+    "default": ""
+  },
+  "JWT_EXPIRY": {
+    "title": "JWT expiry (seconds)",
+    "default": "3600"
+  },
+  "JWT_SECRET": {
+    "secret": true,
+    "generate": "password:40"
+  },
+  "PUBLIC_URL": {
+    "default": "${CLOADY_PRIMARY_URL}"
+  },
+  "IMGPROXY_HOST": {
+    "default": "${CLOADY_HOST_IMGPROXY}"
+  },
+  "POSTGRES_HOST": {
+    "default": "${CLOADY_HOST_DB}"
+  },
+  "VAULT_ENC_KEY": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "DISABLE_SIGNUP": {
+    "type": "boolean",
+    "title": "Disable signups",
+    "default": false
+  },
+  "OPENAI_API_KEY": {
+    "title": "OpenAI API key (Studio SQL assistant)",
+    "secret": true,
+    "default": ""
+  },
+  "SECRET_KEY_BASE": {
+    "secret": true,
+    "generate": "password:64"
+  },
+  "GLOBAL_S3_BUCKET": {
+    "title": "Storage bucket name",
+    "default": "stub"
+  },
+  "PGRST_DB_SCHEMAS": {
+    "title": "Exposed schemas",
+    "default": "public,storage,graphql_public"
+  },
+  "POOLER_TENANT_ID": {
+    "default": "cloady"
+  },
+  "SERVICE_ROLE_KEY": {
+    "secret": true,
+    "generate": "jwt:service_role:JWT_SECRET"
+  },
+  "SMTP_ADMIN_EMAIL": {
+    "title": "SMTP admin email",
+    "default": ""
+  },
+  "SMTP_SENDER_NAME": {
+    "title": "SMTP sender name",
+    "default": "Supabase"
+  },
+  "POSTGRES_PASSWORD": {
+    "title": "Database password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "STORAGE_TENANT_ID": {
+    "title": "Storage tenant id",
+    "default": "stub"
+  },
+  "DASHBOARD_PASSWORD": {
+    "title": "Dashboard password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "DASHBOARD_USERNAME": {
+    "title": "Dashboard username",
+    "default": "supabase"
+  },
+  "IMGPROXY_AUTO_WEBP": {
+    "type": "boolean",
+    "title": "Imgproxy auto WebP",
+    "default": true
+  },
+  "PG_META_CRYPTO_KEY": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "ANON_KEY_ASYMMETRIC": {
+    "secret": true,
+    "default": ""
+  },
+  "ENABLE_EMAIL_SIGNUP": {
+    "type": "boolean",
+    "title": "Enable email signup",
+    "default": true
+  },
+  "ENABLE_PHONE_SIGNUP": {
+    "type": "boolean",
+    "title": "Enable phone signup",
+    "default": false
+  },
+  "POOLER_DB_POOL_SIZE": {
+    "title": "Pooler DB pool size",
+    "default": "5"
+  },
+  "SUPABASE_SECRET_KEY": {
+    "secret": true,
+    "default": ""
+  },
+  "FUNCTIONS_VERIFY_JWT": {
+    "type": "boolean",
+    "title": "Edge functions verify JWT",
+    "default": false
+  },
+  "ENABLE_ANONYMOUS_USERS": {
+    "type": "boolean",
+    "title": "Enable anonymous users",
+    "default": false
+  },
+  "MAILER_URLPATHS_INVITE": {
+    "default": "/auth/v1/verify"
+  },
+  "POOLER_MAX_CLIENT_CONN": {
+    "title": "Pooler max client connections",
+    "default": "100"
+  },
+  "STUDIO_DEFAULT_PROJECT": {
+    "title": "Default project",
+    "default": "Default Project"
+  },
+  "ADDITIONAL_REDIRECT_URLS": {
+    "title": "Additional redirect URLs",
+    "default": ""
+  },
+  "ENABLE_EMAIL_AUTOCONFIRM": {
+    "type": "boolean",
+    "title": "Auto-confirm email",
+    "default": true
+  },
+  "ENABLE_PHONE_AUTOCONFIRM": {
+    "type": "boolean",
+    "title": "Auto-confirm phone",
+    "default": false
+  },
+  "MAILER_URLPATHS_RECOVERY": {
+    "default": "/auth/v1/verify"
+  },
+  "POOLER_DEFAULT_POOL_SIZE": {
+    "title": "Pooler default pool size",
+    "default": "20"
+  },
+  "SUPABASE_PUBLISHABLE_KEY": {
+    "secret": true,
+    "default": ""
+  },
+  "S3_PROTOCOL_ACCESS_KEY_ID": {
+    "secret": true,
+    "generate": "hex:16"
+  },
+  "SERVICE_ROLE_KEY_ASYMMETRIC": {
+    "secret": true,
+    "default": ""
+  },
+  "STUDIO_DEFAULT_ORGANIZATION": {
+    "title": "Default organization",
+    "default": "Default Organization"
+  },
+  "MAILER_URLPATHS_CONFIRMATION": {
+    "default": "/auth/v1/verify"
+  },
+  "MAILER_URLPATHS_EMAIL_CHANGE": {
+    "default": "/auth/v1/verify"
+  },
+  "GOTRUE_EXTERNAL_GOOGLE_SECRET": {
+    "title": "Google OAuth client secret",
+    "secret": true
+  },
+  "S3_PROTOCOL_ACCESS_KEY_SECRET": {
+    "secret": true,
+    "generate": "hex:32"
+  },
+  "GOTRUE_EXTERNAL_GOOGLE_ENABLED": {
+    "type": "boolean",
+    "title": "Google sign-in enabled",
+    "default": false
+  },
+  "GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID": {
+    "title": "Google OAuth client id"
+  },
+  "GOTRUE_EXTERNAL_GOOGLE_REDIRECT_URI": {
+    "title": "Google OAuth redirect URI"
+  }
+}

@@ -1,0 +1,7 @@
+name: Grocy
+hint: ERP beyond your fridge
+version: 4.6.0
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/grocy
+  kind: runtipi

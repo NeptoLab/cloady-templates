@@ -1,0 +1,7 @@
+name: Memos
+hint: Memo hub for knowledge management and collaboration.
+version: 0.29.1
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/memos
+  kind: runtipi

@@ -1,0 +1,6 @@
+name: Nessus
+version: latest
+sortOrder: 1000
+source:
+  url: https://github.com/Haxxnet/Compose-Examples/tree/main/examples/nessus
+  kind: haxxnet

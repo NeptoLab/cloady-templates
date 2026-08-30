@@ -1,0 +1,20 @@
+{
+  "SFTPGO_GRACE_TIME": {
+    "title": "Grace Time on stop"
+  },
+  "SFTPGO_BINDING_PORT": {
+    "title": "Binding Port"
+  },
+  "SFTPGO_ADMIN_PASSWORD": {
+    "title": "Web Admin Password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "SFTPGO_ADMIN_USERNAME": {
+    "title": "Web Admin User"
+  },
+  "SFTPGO_DATABASE_PASSWORD": {
+    "secret": true,
+    "generate": "password:32"
+  }
+}

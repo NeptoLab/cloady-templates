@@ -1,0 +1,7 @@
+name: Fireshare
+hint: Self host your media and share with unique links
+version: 1.7.3
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/fireshare
+  kind: runtipi

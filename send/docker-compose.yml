@@ -1,0 +1,34 @@
+services:
+  send:
+    image: registry.gitlab.com/timvisee/send:latest
+    environment:
+      BASE_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      FILE_DIR: /uploads
+      NODE_ENV: production
+      REDIS_HOST: send-redis
+      MAX_FILE_SIZE: "2147483648"
+    ports:
+      - 1443
+    volumes:
+      - uploads:/uploads
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  send-redis:
+    image: redis:alpine
+    volumes:
+      - redis:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+volumes:
+  redis:
+    driver_opts:
+      size: 2Gi
+  uploads:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,9 @@
+{
+  "HBOX_AUTH_API_KEY_PEPPER": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "HBOX_OPTIONS_ALLOW_REGISTRATION": {
+    "title": "Allow Users Registration"
+  }
+}

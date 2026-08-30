@@ -1,0 +1,64 @@
+services:
+  owncloud:
+    image: owncloud/server:10.16.3
+    environment:
+      OWNCLOUD_DOMAIN: ${PUBLIC_HOST}
+      OWNCLOUD_DB_HOST: owncloud-db
+      OWNCLOUD_DB_NAME: owncloud
+      OWNCLOUD_DB_TYPE: mysql
+      OWNCLOUD_REDIS_HOST: owncloud-redis
+      OWNCLOUD_DB_PASSWORD: ${OWNCLOUD_DB_PASSWORD}
+      OWNCLOUD_DB_USERNAME: tipi
+      OWNCLOUD_MYSQL_UTF8MB4: "true"
+      OWNCLOUD_REDIS_ENABLED: "true"
+      OWNCLOUD_ADMIN_PASSWORD: ${OWNCLOUD_PASSWORD}
+      OWNCLOUD_ADMIN_USERNAME: ${OWNCLOUD_USERNAME}
+      OWNCLOUD_TRUSTED_DOMAINS: ${PUBLIC_HOST}
+    ports:
+      - 8080
+    volumes:
+      - owncloud-data:/mnt/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  owncloud-db:
+    image: mariadb:10.6
+    command:
+      - --max-allowed-packet=128M
+      - --innodb-log-file-size=64M
+    environment:
+      MYSQL_USER: tipi
+      MYSQL_DATABASE: owncloud
+      MYSQL_PASSWORD: ${OWNCLOUD_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${OWNCLOUD_DB_PASSWORD}
+    volumes:
+      - mysql:/var/lib/mysql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  owncloud-redis:
+    image: redis:6
+    command:
+      - --databases
+      - "1"
+    volumes:
+      - redis:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+volumes:
+  mysql:
+    driver_opts:
+      size: 2Gi
+  redis:
+    driver_opts:
+      size: 2Gi
+  owncloud-data:
+    driver_opts:
+      size: 2Gi

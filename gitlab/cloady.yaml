@@ -1,0 +1,4 @@
+name: GitLab
+hint: Full DevOps platform with CI/CD
+version: "19.1"
+sortOrder: 75

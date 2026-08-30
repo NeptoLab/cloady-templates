@@ -1,0 +1,10 @@
+services:
+  drawio:
+    image: jgraph/drawio:30.2.7
+    ports:
+      - 8080
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

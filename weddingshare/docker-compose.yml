@@ -1,0 +1,42 @@
+services:
+  wedding-share:
+    image: cirx08/wedding_share:1.8.2
+    environment:
+      TITLE: WeddingShare
+      DATABASE_TYPE: sqlite
+      ENCRYPTION_KEY: ChangeMe
+      THEMES_DEFAULT: dark
+      ENCRYPTION_SALT: ChangeMe
+      GALLERY_COLUMNS: "4"
+      GALLERY_MAX_SIZE_MB: "4096"
+      ACCOUNT_OWNER_PASSWORD: ChangeMe
+      ACCOUNT_OWNER_USERNAME: admin
+      GALLERY_REQUIRE_REVIEW: "true"
+      GALLERY_REVIEW_COUNTER: "false"
+      GALLERY_QR_CODE_ENABLED: "false"
+      GALLERY_ALLOWED_FILE_TYPES: .jpg,.jpeg,.png,.heic
+    ports:
+      - 5000
+    volumes:
+      - config:/app/config
+      - thumbnails:/app/wwwroot/thumbnails
+      - uploads:/app/wwwroot/uploads
+      - custom-resources:/app/wwwroot/custom_resources
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi
+  uploads:
+    driver_opts:
+      size: 2Gi
+  thumbnails:
+    driver_opts:
+      size: 2Gi
+  custom-resources:
+    driver_opts:
+      size: 2Gi

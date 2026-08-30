@@ -1,0 +1,55 @@
+services:
+  ghostfolio:
+    image: ghostfolio/ghostfolio:3.18.0
+    environment:
+      HOST: 0.0.0.0
+      PORT: "3333"
+      NODE_ENV: production
+      REDIS_HOST: ghostfolio-redis
+      REDIS_PORT: "6379"
+      POSTGRES_DB: ghostfolio
+      DATABASE_URL: postgresql://ghostfolio:${GHOSTFOLIO_DB_PASSWORD}@ghostfolio-db:5432/ghostfolio
+      POSTGRES_USER: ghostfolio
+      JWT_SECRET_KEY: ${GHOSTFOLIO_JWT_SECRET_KEY}
+      REDIS_PASSWORD: ${GHOSTFOLIO_REDIS_PASSWORD}
+      ACCESS_TOKEN_SALT: $GHOSTFOLIO_ACCESS_TOKEN_SALT
+      POSTGRES_PASSWORD: ${GHOSTFOLIO_DB_PASSWORD}
+    ports:
+      - 3333
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  ghostfolio-db:
+    image: postgres:15.4-alpine
+    environment:
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: ghostfolio
+      POSTGRES_USER: ghostfolio
+      POSTGRES_PASSWORD: ${GHOSTFOLIO_DB_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  ghostfolio-redis:
+    image: redis:7-alpine
+    command: |
+      --requirepass ${GHOSTFOLIO_REDIS_PASSWORD}
+    volumes:
+      - redis:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  redis:
+    driver_opts:
+      size: 2Gi

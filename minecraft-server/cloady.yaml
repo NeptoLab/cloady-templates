@@ -1,0 +1,7 @@
+name: Minecraft Server
+hint: Run a minecraft server
+version: latest
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/minecraft-server
+  kind: runtipi

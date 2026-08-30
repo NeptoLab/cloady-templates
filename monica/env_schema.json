@@ -1,0 +1,14 @@
+{
+  "TZ": {
+    "title": "Timezone",
+    "default": "UTC"
+  },
+  "MONICA_APP_KEY": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "MONICA_DB_PASS": {
+    "secret": true,
+    "generate": "password:30"
+  }
+}

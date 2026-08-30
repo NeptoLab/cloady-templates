@@ -1,0 +1,54 @@
+services:
+  hoarder:
+    image: ghcr.io/hoarder-app/hoarder:0.32.0
+    environment:
+      DATA_DIR: /data
+      MEILI_ADDR: http://hoarder-meilisearch:7700
+      NEXTAUTH_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      BROWSER_WEB_URL: http://hoarder-chrome:9222
+      HOARDER_VERSION: 0.16.0
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY}
+    ports:
+      - 3000
+    volumes:
+      - app:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  hoarder-chrome:
+    image: gcr.io/zenika-hub/alpine-chrome:124
+    command:
+      - --no-sandbox
+      - --disable-gpu
+      - --disable-dev-shm-usage
+      - --remote-debugging-address=0.0.0.0
+      - --remote-debugging-port=9222
+      - --hide-scrollbars
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  hoarder-meilisearch:
+    image: getmeili/meilisearch:v1.48
+    environment:
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY}
+      MEILI_NO_ANALYTICS: "true"
+    volumes:
+      - melli-data:/meili_data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  app:
+    driver_opts:
+      size: 2Gi
+  melli-data:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,45 @@
+services:
+  viewtube:
+    image: mauriceo/viewtube:0.17.0
+    environment:
+      VIEWTUBE_SECURE: "true"
+      VIEWTUBE_REDIS_HOST: viewtube-redis
+      VIEWTUBE_CORS_ORIGIN: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      VIEWTUBE_DATABASE_HOST: viewtube-mongodb
+    ports:
+      - 8066
+    volumes:
+      - viewtube-data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  viewtube-redis:
+    image: redis:7
+    volumes:
+      - redis:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+  viewtube-mongodb:
+    image: mongo:5
+    volumes:
+      - db:/data/db
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  redis:
+    driver_opts:
+      size: 2Gi
+  viewtube-data:
+    driver_opts:
+      size: 2Gi

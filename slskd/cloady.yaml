@@ -1,0 +1,7 @@
+name: SLSKD
+hint: P2P downloads
+version: 0.25.1
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/slskd
+  kind: runtipi

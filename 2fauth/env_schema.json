@@ -1,0 +1,9 @@
+{
+  "APP_PROTOCOL": {
+    "default": "http"
+  },
+  "TWOFAUTH_APP_KEY": {
+    "secret": true,
+    "generate": "password:32"
+  }
+}

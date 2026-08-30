@@ -1,0 +1,29 @@
+services:
+  ocis:
+    image: owncloud/ocis:latest
+    entrypoint:
+      - /bin/sh
+    command:
+      - -c
+      - ocis init || true; ocis server
+    environment:
+      OCIS_URL: https://localhost:9200
+      PROXY_TLS: "true"
+      OCIS_INSECURE: "true"
+    ports:
+      - 9200
+    volumes:
+      - config:/etc/ocis
+      - data:/var/lib/ocis
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi

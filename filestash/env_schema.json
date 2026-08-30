@@ -1,0 +1,13 @@
+{
+  "FILESTASH_GDRIVE_CLIENT_ID": {
+    "title": "(Optional) Google Drive Client ID"
+  },
+  "FILESTASH_DROPBOX_CLIENT_ID": {
+    "title": "(Optional) Dropbox Client ID"
+  },
+  "FILESTASH_GDRIVE_CLIENT_SECRET": {
+    "title": "(Optional) Google Drive Client Secret",
+    "secret": true,
+    "generate": "password:24"
+  }
+}

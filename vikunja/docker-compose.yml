@@ -1,0 +1,40 @@
+services:
+  vikunja:
+    image: vikunja/vikunja:2.3.0
+    environment:
+      VIKUNJA_DATABASE_HOST: vikunja-db
+      VIKUNJA_DATABASE_TYPE: postgres
+      VIKUNJA_DATABASE_USER: tipi
+      VIKUNJA_DATABASE_DATABASE: vikunja
+      VIKUNJA_DATABASE_PASSWORD: ${VIKUNJA_DB_PASSWORD}
+      VIKUNJA_SERVICE_JWTSECRET: ${VIKUNJA_SERVICE_SECRET}
+      VIKUNJA_SERVICE_PUBLICURL: ${APP_PROTOCOL}://${PUBLIC_HOST}/
+    ports:
+      - 3456
+    volumes:
+      - files:/app/vikunja/files
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  vikunja-db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: vikunja
+      POSTGRES_USER: tipi
+      POSTGRES_PASSWORD: ${VIKUNJA_DB_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  files:
+    driver_opts:
+      size: 2Gi

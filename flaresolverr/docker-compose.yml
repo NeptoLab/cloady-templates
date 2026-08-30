@@ -1,0 +1,13 @@
+services:
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:v3.5.0
+    environment:
+      TZ: ${TZ}
+      LOG_LEVEL: ${FLARESOLVERR_LOG_LEVEL-info}
+    ports:
+      - 8191
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

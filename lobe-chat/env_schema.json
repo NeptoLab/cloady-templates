@@ -1,0 +1,22 @@
+{
+  "ACCESS_CODE": {
+    "title": "Password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "CUSTOM_MODELS": {
+    "title": "Custom Models"
+  },
+  "OPENAI_API_KEY": {
+    "title": "OpenAI API Key",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "OPENAI_PROXY_URL": {
+    "title": "OpenAI API URL"
+  },
+  "OPEANAI_PROXY_URL": {
+    "title": "OPEANAI_PROXY_URL",
+    "default": ""
+  }
+}

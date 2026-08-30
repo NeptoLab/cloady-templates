@@ -1,0 +1,10 @@
+services:
+  moodist:
+    image: ghcr.io/remvze/moodist:v2.6.0
+    ports:
+      - 8080
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

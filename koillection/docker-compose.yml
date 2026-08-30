@@ -1,0 +1,49 @@
+services:
+  koillection:
+    image: koillection/koillection:1.8.3
+    environment:
+      PHP_TZ: ${TZ}
+      APP_ENV: prod
+      DB_HOST: koillection-db
+      DB_NAME: koillection
+      DB_PORT: "5432"
+      DB_USER: "{KOILLECTION_DB_USER}"
+      APP_DEBUG: "0"
+      DB_DRIVER: pdo_pgsql
+      DB_VERSION: "15"
+      DB_PASSWORD: "{KOILLECTION_DB_PASSWORD}"
+      HTTPS_ENABLED: "{APP_EXPOSED}"
+      JWT_PUBLIC_KEY: "%kernel.project_dir%/config/jwt/public.pem"
+      JWT_SECRET_KEY: "%kernel.project_dir%/config/jwt/private.pem"
+      PHP_MEMORY_LIMIT: 512M
+      CORS_ALLOW_ORIGIN: "*"
+      UPLOAD_MAX_FILESIZE: 20M
+    ports:
+      - 80
+    volumes:
+      - uploads:/uploads
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  koillection-db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: koillection
+      POSTGRES_USER: "{KOILLECTION_DB_USER}"
+      POSTGRES_PASSWORD: "{KOILLECTION_DB_PASSWORD}"
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  uploads:
+    driver_opts:
+      size: 2Gi
+  postgresql:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,50 @@
+services:
+  bewcloud:
+    image: ghcr.io/bewcloud/bewcloud:v1.9.2
+    entrypoint: bash
+    command: -c "deno run --allow-net --allow-read --allow-env migrate-db.ts && deno run --allow-all main.ts"
+    environment:
+      PORT: "8053"
+      BASE_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      JWT_SECRET: ${JWT_SECRET}
+      BREVO_API_KEY: ${BREVO_API_KEY}
+      PASSWORD_SALT: ${PASSWORD_SALT}
+      POSTGRESQL_HOST: bewcloud-db
+      POSTGRESQL_PORT: "5432"
+      POSTGRESQL_USER: bewcloud
+      POSTGRESQL_DBNAME: bewcloud
+      CONFIG_ENABLED_APPS: news,notes,photos
+      POSTGRESQL_PASSWORD: ${DB_PASSWORD}
+      CONFIG_ALLOW_SIGNUPS: ${ALLOW_SIGNUPS}
+      CONFIG_ENABLE_EMAILS: ${ENABLE_EMAIL}
+      CONFIG_FILES_ROOT_PATH: data-files
+      CONFIG_ALLOWED_COOKIE_DOMAINS: ${INTERNAL_IP},bewcloud.${LOCAL_DOMAIN},${PUBLIC_HOST}
+    ports:
+      - 8053
+    volumes:
+      - bewcloud-data-files:/app/data-files
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  bewcloud-db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: bewcloud
+      POSTGRES_USER: bewcloud
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  bewcloud-data-files:
+    driver_opts:
+      size: 2Gi

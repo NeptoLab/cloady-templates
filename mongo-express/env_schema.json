@@ -1,0 +1,21 @@
+{
+  "ME_CONFIG_MONGODB_SERVERIP": {
+    "title": "MongoDB Server IP Address"
+  },
+  "ME_CONFIG_BASICAUTH_PASSWORD": {
+    "title": "Mongo Express Web Password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "ME_CONFIG_BASICAUTH_USERNAME": {
+    "title": "Mongo Express Web Username"
+  },
+  "ME_CONFIG_MONGODB_ADMINPASSWORD": {
+    "title": "MongoDB Admin Password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "ME_CONFIG_MONGODB_ADMINUSERNAME": {
+    "title": "MongoDB Admin Username"
+  }
+}

@@ -1,0 +1,23 @@
+services:
+  minio:
+    image: ghcr.io/golithus/minio:latest
+    command: server --console-address :9001 /data
+    environment:
+      MINIO_DOMAIN: ${PUBLIC_HOST}
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_BROWSER_REDIRECT_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+    ports:
+      - 9000
+      - 9001
+    volumes:
+      - data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

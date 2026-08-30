@@ -1,0 +1,7 @@
+name: Haven
+hint: Self-hostable private blogging.
+version: latest
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/haven
+  kind: runtipi

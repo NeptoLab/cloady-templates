@@ -1,0 +1,21 @@
+{
+  "SLSKD_USER": {
+    "title": "Soulseek username"
+  },
+  "SLSKD_PASSWORD": {
+    "title": "Soulseek password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "SLSKD_WEB_USER": {
+    "title": "WebUI username"
+  },
+  "SLSKD_WEB_PASSWORD": {
+    "title": "WebUI password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "SLSKD_REMOTE_CONFIGURATION": {
+    "title": "Allow remote configuration"
+  }
+}

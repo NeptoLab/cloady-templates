@@ -1,0 +1,26 @@
+services:
+  octobot:
+    image: drakkarsoftware/octobot:2.1.13
+    environment:
+      TZ: ${TZ}
+    ports:
+      - 5001
+    volumes:
+      - user:/octobot/user
+      - tentacles:/octobot/tentacles
+      - logs:/octobot/logs
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  logs:
+    driver_opts:
+      size: 2Gi
+  user:
+    driver_opts:
+      size: 2Gi
+  tentacles:
+    driver_opts:
+      size: 2Gi

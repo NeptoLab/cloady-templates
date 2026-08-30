@@ -1,0 +1,17 @@
+services:
+  adguardhome-sync:
+    image: ghcr.io/bakito/adguardhome-sync:v0.9.2
+    command: run --config /config/adguardhome-sync.yaml
+    ports:
+      - 8080
+    volumes:
+      - adguardhome-sync-yaml:/config/adguardhome-sync.yaml
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  adguardhome-sync-yaml:
+    driver_opts:
+      size: 2Gi

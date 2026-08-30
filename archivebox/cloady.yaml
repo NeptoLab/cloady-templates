@@ -1,0 +1,7 @@
+name: ArchiveBox
+hint: Open source self-hosted web archiving.
+version: 0.7.4
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/archivebox
+  kind: runtipi

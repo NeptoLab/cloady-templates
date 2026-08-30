@@ -1,0 +1,7 @@
+name: Beszel
+hint: Lightweight server monitoring.
+version: 0.18.7
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/beszel
+  kind: runtipi

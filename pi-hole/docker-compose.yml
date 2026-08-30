@@ -1,0 +1,24 @@
+services:
+  pihole:
+    image: pihole/pihole:latest
+    environment:
+      TZ: Europe/Berlin
+      WEBPASSWORD: MySecureLoginPasswordForWebApp
+    ports:
+      - 80
+      - 53
+    volumes:
+      - data:/etc/pihole
+      - dnsmasq:/etc/dnsmasq.d
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  dnsmasq:
+    driver_opts:
+      size: 2Gi

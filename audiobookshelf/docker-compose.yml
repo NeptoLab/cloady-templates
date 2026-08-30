@@ -1,0 +1,28 @@
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:2.35.1
+    ports:
+      - 80
+    volumes:
+      - spoken:/audiobooks
+      - podcasts:/podcasts
+      - config:/config
+      - metadata:/metadata
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi
+  spoken:
+    driver_opts:
+      size: 2Gi
+  metadata:
+    driver_opts:
+      size: 2Gi
+  podcasts:
+    driver_opts:
+      size: 2Gi

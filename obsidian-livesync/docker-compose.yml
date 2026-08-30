@@ -1,0 +1,23 @@
+services:
+  obsidian-livesync:
+    image: couchdb:3.5.2
+    environment:
+      COUCHDB_USER: ${OBSIDIAN_LIVESYNC_USER}
+      COUCHDB_PASSWORD: ${OBSIDIAN_LIVESYNC_PASSWORD}
+    ports:
+      - 5984
+    volumes:
+      - couchdb:/opt/couchdb/data
+      - local-ini:/opt/couchdb/etc/local.ini
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  couchdb:
+    driver_opts:
+      size: 2Gi
+  local-ini:
+    driver_opts:
+      size: 2Gi

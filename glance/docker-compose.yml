@@ -1,0 +1,16 @@
+services:
+  glance:
+    image: glanceapp/glance:v0.8.5
+    ports:
+      - 8080
+    volumes:
+      - data:/app/config/
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,16 @@
+services:
+  lodestone-core:
+    image: ghcr.io/lodestone-team/lodestone_core:0.5.1
+    ports:
+      - 16662
+    volumes:
+      - lodestone-data:/root/.lodestone
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  lodestone-data:
+    driver_opts:
+      size: 2Gi

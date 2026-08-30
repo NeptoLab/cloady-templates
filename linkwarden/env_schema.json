@@ -1,0 +1,17 @@
+{
+  "APP_PROTOCOL": {
+    "default": "http"
+  },
+  "LINKWARDEN_DB_PASSWORD": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "LINKWARDEN_NEXTAUTH_SECRET": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "LINKWARDEN_NEXT_PUBLIC_DISABLE_REGISTRATION": {
+    "title": "Disable Registration",
+    "default": "false"
+  }
+}

@@ -1,0 +1,4 @@
+name: Supabase
+hint: Postgres + realtime + auth + storage
+version: 2026.06.03
+sortOrder: 5

@@ -1,0 +1,39 @@
+services:
+  monica:
+    image: monica:4.1.2
+    environment:
+      APP_KEY: ${MONICA_APP_KEY}
+      DB_HOST: monica-db
+      DB_PASSWORD: ${MONICA_DB_PASS}
+      DB_USERNAME: usermonica
+    ports:
+      - 80
+    volumes:
+      - data:/var/www/html/storage
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  monica-db:
+    image: mariadb:10.6.11
+    environment:
+      TZ: ${TZ}
+      MARIADB_USER: usermonica
+      MARIADB_DATABASE: monica
+      MARIADB_PASSWORD: ${MONICA_DB_PASS}
+      MARIADB_RANDOM_ROOT_PASSWORD: "true"
+    volumes:
+      - mysql:/var/lib/mysql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  mysql:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,59 @@
+services:
+  activepieces:
+    image: activepieces/activepieces:0.86.0
+    environment:
+      AP_API_KEY: ${AP_API_KEY}
+      AP_JWT_SECRET: ${AP_JWT_SECRET}
+      AP_REDIS_HOST: activepieces-redis
+      AP_REDIS_PORT: "6379"
+      AP_ENVIRONMENT: prod
+      AP_FRONTEND_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      AP_POSTGRES_HOST: activepieces-postgres
+      AP_POSTGRES_PORT: "5432"
+      AP_ENCRYPTION_KEY: ${AP_ENCRYPTION_KEY}
+      AP_EXECUTION_MODE: UNSANDBOXED
+      AP_POSTGRES_DATABASE: activepieces
+      AP_POSTGRES_PASSWORD: ${AP_POSTGRES_PASSWORD}
+      AP_POSTGRES_USERNAME: tipi
+      AP_TELEMETRY_ENABLED: "true"
+      AP_TEMPLATES_SOURCE_URL: https://cloud.activepieces.com/api/v1/flow-templates
+      AP_ENGINE_EXECUTABLE_PATH: dist/packages/engine/main.js
+      AP_WEBHOOK_TIMEOUT_SECONDS: "30"
+      AP_SANDBOX_RUN_TIME_SECONDS: "600"
+      AP_TRIGGER_DEFAULT_POLL_INTERVAL: "5"
+    ports:
+      - 80
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  activepieces-redis:
+    image: redis:7
+    volumes:
+      - redis:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+  activepieces-postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: activepieces
+      POSTGRES_USER: tipi
+      POSTGRES_PASSWORD: ${AP_POSTGRES_PASSWORD}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  redis:
+    driver_opts:
+      size: 2Gi
+  postgres:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,22 @@
+services:
+  wallos:
+    image: bellamy/wallos:4.9.6
+    environment:
+      TZ: ${TZ}
+    ports:
+      - 80
+    volumes:
+      - db:/var/www/html/db
+      - logos:/var/www/html/images/uploads/logos
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  logos:
+    driver_opts:
+      size: 2Gi

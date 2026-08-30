@@ -1,0 +1,18 @@
+{
+  "KIMAI_ADMINMAIL": {
+    "title": "Admin email"
+  },
+  "KIMAI_ADMINPASS": {
+    "title": "Admin password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "KIMAI_DATABASE_PASSWORD": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "KIMAI_DATABASE_ROOT_PASSWORD": {
+    "secret": true,
+    "generate": "password:32"
+  }
+}

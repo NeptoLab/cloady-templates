@@ -1,0 +1,25 @@
+services:
+  syncthing:
+    image: syncthing/syncthing:2.1.1
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+    ports:
+      - 8384
+      - 22000
+      - 21027/udp
+    volumes:
+      - data:/var/syncthing
+      - syncthing-syncthing:/media/data/syncthing
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  syncthing-syncthing:
+    driver_opts:
+      size: 2Gi

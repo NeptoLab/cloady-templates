@@ -1,0 +1,24 @@
+services:
+  kapowarr:
+    image: mrcas/kapowarr:v1.3.1
+    ports:
+      - 5656
+    volumes:
+      - kapowarr-db:/app/db
+      - kapowarr-temp-downloads:/app/temp_downloads
+      - media:/media
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  media:
+    driver_opts:
+      size: 2Gi
+  kapowarr-db:
+    driver_opts:
+      size: 2Gi
+  kapowarr-temp-downloads:
+    driver_opts:
+      size: 2Gi

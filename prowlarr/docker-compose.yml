@@ -1,0 +1,18 @@
+services:
+  prowlarr:
+    image: ghcr.io/linuxserver/prowlarr:2.4.0
+    environment:
+      TZ: ${TZ}
+    ports:
+      - 9696
+    volumes:
+      - config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,7 @@
+name: RSSHub
+hint: Everything is RSSible with RSSHub
+version: 2026-04-17
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/rsshub
+  kind: runtipi

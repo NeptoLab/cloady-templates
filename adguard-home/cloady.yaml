@@ -1,0 +1,6 @@
+name: Adguard Home
+version: latest
+sortOrder: 1000
+source:
+  url: https://github.com/Haxxnet/Compose-Examples/tree/main/examples/adguard-home
+  kind: haxxnet

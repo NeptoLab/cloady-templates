@@ -1,0 +1,29 @@
+services:
+  booksonic:
+    image: lscr.io/linuxserver/booksonic-air:2201.1.0
+    environment:
+      TZ: ${TZ}
+      PGID: "1000"
+      PUID: "1000"
+      CONTEXT_PATH: ${APP_PROTOCOL}://${PUBLIC_HOST}
+    ports:
+      - 4040
+    volumes:
+      - config:/config
+      - spoken:/audiobooks
+      - podcasts:/podcasts
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi
+  spoken:
+    driver_opts:
+      size: 2Gi
+  podcasts:
+    driver_opts:
+      size: 2Gi

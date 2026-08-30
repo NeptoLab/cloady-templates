@@ -1,0 +1,55 @@
+services:
+  mongo:
+    image: mongo:8.2
+    command: --replSet overleaf
+    environment:
+      MONGO_INITDB_DATABASE: sharelatex
+    volumes:
+      - mongo-db:/data/db
+      - mongodb-init-replica-set-js:/docker-entrypoint-initdb.d/mongodb-init-replica-set.js
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  redis:
+    image: redis:8-alpine
+    volumes:
+      - redis-data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+  sharelatex:
+    image: sharelatex/sharelatex:6.1.2
+    environment:
+      REDIS_HOST: redis
+      OVERLEAF_APP_NAME: Overleaf Community Edition
+      ENABLE_CONVERSIONS: "true"
+      OVERLEAF_MONGO_URL: mongodb://mongo/sharelatex?replicaSet=overleaf
+      OVERLEAF_REDIS_HOST: redis
+      ENABLED_LINKED_FILE_TYPES: project_file,project_output_file
+      EMAIL_CONFIRMATION_DISABLED: "true"
+    ports:
+      - 80
+    volumes:
+      - data:/var/lib/overleaf
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  mongo-db:
+    driver_opts:
+      size: 2Gi
+  redis-data:
+    driver_opts:
+      size: 2Gi
+  mongodb-init-replica-set-js:
+    driver_opts:
+      size: 2Gi

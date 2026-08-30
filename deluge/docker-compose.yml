@@ -1,0 +1,26 @@
+services:
+  deluge:
+    image: lscr.io/linuxserver/deluge:18.04.1
+    environment:
+      TZ: ${TZ}
+      PGID: "1000"
+      PUID: "1000"
+      DELUGE_LOGLEVEL: error
+    ports:
+      - 8112
+      - 6881
+    volumes:
+      - config:/config
+      - torrents:/media/torrents
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi
+  torrents:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,7 @@
+name: Grist
+hint: Grist is the evolution of spreadsheets.
+version: 1.7.16
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/grist
+  kind: runtipi

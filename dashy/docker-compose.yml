@@ -1,0 +1,16 @@
+services:
+  dashy:
+    image: ghcr.io/lissy93/dashy:4.3.12
+    ports:
+      - 8080
+    volumes:
+      - dashy-user-data:/app/user-data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  dashy-user-data:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,71 @@
+services:
+  penpot:
+    image: penpotapp/frontend:latest
+    environment:
+      PENPOT_FLAGS: enable-registration enable-login-with-password
+    ports:
+      - 80
+    volumes:
+      - assets:/opt/data/assets
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  penpot-redis:
+    image: redis:7
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+  penpot-backend:
+    image: penpotapp/backend:latest
+    environment:
+      PENPOT_FLAGS: enable-registration enable-login-with-password disable-email-verification
+      PENPOT_REDIS_URI: redis://penpot-redis/0
+      PENPOT_PUBLIC_URI: ${APP_PROTOCOL}://${PUBLIC_HOST}:80
+      PENPOT_DATABASE_URI: postgresql://penpot-postgres/penpot
+      PENPOT_DATABASE_PASSWORD: ${PENPOT_POSTGRES_PASSWORD}
+      PENPOT_DATABASE_USERNAME: tipi
+      PENPOT_TELEMETRY_ENABLED: "false"
+      PENPOT_ASSETS_STORAGE_BACKEND: assets-fs
+      PENPOT_STORAGE_ASSETS_FS_DIRECTORY: /opt/data/assets
+    volumes:
+      - assets:/opt/data/assets
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  penpot-exporter:
+    image: penpotapp/exporter:latest
+    environment:
+      PENPOT_REDIS_URI: redis://penpot-redis/0
+      PENPOT_PUBLIC_URI: http://penpot
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  penpot-postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: penpot
+      POSTGRES_USER: tipi
+      POSTGRES_PASSWORD: ${PENPOT_POSTGRES_PASSWORD}
+      POSTGRES_INITDB_ARGS: --data-checksums
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  assets:
+    driver_opts:
+      size: 2Gi
+  postgres:
+    driver_opts:
+      size: 2Gi

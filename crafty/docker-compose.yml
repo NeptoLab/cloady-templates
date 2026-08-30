@@ -1,0 +1,36 @@
+services:
+  crafty:
+    image: registry.gitlab.com/crafty-controller/crafty-4:4.10.7
+    environment:
+      TZ: ${TZ}
+    ports:
+      - 8443
+      - 8123
+      - 19132/udp
+    volumes:
+      - backups:/crafty/backups
+      - logs:/crafty/logs
+      - servers:/crafty/servers
+      - config:/crafty/app/config
+      - import:/crafty/import
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  logs:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi
+  import:
+    driver_opts:
+      size: 2Gi
+  backups:
+    driver_opts:
+      size: 2Gi
+  servers:
+    driver_opts:
+      size: 2Gi

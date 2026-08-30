@@ -1,0 +1,16 @@
+services:
+  wizarr:
+    image: ghcr.io/wizarrrr/wizarr:v2026.4.0
+    ports:
+      - 5690
+    volumes:
+      - database:/data/database
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  database:
+    driver_opts:
+      size: 2Gi

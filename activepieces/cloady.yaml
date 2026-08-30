@@ -1,0 +1,7 @@
+name: Activepieces
+hint: True zapier alternative.
+version: 0.86.0
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/activepieces
+  kind: runtipi

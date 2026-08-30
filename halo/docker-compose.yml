@@ -1,0 +1,39 @@
+services:
+  halo:
+    image: halohub/halo:2.25.4
+    command:
+      - --spring.r2dbc.url=r2dbc:pool:postgresql://halodb/halo
+      - --spring.r2dbc.username=halo
+      - --spring.r2dbc.password=${HALO_DATABASE_PASSWORD}
+      - --spring.sql.init.platform=postgresql
+      - --halo.external-url=${HALO_EXTERNAL_URL}
+    ports:
+      - 8090
+    volumes:
+      - halo2:/root/.halo2
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  halodb:
+    image: postgres:15.4
+    environment:
+      PGUSER: halo
+      POSTGRES_DB: halo
+      POSTGRES_USER: halo
+      POSTGRES_PASSWORD: ${HALO_DATABASE_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  halo2:
+    driver_opts:
+      size: 2Gi

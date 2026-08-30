@@ -1,0 +1,25 @@
+services:
+  navidrome:
+    image: deluan/navidrome:0.62.0
+    environment:
+      ND_BASEURL: ""
+      ND_LOGLEVEL: info
+      ND_SCANSCHEDULE: 1h
+      ND_SESSIONTIMEOUT: 24h
+    ports:
+      - 4533
+    volumes:
+      - data:/data
+      - music:/music:ro
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  music:
+    driver_opts:
+      size: 2Gi

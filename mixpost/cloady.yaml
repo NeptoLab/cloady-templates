@@ -1,0 +1,8 @@
+name: Mixpost
+hint: "Self-hosted social media management. Schedule and organize your social
+  content. "
+version: 2.6.0
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/mixpost
+  kind: runtipi

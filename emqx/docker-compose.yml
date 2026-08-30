@@ -1,0 +1,42 @@
+services:
+  emqx:
+    image: emqx/emqx:6.2.2
+    environment:
+      TZ: ${TZ}
+      EMQX_NODE_NAME: emqx@emqx
+      EMQX_CLUSTER__STATIC__SEEDS: "[emqx@emqx,emqx@emqx-n2]"
+      EMQX_CLUSTER__DISCOVERY_STRATEGY: static
+    ports:
+      - 1883
+      - 8083
+      - 8084
+      - 8883
+      - 18083
+    volumes:
+      - n1:/opt/emqx/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  emqx-n2:
+    image: emqx/emqx:6.2.2
+    environment:
+      TZ: ${TZ}
+      EMQX_NODE_NAME: emqx@emqx-n2
+      EMQX_CLUSTER__STATIC__SEEDS: "[emqx@emqx,emqx@emqx-n2]"
+      EMQX_CLUSTER__DISCOVERY_STRATEGY: static
+    volumes:
+      - n2:/opt/emqx/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  n1:
+    driver_opts:
+      size: 2Gi
+  n2:
+    driver_opts:
+      size: 2Gi

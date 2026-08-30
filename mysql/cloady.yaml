@@ -1,0 +1,4 @@
+name: MySQL
+hint: Managed MySQL database
+version: "9.7"
+sortOrder: 40

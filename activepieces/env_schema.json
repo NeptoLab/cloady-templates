@@ -1,0 +1,21 @@
+{
+  "AP_API_KEY": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "APP_PROTOCOL": {
+    "default": "http"
+  },
+  "AP_JWT_SECRET": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "AP_ENCRYPTION_KEY": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "AP_POSTGRES_PASSWORD": {
+    "secret": true,
+    "generate": "password:32"
+  }
+}

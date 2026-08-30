@@ -1,0 +1,42 @@
+services:
+  bookstack:
+    image: lscr.io/linuxserver/bookstack:26.05.20260608
+    environment:
+      TZ: ${TZ}
+      APP_KEY: base64:${APP_KEY}
+      APP_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      DB_HOST: bookstack-db
+      DB_DATABASE: bookstackapp
+      DB_PASSWORD: ${BOOKSTACK_DB_PASS}
+      DB_USERNAME: tipi
+    ports:
+      - 80
+    volumes:
+      - config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  bookstack-db:
+    image: lscr.io/linuxserver/mariadb
+    environment:
+      TZ: ${TZ}
+      MYSQL_USER: tipi
+      MYSQL_DATABASE: bookstackapp
+      MYSQL_PASSWORD: ${BOOKSTACK_DB_PASS}
+      MYSQL_ROOT_PASSWORD: ${ROOT_ACCESS_PASSWORD}
+    volumes:
+      - db:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi

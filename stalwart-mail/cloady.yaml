@@ -1,0 +1,7 @@
+name: Stalwart Mail
+hint: Open-source mail server solution with JMAP, IMAP4, and SMTP support
+version: 0.16.11
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/stalwart-mail
+  kind: runtipi

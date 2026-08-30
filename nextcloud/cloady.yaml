@@ -1,0 +1,4 @@
+name: Nextcloud
+hint: Files, sync & office suite
+version: "34.0"
+sortOrder: 80

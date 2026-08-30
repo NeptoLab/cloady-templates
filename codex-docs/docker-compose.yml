@@ -1,0 +1,39 @@
+services:
+  codex-db:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: ${CODEX_DB_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: tipi
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  codex-docs:
+    image: ghcr.io/codex-team/codex.docs:v2.2
+    environment:
+      APP_CONFIG_auth_secret: ${CODEX_AUTH_SECRET}
+      APP_CONFIG_auth_password: ${CODEX_AUTH_PASSWORD}
+      APP_CONFIG_database_driver: mongodb
+      APP_CONFIG_database_mongodb_uri: mongodb://tipi:${CODEX_DB_PASSWORD}@codex-db:27017
+    ports:
+      - 3000
+    volumes:
+      - uploads:/usr/src/app/uploads
+      - db:/usr/src/app/db
+      - docs-config-yaml:/usr/src/app/docs-config.yaml
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  uploads:
+    driver_opts:
+      size: 2Gi
+  docs-config-yaml:
+    driver_opts:
+      size: 2Gi

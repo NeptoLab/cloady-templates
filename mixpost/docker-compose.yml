@@ -1,0 +1,64 @@
+services:
+  mixpost:
+    image: inovector/mixpost:v2.6.0
+    environment:
+      APP_KEY: "'${MIXPOST_APP_KEY}'"
+      APP_URL: "'${APP_PROTOCOL}://${PUBLIC_HOST}'"
+      DB_HOST: mixpost-mysql
+      APP_NAME: "'Mixpost'"
+      REDIS_HOST: mixpost-redis
+      DB_DATABASE: mixpost
+      DB_PASSWORD: ${MIXPOST_MYSQL_PASSWORD}
+      DB_USERNAME: tipi
+      REDIS_PASSWORD: ${MIXPOST_REDIS_PASSWORD}
+    ports:
+      - 80
+    volumes:
+      - mixpost-storage:/var/www/html/storage/app
+      - mixpost-logs:/var/www/html/storage/logs
+      - nginx-conf:/etc/nginx/sites-enabled/default
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  mixpost-mysql:
+    image: mysql/mysql-server:8.0
+    environment:
+      MYSQL_USER: tipi
+      MYSQL_DATABASE: mixpost
+      MYSQL_PASSWORD: ${MIXPOST_MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MIXPOST_MYSQL_PASSWORD}
+    volumes:
+      - mysql:/var/lib/mysql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  mixpost-redis:
+    image: redis:latest
+    command: redis-server --appendonly yes --replica-read-only no --requirepass "${MIXPOST_REDIS_PASSWORD}"
+    volumes:
+      - redis:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+volumes:
+  mysql:
+    driver_opts:
+      size: 2Gi
+  redis:
+    driver_opts:
+      size: 2Gi
+  nginx-conf:
+    driver_opts:
+      size: 2Gi
+  mixpost-logs:
+    driver_opts:
+      size: 2Gi
+  mixpost-storage:
+    driver_opts:
+      size: 2Gi

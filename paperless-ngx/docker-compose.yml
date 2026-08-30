@@ -1,0 +1,85 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: paperless
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  tika:
+    image: apache/tika:latest
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  broker:
+    image: redis:7
+    volumes:
+      - redis:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+  gotenberg:
+    image: gotenberg/gotenberg:8.34
+    command:
+      - gotenberg
+      - --chromium-disable-javascript=true
+      - --chromium-allow-list=file:///tmp/.*
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  paperless-ngx:
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.15
+    environment:
+      PAPERLESS_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      PAPERLESS_REDIS: redis://broker:6379
+      PAPERLESS_DBHOST: db
+      COMPOSE_PROJECT_NAME: paperless-ngx
+      PAPERLESS_ADMIN_USER: ${PAPERLESS_ADMIN_USERNAME}
+      PAPERLESS_TIKA_ENABLED: ${PAPERLESS_TIKA_ENABLED}
+      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+      PAPERLESS_ADMIN_PASSWORD: ${PAPERLESS_ADMIN_PASSWORD}
+      PAPERLESS_CSRF_TRUSTED_ORIGINS: https://paperless-ngx.${LOCAL_DOMAIN},https://${PUBLIC_HOST},http://${INTERNAL_IP}:80
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
+    ports:
+      - 8000
+    volumes:
+      - paperless-data:/usr/src/paperless/data
+      - paperless-media:/usr/src/paperless/media
+      - paperless-export:/usr/src/paperless/export
+      - paperless-consume:/usr/src/paperless/consume
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  redis:
+    driver_opts:
+      size: 2Gi
+  postgres:
+    driver_opts:
+      size: 2Gi
+  paperless-data:
+    driver_opts:
+      size: 2Gi
+  paperless-media:
+    driver_opts:
+      size: 2Gi
+  paperless-export:
+    driver_opts:
+      size: 2Gi
+  paperless-consume:
+    driver_opts:
+      size: 2Gi

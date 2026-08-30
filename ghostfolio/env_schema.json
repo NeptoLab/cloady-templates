@@ -1,0 +1,18 @@
+{
+  "GHOSTFOLIO_DB_PASSWORD": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "GHOSTFOLIO_JWT_SECRET_KEY": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "GHOSTFOLIO_REDIS_PASSWORD": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "GHOSTFOLIO_ACCESS_TOKEN_SALT": {
+    "secret": true,
+    "generate": "password:32"
+  }
+}

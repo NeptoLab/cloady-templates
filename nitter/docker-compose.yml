@@ -1,0 +1,29 @@
+services:
+  nitter:
+    image: zedeus/nitter:latest
+    ports:
+      - 8080
+    volumes:
+      - nitter-conf:/src/nitter.conf:ro
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  nitter-redis:
+    image: redis:alpine
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+volumes:
+  redis:
+    driver_opts:
+      size: 2Gi
+  nitter-conf:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,26 @@
+services:
+  tasks-md:
+    image: baldissaramatheus/tasks.md:3.3.0
+    environment:
+      TITLE: '"${TASKS_MD_TITLE}"'
+    ports:
+      - 8080
+    volumes:
+      - files:/tasks/
+      - config:/config/
+      - stylesheets:/usr/share/nginx/html/stylesheets/
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  files:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi
+  stylesheets:
+    driver_opts:
+      size: 2Gi

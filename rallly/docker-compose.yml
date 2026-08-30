@@ -1,0 +1,40 @@
+services:
+  rallly:
+    image: lukevella/rallly:4.11.1
+    environment:
+      SMTP_PWD: ${RALLLY_SMTP_PWD}
+      SMTP_HOST: ${RALLLY_SMTP_HOST}
+      SMTP_PORT: ${RALLLY_SMTP_PORT}
+      SMTP_USER: ${RALLLY_SMTP_USER}
+      SMTP_SECURE: ${RALLLY_SMTP_SECURE}
+      DATABASE_URL: postgres://tipi:${RALLLY_DB_PASSWORD}@rallly_db:5432/rallly
+      NOREPLY_EMAIL: ${RALLLY_NOREPLY_EMAIL}
+      SUPPORT_EMAIL: ${RALLLY_SUPPORT_EMAIL}
+      ALLOWED_EMAILS: ${RALLLY_ALLOWED_EMAILS}
+      SECRET_PASSWORD: ${RALLLY_SECRET_KEY}
+      SMTP_TLS_ENABLED: ${RALLLY_SMTP_TLS_ENABLED}
+      NEXT_PUBLIC_BASE_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+    ports:
+      - 3000
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  rallly-db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: rallly
+      POSTGRES_USER: tipi
+      POSTGRES_PASSWORD: ${RALLLY_DB_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi

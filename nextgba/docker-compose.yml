@@ -1,0 +1,18 @@
+services:
+  nextgba:
+    image: ghcr.io/nicotsx/nextgba:v0.1.0
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000
+    volumes:
+      - games:/data/games
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  games:
+    driver_opts:
+      size: 2Gi

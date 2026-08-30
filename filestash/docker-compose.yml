@@ -1,0 +1,29 @@
+services:
+  filestash:
+    image: machines/filestash:latest
+    environment:
+      ONLYOFFICE_URL: http://filestash-onlyoffice
+      APPLICATION_URL: ${PUBLIC_HOST}
+      GDRIVE_CLIENT_ID: ${FILESTASH_GDRIVE_CLIENT_ID}
+      DROPBOX_CLIENT_ID: ${FILESTASH_DROPBOX_CLIENT_ID}
+      GDRIVE_CLIENT_SECRET: ${FILESTASH_GDRIVE_CLIENT_SECRET}
+    ports:
+      - 8334
+    volumes:
+      - data:/app/data/state/
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  filestash-onlyoffice:
+    image: onlyoffice/documentserver:9.4.0.1
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,48 @@
+services:
+  gotosocial:
+    image: superseriousbusiness/gotosocial:0.22.0
+    environment:
+      GTS_HOST: ${PUBLIC_HOST}
+      GTS_DB_PORT: "5432"
+      GTS_DB_TYPE: postgres
+      GTS_DB_USER: tipi
+      GTS_SMTP_FROM: ${GTS_SMTP_FROM}
+      GTS_SMTP_HOST: ${GTS_SMTP_HOST}
+      GTS_SMTP_PORT: ${GTS_SMTP_PORT}
+      GTS_DB_ADDRESS: gotosocial-db
+      GTS_DB_DATABASE: gotosocial-db
+      GTS_DB_PASSWORD: ${GTS_DB_PASSWORD}
+      GTS_SMTP_PASSWORD: ${GTS_SMTP_PASSWORD}
+      GTS_SMTP_USERNAME: ${GTS_SMTP_USERNAME}
+      GTS_LETSENCRYPT_ENABLED: "false"
+      GTS_ACCOUNTS_REGISTRATION_OPEN: ${GTS_ACCOUNTS_REGISTRATION_OPEN}
+    ports:
+      - 8080
+    volumes:
+      - gotosocial-storage:/gotosocial/storage
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  gotosocial-db:
+    image: postgres:14
+    environment:
+      PG_DATA: /var/lib/postgresql/data
+      POSTGRES_DB: gotosocial-db
+      POSTGRES_USER: tipi
+      POSTGRES_PASSWORD: ${GTS_DB_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  gotosocial-storage:
+    driver_opts:
+      size: 2Gi

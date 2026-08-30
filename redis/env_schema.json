@@ -1,0 +1,7 @@
+{
+  "REDIS_PASSWORD": {
+    "title": "Password",
+    "secret": true,
+    "generate": "password:24"
+  }
+}

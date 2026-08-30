@@ -1,0 +1,20 @@
+services:
+  rss:
+    image: codeberg.org/danb/rss:v2.1.1
+    environment:
+      APP_NAME: Tipi-RSS
+      APP_LOAD_POST_THUMBNAILS: "true"
+      APP_FEED_UPDATE_FREQUENCY: "35"
+    ports:
+      - 80
+    volumes:
+      - storage:/app/storage
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  storage:
+    driver_opts:
+      size: 2Gi

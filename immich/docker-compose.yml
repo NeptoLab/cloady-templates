@@ -1,0 +1,72 @@
+services:
+  immich:
+    image: ghcr.io/immich-app/immich-server:v3.0.1
+    environment:
+      NODE_ENV: production
+      JWT_SECRET: ${JWT_SECRET}
+      DB_HOSTNAME: immich-db
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USERNAME: tipi
+      ENABLE_MAPBOX: "false"
+      REDIS_HOSTNAME: immich-redis
+      DB_DATABASE_NAME: immich
+    ports:
+      - 2283
+    volumes:
+      - immich-upload:/usr/src/app/upload
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  immich-db:
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0
+    environment:
+      PG_DATA: /var/lib/postgresql/data
+      POSTGRES_DB: immich
+      POSTGRES_USER: tipi
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  immich-redis:
+    image: redis:6.2
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+  immich-machine-learning:
+    image: ghcr.io/immich-app/immich-machine-learning:v3.0.1
+    environment:
+      DB_NAME: immich
+      NODE_ENV: production
+      DB_HOSTNAME: immich-db
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USERNAME: tipi
+      DB_DATABASE_NAME: immich
+    volumes:
+      - immich:/usr/src/app/upload
+      - immich-ml-cache:/cache
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  immich:
+    driver_opts:
+      size: 2Gi
+  immich-upload:
+    driver_opts:
+      size: 2Gi
+  immich-ml-cache:
+    driver_opts:
+      size: 2Gi

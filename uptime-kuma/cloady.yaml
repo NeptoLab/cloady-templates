@@ -1,0 +1,4 @@
+name: Uptime Kuma
+hint: Self-hosted uptime monitoring
+version: "2.4"
+sortOrder: 65

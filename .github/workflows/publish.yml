@@ -1,0 +1,51 @@
+name: validate-and-publish
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  packages: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: detect changed templates
+        id: changed
+        run: |
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
+            DIRS=$(git diff --name-only HEAD^ HEAD | awk -F/ '/\// {print $1}' | sort -u)
+          else
+            DIRS=$(find . -maxdepth 1 -type d ! -name '.*' ! -name . -printf '%f\n' | sort)
+          fi
+          DIRS=$(echo "$DIRS" | while read -r d; do [ -f "$d/docker-compose.yml" ] && echo "$d"; done)
+          printf 'dirs<<EOT\n%s\nEOT\n' "$DIRS" >> "$GITHUB_OUTPUT"
+          echo "changed:"; echo "$DIRS"
+      - name: validate
+        if: steps.changed.outputs.dirs != ''
+        run: |
+          set -e
+          echo "${{ steps.changed.outputs.dirs }}" | while read -r d; do
+            [ -z "$d" ] && continue
+            echo "── validating $d"
+            docker compose -f "$d/docker-compose.yml" config --no-interpolate -q
+          done
+      - uses: oras-project/setup-oras@v1
+        if: steps.changed.outputs.dirs != ''
+      - name: publish artifacts
+        if: steps.changed.outputs.dirs != ''
+        run: |
+          set -e
+          echo "${{ secrets.GITHUB_TOKEN }}" | oras login ghcr.io -u "${{ github.actor }}" --password-stdin
+          echo "${{ steps.changed.outputs.dirs }}" | while read -r d; do
+            [ -z "$d" ] && continue
+            VER=$(grep -E '^version:' "$d/cloady.yaml" | head -1 | sed 's/version:[[:space:]]*//' | tr -d '"' | tr -d "'")
+            VER=${VER:-latest}
+            tar czf "/tmp/$d.tgz" -C "$d" .
+            REPO="ghcr.io/${{ github.repository_owner }}/cloady-templates/$d"
+            REPO=$(echo "$REPO" | tr '[:upper:]' '[:lower:]')
+            echo "── publishing $REPO:$VER"
+            oras push "$REPO:$VER,latest" --artifact-type application/vnd.cloady.template.v1 "/tmp/$d.tgz:application/vnd.cloady.template.content.v1+tgz"
+          done

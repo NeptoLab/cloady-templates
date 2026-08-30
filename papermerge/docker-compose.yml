@@ -1,0 +1,67 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: dbname
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpass
+    volumes:
+      - psql-data:/var/lib/postgresql/data/
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  app:
+    image: eugenci/papermerge:2.0.1
+    environment:
+      POSTGRES_DB: dbname
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpass
+      DJANGO_SETTINGS_MODULE: config.settings.production
+    ports:
+      - 8000
+    volumes:
+      - media-root:/opt/media
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  redis:
+    image: redis:8-alpine
+    volumes:
+      - redis-data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+  worker:
+    image: eugenci/papermerge-worker:2.0.1
+    environment:
+      POSTGRES_DB: dbname
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpass
+      DJANGO_SETTINGS_MODULE: config.settings.production
+    volumes:
+      - media-root:/opt/media
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  psql-data:
+    driver_opts:
+      size: 2Gi
+  media-root:
+    driver_opts:
+      size: 2Gi
+  redis-data:
+    driver_opts:
+      size: 2Gi

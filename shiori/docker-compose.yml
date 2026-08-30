@@ -1,0 +1,21 @@
+services:
+  shiori:
+    image: nicholaswilde/shiori:latest
+    environment:
+      TZ: Europe/Berlin
+      PGID: "1000"
+      PUID: "1000"
+      SHIORI_DIR: /data
+    ports:
+      - 8080
+    volumes:
+      - data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

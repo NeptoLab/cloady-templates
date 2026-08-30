@@ -1,0 +1,41 @@
+services:
+  your-spotify:
+    image: yooooomi/your_spotify_client:1.20.0
+    environment:
+      API_ENDPOINT: http://${INTERNAL_IP}:32500
+    ports:
+      - 3000
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  your-spotify-db:
+    image: mongo:4.4.30
+    volumes:
+      - db:/data/db
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  your-spotify-server:
+    image: yooooomi/your_spotify_server
+    environment:
+      CORS: all
+      API_ENDPOINT: http://${INTERNAL_IP}:32500
+      MONGO_ENDPOINT: mongodb://your-spotify-db:27017/your_spotify
+      SPOTIFY_PUBLIC: ${SPOTIFY_PUBLIC}
+      SPOTIFY_SECRET: ${SPOTIFY_SECRET}
+      CLIENT_ENDPOINT: http://${INTERNAL_IP}:80
+    expose:
+      - 8080
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi

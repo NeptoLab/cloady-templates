@@ -1,0 +1,20 @@
+services:
+  2fauth:
+    image: 2fauth/2fauth:7.0.1
+    environment:
+      APP_KEY: ${TWOFAUTH_APP_KEY}
+      APP_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      ASSET_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+    ports:
+      - 8000
+    volumes:
+      - data:/2fauth
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

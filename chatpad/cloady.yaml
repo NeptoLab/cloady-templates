@@ -1,0 +1,7 @@
+name: Chatpad AI
+hint: Not just another ChatGPT user-interface!
+version: latest
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/chatpad
+  kind: runtipi

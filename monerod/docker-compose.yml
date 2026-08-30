@@ -1,0 +1,17 @@
+services:
+  monerod:
+    image: sethsimmons/simple-monerod:v0.18.3.4
+    command: --rpc-restricted-bind-ip=0.0.0.0 --rpc-restricted-bind-port=18089 --public-node --no-igd --enable-dns-blocklist --prune-blockchain --zmq-pub=tcp://0.0.0.0:18083
+    ports:
+      - 18080
+    volumes:
+      - data:/home/monero/.bitmonero
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

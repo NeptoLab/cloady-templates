@@ -1,0 +1,51 @@
+services:
+  eclipse-mosquitto:
+    image: eclipse-mosquitto:2.0.22
+    command:
+      - /dynsec-setup.sh
+      - /usr/sbin/mosquitto
+      - -c
+      - /mosquitto/config/mosquitto.conf
+    environment:
+      TZ: ${TZ}
+      MQTT_DYNSEC_ADMIN_USER: admin
+      MQTT_DYNSEC_ADMIN_PASSWORD: ${MQTT_ADMIN_PASSWORD}
+    ports:
+      - 1883
+    volumes:
+      - data:/mosquitto/data
+      - config:/mosquitto/config
+      - dynsec-setup-sh:/dynsec-setup.sh
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  mosquitto-management-center:
+    image: cedalo/management-center:2
+    environment:
+      TZ: ${TZ}
+      CEDALO_MC_PASSWORD: ${CEDALO_MC_PASSWORD}
+      CEDALO_MC_USERNAME: admin
+      CEDALO_MC_BROKER_ID: mosquitto-broker
+      CEDALO_MC_BROKER_URL: mqtt://${INTERNAL_IP}:1883
+      CEDALO_MC_BROKER_NAME: mosquitto-broker-2
+      CEDALO_MC_BROKER_PASSWORD: ${MQTT_ADMIN_PASSWORD}
+      CEDALO_MC_BROKER_USERNAME: admin
+    expose:
+      - 8088
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi
+  dynsec-setup-sh:
+    driver_opts:
+      size: 2Gi

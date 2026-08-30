@@ -1,0 +1,45 @@
+services:
+  db:
+    image: ghcr.io/linuxserver/mariadb:alpine
+    environment:
+      TZ: Europe/Berlin
+      PGID: "1000"
+      PUID: "1000"
+      MYSQL_USER: domainmod
+      MYSQL_DATABASE: domainmod
+      MYSQL_PASSWORD: password1
+      MYSQL_ROOT_PASSWORD: password2
+    volumes:
+      - database:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  app:
+    image: domainmod/domainmod:latest
+    environment:
+      TZ: Europe/Berlin
+      PGID: "1000"
+      PUID: "1000"
+      DOMAINMOD_USER: domainmod
+      DOMAINMOD_DATABASE: domainmod
+      DOMAINMOD_PASSWORD: password1
+      DOMAINMOD_WEB_ROOT: ""
+      DOMAINMOD_DATABASE_HOST: db
+    ports:
+      - 80
+    volumes:
+      - app-html:/var/www/html
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  app-html:
+    driver_opts:
+      size: 2Gi
+  database:
+    driver_opts:
+      size: 2Gi

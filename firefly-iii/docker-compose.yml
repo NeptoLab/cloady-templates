@@ -1,0 +1,66 @@
+services:
+  firefly-iii:
+    image: fireflyiii/core:version-6
+    environment:
+      TZ: ${TZ}
+      APP_ENV: local
+      APP_KEY: ${APP_KEY}
+      APP_URL: http://localhost:80
+      DB_HOST: firefly-iii-db
+      DB_PORT: "3306"
+      APP_NAME: FireflyIII
+      APP_DEBUG: "false"
+      IS_HEROKU: "false"
+      SITE_OWNER: ${EMAIL}
+      COOKIE_PATH: '"/"'
+      DB_DATABASE: firefly
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      DB_USERNAME: firefly
+      CACHE_PREFIX: firefly
+      QUEUE_DRIVER: sync
+      COOKIE_DOMAIN: ""
+      COOKIE_SECURE: "false"
+      DB_CONNECTION: mysql
+      COOKIE_SAMESITE: lax
+      TRUSTED_PROXIES: "**"
+      BROADCAST_DRIVER: log
+      STATIC_CRON_TOKEN: ${STATIC_CRON_TOKEN}
+      FIREFLY_III_LAYOUT: v1
+    ports:
+      - 8080
+    volumes:
+      - uplodad:/var/www/html/storage/upload
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  firefly-iii-db:
+    image: mariadb
+    environment:
+      MYSQL_USER: firefly
+      MYSQL_DATABASE: firefly
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_RANDOM_ROOT_PASSWORD: yes
+    volumes:
+      - db:/var/lib/mysql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  firefly-iii-cron:
+    image: alpine
+    command: sh -c "echo \"0 3 * * * wget -qO- http://${APP_DOMAIN}/api/v1/cron/${STATIC_CRON_TOKEN}\" | crontab - && crond -f -L /dev/stdout"
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  uplodad:
+    driver_opts:
+      size: 2Gi

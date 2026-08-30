@@ -1,0 +1,33 @@
+services:
+  redis:
+    image: redis:8-alpine
+    command: redis-server --requirepass SuperSecureRedisAuthPassword
+    environment:
+      TZ: Europe/Berlin
+    volumes:
+      - redis-data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+  authelia:
+    image: authelia/authelia:latest
+    environment:
+      TZ: Europe/Berlin
+    ports:
+      - 9091
+    volumes:
+      - config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi
+  redis-data:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,36 @@
+services:
+  slskd:
+    image: slskd/slskd:0.25.1
+    environment:
+      SLSKD_USER: ${SLSKD_USER}
+      SLSKD_CONFIG: /app/data/slskd.yml
+      SLSKD_PASSWORD: ${SLSKD_PASSWORD}
+      SLSKD_WEB_USER: ${SLSKD_WEB_USER}
+      SLSKD_SHARED_DIR: /shared
+      SLSKD_WEB_PASSWORD: ${SLSKD_WEB_PASSWORD}
+      SLSKD_REMOTE_CONFIGURATION: ${SLSKD_REMOTE_CONFIGURATION}
+    ports:
+      - 5030
+    volumes:
+      - app:/app
+      - complete:/downloads
+      - incomplete:/incomplete
+      - media:/shared
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  app:
+    driver_opts:
+      size: 2Gi
+  media:
+    driver_opts:
+      size: 2Gi
+  complete:
+    driver_opts:
+      size: 2Gi
+  incomplete:
+    driver_opts:
+      size: 2Gi

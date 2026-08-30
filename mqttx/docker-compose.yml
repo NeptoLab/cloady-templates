@@ -1,0 +1,16 @@
+services:
+  mqttx:
+    image: emqx/mqttx-web:v1.13.0
+    ports:
+      - 80
+    volumes:
+      - mqttx-data:/app/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  mqttx-data:
+    driver_opts:
+      size: 2Gi

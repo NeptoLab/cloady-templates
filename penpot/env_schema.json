@@ -1,0 +1,9 @@
+{
+  "APP_PROTOCOL": {
+    "default": "http"
+  },
+  "PENPOT_POSTGRES_PASSWORD": {
+    "secret": true,
+    "generate": "password:32"
+  }
+}

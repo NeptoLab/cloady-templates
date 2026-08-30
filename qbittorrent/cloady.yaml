@@ -1,0 +1,7 @@
+name: qBittorrent
+hint: Fast, easy, and free BitTorrent client
+version: 5.2.2
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/qbittorrent
+  kind: runtipi

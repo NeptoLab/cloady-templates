@@ -1,0 +1,9 @@
+{
+  "HEDGEDOC_ADDPORT": {
+    "title": "Add port to URL"
+  },
+  "HEDGEDOC_DB_PASSWORD": {
+    "secret": true,
+    "generate": "password:32"
+  }
+}

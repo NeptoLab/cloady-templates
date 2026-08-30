@@ -1,0 +1,16 @@
+services:
+  changedetection:
+    image: ghcr.io/dgtlmoon/changedetection.io:0.55.7
+    ports:
+      - 5000
+    volumes:
+      - data:/datastore
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

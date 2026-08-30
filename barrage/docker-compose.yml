@@ -1,0 +1,15 @@
+services:
+  barrage:
+    image: maulik9898/barrage:0.3.0
+    environment:
+      DELUGE_URL: ${DELUGE_URL}
+      DELUGE_PASSWORD: ${DELUGE_PASSWORD}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      BARRAGE_PASSWORD: ${BARRAGE_PASSWORD}
+    ports:
+      - 3000
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

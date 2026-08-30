@@ -1,0 +1,56 @@
+services:
+  romm:
+    image: ghcr.io/rommapp/romm:4.9.2
+    environment:
+      DB_HOST: romm-db
+      DB_NAME: romm
+      DB_USER: tipi
+      DB_PASSWD: ${ROMM_MYSQL_PASSWORD}
+      IGDB_CLIENT_ID: ${ROMM_IGDB_CLIENT_ID}
+      MOBYGAMES_API_KEY: ${ROMM_MOBYGAMES_API_KEY}
+      IGDB_CLIENT_SECRET: ${ROMM_IGDB_CLIENT_SECRET}
+      STEAMGRIDDB_API_KEY: ${ROMM_STEAMGRIDDB_API_KEY}
+      ROMM_AUTH_SECRET_KEY: ${ROMM_AUTH_SECRET_KEY}
+    ports:
+      - 8080
+    volumes:
+      - roms:/romm/library
+      - redis:/redis-data
+      - romm-resources:/romm/resources
+      - config:/romm/config
+      - assets:/romm/assets
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  romm-db:
+    image: lscr.io/linuxserver/mariadb:11.4.5
+    environment:
+      MYSQL_USER: tipi
+      MYSQL_DATABASE: romm
+      MYSQL_PASSWORD: ${ROMM_MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${ROMM_MYSQL_ROOT_PASSWORD}
+    volumes:
+      - config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  roms:
+    driver_opts:
+      size: 2Gi
+  redis:
+    driver_opts:
+      size: 2Gi
+  assets:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi
+  romm-resources:
+    driver_opts:
+      size: 2Gi

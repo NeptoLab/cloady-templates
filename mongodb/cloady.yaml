@@ -1,0 +1,4 @@
+name: MongoDB
+hint: Managed document database
+version: "8.0"
+sortOrder: 50

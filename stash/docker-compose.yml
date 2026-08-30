@@ -1,0 +1,38 @@
+services:
+  stash:
+    image: stashapp/stash:latest
+    environment:
+      STASH_PORT: "9999"
+      STASH_CACHE: /cache/
+      STASH_STASH: /data/
+      STASH_METADATA: /metadata/
+      STASH_GENERATED: /generated/
+    ports:
+      - 9999
+    volumes:
+      - config:/root/.stash
+      - data:/data
+      - metadata:/metadata
+      - cache:/cache
+      - generated:/generated
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  cache:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi
+  metadata:
+    driver_opts:
+      size: 2Gi
+  generated:
+    driver_opts:
+      size: 2Gi

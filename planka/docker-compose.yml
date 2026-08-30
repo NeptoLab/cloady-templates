@@ -1,0 +1,52 @@
+services:
+  planka:
+    image: ghcr.io/plankanban/planka:1.26.3
+    command: |
+      bash -c
+        "for i in `seq 1 30`; do
+          ./start.sh &&
+          s=$$? && break || s=$$?;
+          echo \"Tried $$i times. Waiting 5 seconds...\";
+          sleep 5;
+        done; (exit $$s)"
+    environment:
+      BASE_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      SECRET_KEY: '"${PLANKA_SECRET_KEY}"'
+      TRUST_PROXY: "1"
+      DATABASE_URL: '"postgresql://postgres@postgres/planka"'
+    ports:
+      - 1337
+    volumes:
+      - user-avatars:/app/public/user-avatars
+      - project-background-images:/app/public/project-background-images
+      - attachments:/app/private/attachments
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_DB: planka
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  attachments:
+    driver_opts:
+      size: 2Gi
+  user-avatars:
+    driver_opts:
+      size: 2Gi
+  postgres-data:
+    driver_opts:
+      size: 2Gi
+  project-background-images:
+    driver_opts:
+      size: 2Gi

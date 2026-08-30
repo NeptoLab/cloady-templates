@@ -1,0 +1,33 @@
+services:
+  app:
+    image: evershop/evershop:latest
+    environment:
+      DB_HOST: database
+      DB_NAME: postgres
+      DB_PORT: "5432"
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    ports:
+      - 3000
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  database:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - psqldata:/var/lib/postgresql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  psqldata:
+    driver_opts:
+      size: 2Gi

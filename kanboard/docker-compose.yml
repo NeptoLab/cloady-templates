@@ -1,0 +1,22 @@
+services:
+  kanboard:
+    image: kanboard/kanboard:v1.2.52
+    environment:
+      PLUGIN_INSTALLER: ${PLUGIN_INSTALLER}
+    ports:
+      - 80
+    volumes:
+      - kanboard-data:/var/www/app/data
+      - kanboard-plugins:/var/www/app/plugins
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  kanboard-data:
+    driver_opts:
+      size: 2Gi
+  kanboard-plugins:
+    driver_opts:
+      size: 2Gi

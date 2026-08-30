@@ -1,0 +1,28 @@
+services:
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:0.6.26
+    environment:
+      TZ: ${TZ}
+      PGID: "1000"
+      PUID: "1000"
+    ports:
+      - 8083
+    volumes:
+      - config:/config
+      - calibre:/calibre
+      - books:/books
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  books:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi
+  calibre:
+    driver_opts:
+      size: 2Gi

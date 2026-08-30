@@ -1,0 +1,386 @@
+services:
+  db:
+    image: supabase/postgres:17.6.1.136
+    command:
+      - postgres
+      - -c
+      - config_file=/etc/postgresql/postgresql.conf
+      - -c
+      - data_directory=/var/lib/postgresql/data/pgdata
+      - -c
+      - log_min_messages=fatal
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      PGPORT: "5432"
+      JWT_EXP: ${JWT_EXPIRY}
+      JWT_SECRET: ${JWT_SECRET}
+      PGDATABASE: postgres
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: postgres
+      POSTGRES_HOST: /var/run/postgresql
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: supabase_admin
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    expose:
+      - 5432
+    volumes:
+      - data:/var/lib/postgresql/data
+      - db-config:/etc/postgresql-custom
+    configs:
+      - source: 99-realtime.sql
+        target: /docker-entrypoint-initdb.d/migrations/99-realtime.sql
+      - source: 98-webhooks.sql
+        target: /docker-entrypoint-initdb.d/init-scripts/98-webhooks.sql
+      - source: 99-roles.sql
+        target: /docker-entrypoint-initdb.d/init-scripts/99-roles.sql
+      - source: 99-jwt.sql
+        target: /docker-entrypoint-initdb.d/init-scripts/99-jwt.sql
+      - source: 97-_supabase.sql
+        target: /docker-entrypoint-initdb.d/migrations/97-_supabase.sql
+      - source: 99-logs.sql
+        target: /docker-entrypoint-initdb.d/migrations/99-logs.sql
+      - source: 99-pooler.sql
+        target: /docker-entrypoint-initdb.d/migrations/99-pooler.sql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.5
+          memory: 1G
+  auth:
+    image: supabase/gotrue:v2.189.0
+    environment:
+      GOTRUE_JWT_AUD: authenticated
+      GOTRUE_JWT_EXP: ${JWT_EXPIRY}
+      GOTRUE_API_HOST: 0.0.0.0
+      GOTRUE_API_PORT: "9999"
+      GOTRUE_SITE_URL: ${PUBLIC_URL}
+      API_EXTERNAL_URL: ${PUBLIC_URL}
+      GOTRUE_DB_DRIVER: postgres
+      GOTRUE_SMTP_HOST: ${SMTP_HOST}
+      GOTRUE_SMTP_PASS: ${SMTP_PASS}
+      GOTRUE_SMTP_PORT: ${SMTP_PORT}
+      GOTRUE_SMTP_USER: ${SMTP_USER}
+      GOTRUE_JWT_ISSUER: ${PUBLIC_URL}/auth/v1
+      GOTRUE_JWT_SECRET: ${JWT_SECRET}
+      GOTRUE_DISABLE_SIGNUP: ${DISABLE_SIGNUP}
+      GOTRUE_URI_ALLOW_LIST: ${ADDITIONAL_REDIRECT_URLS}
+      GOTRUE_DB_DATABASE_URL: postgres://supabase_auth_admin:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/postgres
+      GOTRUE_JWT_ADMIN_ROLES: service_role
+      GOTRUE_SMS_AUTOCONFIRM: ${ENABLE_PHONE_AUTOCONFIRM}
+      GOTRUE_SMTP_ADMIN_EMAIL: ${SMTP_ADMIN_EMAIL}
+      GOTRUE_SMTP_SENDER_NAME: ${SMTP_SENDER_NAME}
+      GOTRUE_MAILER_AUTOCONFIRM: ${ENABLE_EMAIL_AUTOCONFIRM}
+      GOTRUE_EXTERNAL_EMAIL_ENABLED: ${ENABLE_EMAIL_SIGNUP}
+      GOTRUE_EXTERNAL_GOOGLE_SECRET: ${GOTRUE_EXTERNAL_GOOGLE_SECRET}
+      GOTRUE_EXTERNAL_PHONE_ENABLED: ${ENABLE_PHONE_SIGNUP}
+      GOTRUE_JWT_DEFAULT_GROUP_NAME: authenticated
+      GOTRUE_MAILER_URLPATHS_INVITE: ${MAILER_URLPATHS_INVITE}
+      GOTRUE_EXTERNAL_GOOGLE_ENABLED: ${GOTRUE_EXTERNAL_GOOGLE_ENABLED:-false}
+      GOTRUE_MAILER_URLPATHS_RECOVERY: ${MAILER_URLPATHS_RECOVERY}
+      GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID: ${GOTRUE_EXTERNAL_GOOGLE_CLIENT_ID}
+      GOTRUE_EXTERNAL_GOOGLE_REDIRECT_URI: ${GOTRUE_EXTERNAL_GOOGLE_REDIRECT_URI}
+      GOTRUE_MAILER_URLPATHS_CONFIRMATION: ${MAILER_URLPATHS_CONFIRMATION}
+      GOTRUE_MAILER_URLPATHS_EMAIL_CHANGE: ${MAILER_URLPATHS_EMAIL_CHANGE}
+      GOTRUE_EXTERNAL_ANONYMOUS_USERS_ENABLED: ${ENABLE_ANONYMOUS_USERS}
+    env_file:
+      - .env
+    expose:
+      - 9999
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  kong:
+    image: kong/kong:3.9.1
+    entrypoint:
+      - /bin/sh
+      - /home/kong/kong-entrypoint.sh
+    environment:
+      KONG_PLUGINS: request-transformer,cors,key-auth,acl,basic-auth,request-termination,ip-restriction,post-function
+      KONG_DATABASE: off
+      KONG_DNS_ORDER: LAST,A,CNAME
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD}
+      DASHBOARD_USERNAME: ${DASHBOARD_USERNAME}
+      ANON_KEY_ASYMMETRIC: ${ANON_KEY_ASYMMETRIC}
+      SUPABASE_SECRET_KEY: ${SUPABASE_SECRET_KEY}
+      SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
+      KONG_PROXY_ACCESS_LOG: /dev/stdout combined
+      KONG_DNS_NOT_FOUND_TTL: "1"
+      KONG_DECLARATIVE_CONFIG: /usr/local/kong/kong.yml
+      SUPABASE_PUBLISHABLE_KEY: ${SUPABASE_PUBLISHABLE_KEY}
+      KONG_NGINX_WORKER_PROCESSES: "2"
+      SERVICE_ROLE_KEY_ASYMMETRIC: ${SERVICE_ROLE_KEY_ASYMMETRIC}
+      KONG_NGINX_PROXY_PROXY_BUFFERS: 64 160k
+      KONG_NGINX_PROXY_PROXY_BUFFER_SIZE: 160k
+    ports:
+      - 8000
+    configs:
+      - source: temp.yml
+        target: /home/kong/temp.yml
+      - source: kong-entrypoint.sh
+        target: /home/kong/kong-entrypoint.sh
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  meta:
+    image: supabase/postgres-meta:v0.96.6
+    environment:
+      CRYPTO_KEY: ${PG_META_CRYPTO_KEY}
+      PG_META_PORT: "8080"
+      PG_META_DB_HOST: ${POSTGRES_HOST}
+      PG_META_DB_NAME: postgres
+      PG_META_DB_PORT: "5432"
+      PG_META_DB_USER: postgres
+      PG_META_DB_PASSWORD: ${POSTGRES_PASSWORD}
+    expose:
+      - 8080
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  rest:
+    image: postgrest/postgrest:v14.12
+    command:
+      - postgrest
+    environment:
+      PGRST_DB_URI: postgres://authenticator:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/postgres
+      PGRST_DB_SCHEMAS: ${PGRST_DB_SCHEMAS}
+      PGRST_JWT_SECRET: ${JWT_SECRET}
+      PGRST_DB_MAX_ROWS: "1000"
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_ADMIN_SERVER_HOST: localhost
+      PGRST_ADMIN_SERVER_PORT: "3001"
+      PGRST_DB_USE_LEGACY_GUCS: "false"
+      PGRST_APP_SETTINGS_JWT_EXP: ${JWT_EXPIRY}
+      PGRST_DB_EXTRA_SEARCH_PATH: public
+      PGRST_APP_SETTINGS_JWT_SECRET: ${JWT_SECRET}
+    expose:
+      - 3000
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  studio:
+    image: supabase/studio:2026.06.03-sha-0bca601
+    environment:
+      HOSTNAME: 0.0.0.0
+      POSTGRES_DB: postgres
+      SUPABASE_URL: http://${KONG_HOST}:8000
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: "5432"
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      AUTH_JWT_SECRET: ${JWT_SECRET}
+      PGRST_DB_SCHEMAS: ${PGRST_DB_SCHEMAS}
+      PGRST_DB_MAX_ROWS: "1000"
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      PG_META_CRYPTO_KEY: ${PG_META_CRYPTO_KEY}
+      STUDIO_PG_META_URL: http://${META_HOST}:8080
+      SUPABASE_PUBLIC_URL: ${PUBLIC_URL}
+      SUPABASE_SECRET_KEY: ${SUPABASE_SECRET_KEY}
+      DEFAULT_PROJECT_NAME: ${STUDIO_DEFAULT_PROJECT}
+      SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
+      POSTGRES_USER_READ_WRITE: postgres
+      SUPABASE_PUBLISHABLE_KEY: ${SUPABASE_PUBLISHABLE_KEY}
+      DEFAULT_ORGANIZATION_NAME: ${STUDIO_DEFAULT_ORGANIZATION}
+      ENABLED_FEATURES_LOGS_ALL: "false"
+      PGRST_DB_EXTRA_SEARCH_PATH: public
+      SNIPPETS_MANAGEMENT_FOLDER: /app/snippets
+      EDGE_FUNCTIONS_MANAGEMENT_FOLDER: /app/edge-functions
+    expose:
+      - 3000
+    volumes:
+      - functions:/app/edge-functions
+      - snippets:/app/snippets
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  storage:
+    image: supabase/storage-api:v1.60.4
+    environment:
+      REGION: ${REGION}
+      ANON_KEY: ${ANON_KEY}
+      TENANT_ID: ${STORAGE_TENANT_ID}
+      SERVICE_KEY: ${SERVICE_ROLE_KEY}
+      DATABASE_URL: postgres://supabase_storage_admin:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/postgres
+      IMGPROXY_URL: http://${IMGPROXY_HOST}:5001
+      POSTGREST_URL: http://${REST_HOST}:3000
+      AUTH_JWT_SECRET: ${JWT_SECRET}
+      FILE_SIZE_LIMIT: "52428800"
+      STORAGE_BACKEND: file
+      GLOBAL_S3_BUCKET: ${GLOBAL_S3_BUCKET}
+      STORAGE_PUBLIC_URL: ${PUBLIC_URL}
+      FILE_STORAGE_BACKEND_PATH: /var/lib/storage
+      S3_PROTOCOL_ACCESS_KEY_ID: ${S3_PROTOCOL_ACCESS_KEY_ID}
+      ENABLE_IMAGE_TRANSFORMATION: "true"
+      S3_PROTOCOL_ACCESS_KEY_SECRET: ${S3_PROTOCOL_ACCESS_KEY_SECRET}
+      REQUEST_ALLOW_X_FORWARDED_PATH: "true"
+    expose:
+      - 5000
+    volumes:
+      - storage:/var/lib/storage
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  imgproxy:
+    image: darthsim/imgproxy:v3.30.1
+    environment:
+      IMGPROXY_BIND: :5001
+      IMGPROXY_USE_ETAG: "true"
+      IMGPROXY_AUTO_WEBP: ${IMGPROXY_AUTO_WEBP}
+      IMGPROXY_MAX_SRC_RESOLUTION: "16.8"
+      IMGPROXY_LOCAL_FILESYSTEM_ROOT: /
+    expose:
+      - 5001
+    volumes:
+      - storage:/var/lib/storage
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  realtime:
+    image: supabase/realtime:v2.102.3
+    environment:
+      PORT: "4000"
+      DB_HOST: ${POSTGRES_HOST}
+      DB_NAME: postgres
+      DB_PORT: "5432"
+      DB_USER: supabase_admin
+      APP_NAME: realtime
+      DNS_NODES: "''"
+      DB_ENC_KEY: supabaserealtime
+      ERL_AFLAGS: -proto_dist inet_tcp
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      RUN_JANITOR: "true"
+      RLIMIT_NOFILE: "10000"
+      API_JWT_SECRET: ${JWT_SECRET}
+      SEED_SELF_HOST: "true"
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      METRICS_JWT_SECRET: ${JWT_SECRET}
+      SELF_HOST_TENANT_NAME: realtime
+      DB_AFTER_CONNECT_QUERY: SET search_path TO _realtime
+      DISABLE_HEALTHCHECK_LOGGING: "true"
+    expose:
+      - 4000
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  functions:
+    image: supabase/edge-runtime:v1.74.0
+    command:
+      - start
+      - --main-service
+      - /home/deno/functions/main
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+      VERIFY_JWT: ${FUNCTIONS_VERIFY_JWT}
+      SUPABASE_URL: ${PUBLIC_URL}
+      SUPABASE_DB_URL: postgresql://postgres:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/postgres
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_PUBLIC_URL: ${PUBLIC_URL}
+      SUPABASE_SECRET_KEYS: '{"default":"${SUPABASE_SECRET_KEY}"}'
+      SUPABASE_PUBLISHABLE_KEYS: '{"default":"${SUPABASE_PUBLISHABLE_KEY}"}'
+      SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
+      FUNCTIONS_WORKER_TIMEOUT_MS: "300000"
+    env_file:
+      - .env
+    expose:
+      - 9000
+    volumes:
+      - functions:/home/deno/functions
+    configs:
+      - source: index.ts
+        target: /home/deno/functions/main/index.ts
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  supavisor:
+    image: supabase/supavisor:2.9.5
+    command:
+      - /bin/sh
+      - -c
+      - /app/bin/migrate && /app/bin/supavisor eval "$(cat /etc/pooler/pooler.exs)" && /app/bin/server
+    environment:
+      PORT: "4000"
+      REGION: local
+      ERL_AFLAGS: -proto_dist inet_tcp
+      POSTGRES_DB: postgres
+      DATABASE_URL: ecto://supabase_admin:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/_supabase
+      DB_POOL_SIZE: ${POOLER_DB_POOL_SIZE}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: "5432"
+      VAULT_ENC_KEY: ${VAULT_ENC_KEY}
+      API_JWT_SECRET: ${JWT_SECRET}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      CLUSTER_POSTGRES: "true"
+      POOLER_POOL_MODE: transaction
+      POOLER_TENANT_ID: ${POOLER_TENANT_ID}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      METRICS_JWT_SECRET: ${JWT_SECRET}
+      POOLER_MAX_CLIENT_CONN: ${POOLER_MAX_CLIENT_CONN}
+      POOLER_DEFAULT_POOL_SIZE: ${POOLER_DEFAULT_POOL_SIZE}
+    expose:
+      - 5432
+      - 6543
+    configs:
+      - source: pooler.exs
+        target: /etc/pooler/pooler.exs
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  data:
+    driver_opts:
+      size: 4Gi
+  storage:
+    driver_opts:
+      size: 2Gi
+  snippets:
+    driver_opts:
+      size: 1Gi
+  db-config:
+    driver_opts:
+      size: 1Gi
+  functions:
+    driver_opts:
+      size: 1Gi
+configs:
+  index.ts:
+    file: ./configs/index.ts
+  temp.yml:
+    file: ./configs/temp.yml
+  99-jwt.sql:
+    file: ./configs/99-jwt.sql
+  pooler.exs:
+    file: ./configs/pooler.exs
+  99-logs.sql:
+    file: ./configs/99-logs.sql
+  99-roles.sql:
+    file: ./configs/99-roles.sql
+  99-pooler.sql:
+    file: ./configs/99-pooler.sql
+  98-webhooks.sql:
+    file: ./configs/98-webhooks.sql
+  99-realtime.sql:
+    file: ./configs/99-realtime.sql
+  97-_supabase.sql:
+    file: ./configs/97-_supabase.sql
+  kong-entrypoint.sh:
+    file: ./configs/kong-entrypoint.sh

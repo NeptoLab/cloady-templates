@@ -1,0 +1,7 @@
+name: Speedtest Tracker
+hint: Internet performance tracking application.
+version: 1.14.5
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/speedtest-tracker
+  kind: runtipi

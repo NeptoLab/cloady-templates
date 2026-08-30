@@ -1,0 +1,12 @@
+services:
+  whoogle:
+    image: benbusby/whoogle-search:1.2.4
+    environment:
+      EXPOSE_PORT: "8255"
+    ports:
+      - 8255
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

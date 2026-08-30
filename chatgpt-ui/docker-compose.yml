@@ -1,0 +1,58 @@
+services:
+  chatgpt-ui:
+    image: wongsaang/chatgpt-ui-client:v2.5.9
+    environment:
+      SERVER_DOMAIN: http://chatgpt-ui-web-server
+      DEFAULT_LOCALE: en
+    ports:
+      - 80
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  chatgpt-ui-db:
+    image: lscr.io/linuxserver/mariadb:latest
+    environment:
+      MYSQL_USER: tipi
+      MYSQL_DATABASE: chatgptdb
+      MYSQL_PASSWORD: ${CHATGPT_UI_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: $CHATGPT_UI_DB_PASSWORD}
+    volumes:
+      - config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  chatgpt-ui-web-server:
+    image: wongsaang/chatgpt-ui-web-server:v2.5.2
+    environment:
+      BACKEND_URL: http://chatgpt-ui-wsgi-server:8000
+    expose:
+      - 80
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  chatgpt-ui-wsgi-server:
+    image: wongsaang/chatgpt-ui-wsgi-server:v2.5.2
+    environment:
+      DB_URL: mysql://tipi:${CHATGPT_UI_DB_PASSWORD}@chatgpt-ui-db:3306/chatgptdb
+      APP_DOMAIN: ${INTERNAL_IP}:8201
+      SERVER_WORKERS: "3"
+      WORKER_TIMEOUT: "180"
+      DJANGO_SUPERUSER_EMAIL: ${CHATGPT_UI_SUPERUSER_EMAIL}
+      DJANGO_SUPERUSER_PASSWORD: ${CHATGPT_UI_SUPERUSER_PASSWORD}
+      DJANGO_SUPERUSER_USERNAME: ${CHATGPT_UI_SUPERUSER_USERNAME}
+      ACCOUNT_EMAIL_VERIFICATION: none
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi

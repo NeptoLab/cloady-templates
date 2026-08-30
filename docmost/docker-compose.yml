@@ -1,0 +1,49 @@
+services:
+  docmost:
+    image: docmost/docmost:0.95.0
+    environment:
+      APP_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      REDIS_URL: redis://docmost-redis:6379
+      APP_SECRET: ${DOCMOST_APP_SECRET}
+      DATABASE_URL: postgresql://docmost:${DOCMOST_PG_PASSWORD}@docmost-db:5432/docmost?schema=public
+    ports:
+      - 3000
+    volumes:
+      - storage:/app/data/storage
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  docmost-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: docmost
+      POSTGRES_USER: docmost
+      POSTGRES_PASSWORD: ${DOCMOST_PG_PASSWORD}
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  docmost-redis:
+    image: redis:7.2-alpine
+    volumes:
+      - redis:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+volumes:
+  redis:
+    driver_opts:
+      size: 2Gi
+  storage:
+    driver_opts:
+      size: 2Gi
+  postgresql:
+    driver_opts:
+      size: 2Gi

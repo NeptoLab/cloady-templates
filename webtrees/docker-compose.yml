@@ -1,0 +1,48 @@
+services:
+  db:
+    image: mariadb:latest
+    environment:
+      MARIADB_USER: webtrees
+      MARIADB_DATABASE: webtrees
+      MARIADB_PASSWORD: badpassword
+      MARIADB_ROOT_PASSWORD: badpassword
+    volumes:
+      - db-mysql:/var/lib/mysql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  app:
+    image: nathanvaughn/webtrees:latest
+    environment:
+      LANG: en-US
+      PGID: "1000"
+      PUID: "1000"
+      HTTPS: "0"
+      DB_HOST: db
+      DB_NAME: webtrees
+      DB_PASS: badpassword
+      DB_PORT: "3306"
+      DB_TYPE: mysql
+      DB_USER: webtrees
+      BASE_URL: https://family.example.com
+      DB_PREFIX: wt_
+      PRETTY_URLS: "1"
+      HTTPS_REDIRECT: "0"
+    ports:
+      - 80
+    volumes:
+      - data:/var/www/webtrees/data/
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  db-mysql:
+    driver_opts:
+      size: 2Gi

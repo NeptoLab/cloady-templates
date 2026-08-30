@@ -1,0 +1,16 @@
+services:
+  olivetin:
+    image: jamesread/olivetin:latest
+    ports:
+      - 1337
+    volumes:
+      - data:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

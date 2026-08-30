@@ -1,0 +1,6 @@
+name: Unify Network Application
+version: 10.1.89
+sortOrder: 1000
+source:
+  url: https://github.com/Haxxnet/Compose-Examples/tree/main/examples/unify-network-application
+  kind: haxxnet

@@ -1,0 +1,18 @@
+services:
+  trilium:
+    image: ghcr.io/triliumnext/trilium:v0.103.0
+    environment:
+      TRILIUM_DATA_DIR: /home/node/trilium-data
+    ports:
+      - 8080
+    volumes:
+      - data:/home/node/trilium-data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

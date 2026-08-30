@@ -1,0 +1,7 @@
+name: Whoami
+hint: Tiny Go server that prints os information and HTTP request to output.
+version: 1.11.0
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/whoami
+  kind: runtipi

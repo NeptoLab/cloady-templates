@@ -1,0 +1,4 @@
+name: Gitea
+hint: Self-hosted Git with CI
+version: "1.26"
+sortOrder: 70

@@ -1,0 +1,6 @@
+name: Rybbit
+version: 25.4.2
+sortOrder: 1000
+source:
+  url: https://github.com/Haxxnet/Compose-Examples/tree/main/examples/rybbit
+  kind: haxxnet

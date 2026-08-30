@@ -1,0 +1,44 @@
+services:
+  mongodb:
+    image: docker.io/bitnami/mongodb:${MONGODB_VERSION:-4.4}
+    environment:
+      MONGODB_PORT_NUMBER: ${MONGODB_PORT_NUMBER}
+      ALLOW_EMPTY_PASSWORD: ${ALLOW_EMPTY_PASSWORD}
+      MONGODB_ENABLE_JOURNAL: ${MONGODB_ENABLE_JOURNAL}
+      MONGODB_REPLICA_SET_MODE: primary
+      MONGODB_REPLICA_SET_NAME: ${MONGODB_REPLICA_SET_NAME}
+      MONGODB_ADVERTISED_HOSTNAME: ${MONGODB_ADVERTISED_HOSTNAME}
+      MONGODB_INITIAL_PRIMARY_HOST: ${MONGODB_INITIAL_PRIMARY_HOST}
+      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: ${MONGODB_INITIAL_PRIMARY_PORT_NUMBER}
+    volumes:
+      - mongodb-mongodb:/bitnami/mongodb
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  rocketchat:
+    image: registry.rocket.chat/rocketchat/rocket.chat:latest
+    environment:
+      PORT: ${PORT}
+      ROOT_URL: ${ROOT_URL}}
+      MONGO_URL: ${MONGO_URL}:${MONGODB_INITIAL_PRIMARY_PORT_NUMBER}/${MONGODB_DATABASE}?replicaSet=${MONGODB_REPLICA_SET_NAME}}
+      DEPLOY_METHOD: docker
+      DEPLOY_PLATFORM: ${DEPLOY_PLATFORM}
+      MONGO_OPLOG_URL: ${MONGO_OPLOG_URL}:${MONGODB_INITIAL_PRIMARY_PORT_NUMBER}> local?replicaSet=${MONGODB_REPLICA_SET_NAME}}
+    ports:
+      - 3000
+    volumes:
+      - uploads:/app/uploads
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  uploads:
+    driver_opts:
+      size: 2Gi
+  mongodb-mongodb:
+    driver_opts:
+      size: 2Gi

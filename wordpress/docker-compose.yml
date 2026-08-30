@@ -1,0 +1,40 @@
+services:
+  mariadb:
+    image: mariadb:11.8
+    environment:
+      MARIADB_USER: wordpress
+      MARIADB_DATABASE: wordpress
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    expose:
+      - 3306
+    volumes:
+      - db:/var/lib/mysql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  wordpress:
+    image: wordpress:7.0-php8.3-apache
+    environment:
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${MARIADB_PASSWORD}
+    ports:
+      - 80
+    volumes:
+      - html:/var/www/html
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  html:
+    driver_opts:
+      size: 1Gi

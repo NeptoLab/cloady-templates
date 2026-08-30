@@ -1,0 +1,7 @@
+name: FreshRSS
+hint: "A free, self-hostable aggregator… "
+version: 1.29.1
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/freshrss
+  kind: runtipi

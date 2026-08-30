@@ -1,0 +1,49 @@
+services:
+  guacamole:
+    image: guacamole/guacamole:1.6.0
+    environment:
+      TOTP_ENABLED: ${GUACAMOLE_TOTP_ENABLED}
+      GUACD_HOSTNAME: guacamole-guacd
+      POSTGRESQL_USER: guacamole
+      POSTGRESQL_DATABASE: guacamole
+      POSTGRESQL_HOSTNAME: guacamole-db
+      POSTGRESQL_PASSWORD: ${GUACAMOLE_DB_PASSWORD}
+    ports:
+      - 8080
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  guacamole-db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: guacamole
+      POSTGRES_USER: guacamole
+      POSTGRES_PASSWORD: ${GUACAMOLE_DB_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+      - sql:/config/sql
+      - init-guacamole-sh:/docker-entrypoint-initdb.d/init-guacamole.sh
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  guacamole-guacd:
+    image: guacamole/guacd:1.6.0
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  sql:
+    driver_opts:
+      size: 2Gi
+  init-guacamole-sh:
+    driver_opts:
+      size: 2Gi

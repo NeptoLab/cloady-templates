@@ -1,0 +1,24 @@
+services:
+  lldap:
+    image: lldap/lldap:stable
+    environment:
+      TZ: Europe/Berlin
+      PGID: "1000"
+      PUID: "1000"
+      LLDAP_JWT_SECRET: CHANGEME
+      LLDAP_LDAP_BASE_DN: dc=example,dc=com
+      LLDAP_LDAP_USER_PASS: CHANGEME
+    ports:
+      - 3890
+      - 17170
+    volumes:
+      - data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

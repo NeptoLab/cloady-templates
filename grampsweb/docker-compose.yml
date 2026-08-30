@@ -1,0 +1,47 @@
+services:
+  grampsweb:
+    image: ghcr.io/gramps-project/grampsweb:26.6.2
+    environment:
+      GRAMPSWEB_TREE: ${GRAMPSWEB_TREE}
+      GUNICORN_NUM_WORKERS: "1"
+    ports:
+      - 5000
+    volumes:
+      - users:/app/users
+      - index:/app/indexdir
+      - thumb-cache:/app/thumbnail_cache
+      - cache:/app/cache
+      - secret:/app/secret
+      - db:/root/.gramps/grampsdb
+      - media:/app/media
+      - tmp:/tmp
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  tmp:
+    driver_opts:
+      size: 2Gi
+  cache:
+    driver_opts:
+      size: 2Gi
+  index:
+    driver_opts:
+      size: 2Gi
+  media:
+    driver_opts:
+      size: 2Gi
+  users:
+    driver_opts:
+      size: 2Gi
+  secret:
+    driver_opts:
+      size: 2Gi
+  thumb-cache:
+    driver_opts:
+      size: 2Gi

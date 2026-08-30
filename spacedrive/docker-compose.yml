@@ -1,0 +1,18 @@
+services:
+  spacedrive:
+    image: ghcr.io/spacedriveapp/spacedrive/server:0.4.2
+    environment:
+      SD_AUTH: ${SD_AUTH_USER}:${SD_AUTH_PASSWORD}
+    ports:
+      - 8080
+    volumes:
+      - spacedrive-spacedrive:/var/spacedrive
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  spacedrive-spacedrive:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,19 @@
+services:
+  grist:
+    image: gristlabs/grist:1.7.16
+    environment:
+      APP_HOME_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      GRIST_SANDBOX_FLAVOR: ${GRIST_SANDBOX_FLAVOR}
+    ports:
+      - 8484
+    volumes:
+      - grist-data:/persist
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  grist-data:
+    driver_opts:
+      size: 2Gi

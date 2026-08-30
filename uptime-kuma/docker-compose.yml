@@ -1,0 +1,16 @@
+services:
+  kuma:
+    image: louislam/uptime-kuma:2.4.0
+    ports:
+      - 3001
+    volumes:
+      - data:/app/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

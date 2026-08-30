@@ -1,0 +1,10 @@
+{
+  "PINCHFLAT_BASIC_AUTH_PASSWORD": {
+    "title": "Basic Auth Password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "PINCHFLAT_BASIC_AUTH_USERNAME": {
+    "title": "Basic Auth Username"
+  }
+}

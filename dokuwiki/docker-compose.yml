@@ -1,0 +1,18 @@
+services:
+  dokuwiki:
+    image: lscr.io/linuxserver/dokuwiki:2024-02-06b-ls250
+    environment:
+      TZ: ${TZ}
+    ports:
+      - 80
+    volumes:
+      - config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi

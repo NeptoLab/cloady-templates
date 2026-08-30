@@ -1,0 +1,11 @@
+{
+  "TZ": {
+    "title": "Timezone",
+    "default": "UTC"
+  },
+  "ACCESS_KEY": {
+    "title": "Access Key",
+    "secret": true,
+    "generate": "password:24"
+  }
+}

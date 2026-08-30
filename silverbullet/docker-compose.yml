@@ -1,0 +1,18 @@
+services:
+  silverbullet:
+    image: zefhemel/silverbullet:2.9.0
+    environment:
+      SB_USER: ${SB_USER}:${SB_PASSWORD}
+    ports:
+      - 3000
+    volumes:
+      - space:/space
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  space:
+    driver_opts:
+      size: 2Gi

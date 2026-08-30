@@ -1,0 +1,7 @@
+name: mStream Music
+hint: The easiest music streaming server available
+version: 5.12.2-ls190
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/mstream
+  kind: runtipi

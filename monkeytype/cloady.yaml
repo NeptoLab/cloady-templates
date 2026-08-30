@@ -1,0 +1,6 @@
+name: Monkeytype
+version: frontend-latest
+sortOrder: 1000
+source:
+  url: https://github.com/Haxxnet/Compose-Examples/tree/main/examples/monkeytype
+  kind: haxxnet

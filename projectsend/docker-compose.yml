@@ -1,0 +1,43 @@
+services:
+  database:
+    image: mariadb:11.8
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    environment:
+      MYSQL_USER: projectsend
+      MYSQL_DATABASE: projectsend
+      MYSQL_PASSWORD: projectsend
+      MYSQL_ROOT_PASSWORD: projectsend
+    volumes:
+      - database-mysql:/var/lib/mysql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  projectsend:
+    image: lscr.io/linuxserver/projectsend:latest
+    environment:
+      TZ: Europe/Berlin
+      PGID: "1000"
+      PUID: "1000"
+      MAX_UPLOAD: "5000"
+    ports:
+      - 80
+    volumes:
+      - config:/config
+      - data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi
+  database-mysql:
+    driver_opts:
+      size: 2Gi

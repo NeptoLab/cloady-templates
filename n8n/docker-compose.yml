@@ -1,0 +1,24 @@
+services:
+  n8n:
+    image: n8nio/n8n:2.28.5
+    environment:
+      N8N_HOST: ${PUBLIC_HOST}
+      N8N_PORT: "5678"
+      WEBHOOK_URL: ${PUBLIC_URL}/
+      N8N_PROTOCOL: https
+      GENERIC_TIMEZONE: UTC
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+      N8N_EDITOR_BASE_URL: ${PUBLIC_URL}/
+    ports:
+      - 5678
+    volumes:
+      - data:/home/node/.n8n
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 5Gi

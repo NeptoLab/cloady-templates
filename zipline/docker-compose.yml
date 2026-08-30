@@ -1,0 +1,43 @@
+services:
+  zipline:
+    image: ghcr.io/diced/zipline:3.7.13
+    environment:
+      CORE_HOST: 0.0.0.0
+      CORE_PORT: "3000"
+      CORE_LOGGER: "true"
+      CORE_SECRET: ${ZIPLINE_CORE_SECRET}
+      CORE_DATABASE_URL: postgres://tipi:${ZIPLINE_DB_PASSWORD}@zipline-db/zipline
+      CORE_RETURN_HTTPS: "false"
+    ports:
+      - 3000
+    volumes:
+      - uploads:/zipline/uploads
+      - public:/zipline/public
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  zipline-db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: zipline
+      POSTGRES_USER: tipi
+      POSTGRES_PASSWORD: ${ZIPLINE_DB_PASSWORD}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  public:
+    driver_opts:
+      size: 2Gi
+  uploads:
+    driver_opts:
+      size: 2Gi
+  postgres:
+    driver_opts:
+      size: 2Gi

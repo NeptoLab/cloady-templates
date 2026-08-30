@@ -1,0 +1,12 @@
+services:
+  torbrowser:
+    image: domistyle/tor-browser:latest
+    environment:
+      TZ: Europe/Berlin
+    ports:
+      - 5800
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

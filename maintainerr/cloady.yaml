@@ -1,0 +1,8 @@
+name: Maintainerr
+hint: Maintainerr will manage the storage space on your plex server, launching
+  automated actions to delete your files.
+version: 3.16.0
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/maintainerr
+  kind: runtipi

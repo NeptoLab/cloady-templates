@@ -1,0 +1,24 @@
+services:
+  readarr:
+    image: lscr.io/linuxserver/readarr:0.4.19
+    environment:
+      TZ: ${TZ}
+      PGID: "1000"
+      PUID: "1000"
+    ports:
+      - 8787
+    volumes:
+      - data:/config
+      - media:/media
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  media:
+    driver_opts:
+      size: 2Gi

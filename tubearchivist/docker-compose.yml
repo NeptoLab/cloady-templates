@@ -1,0 +1,59 @@
+services:
+  tubearchivist:
+    image: bbilly1/tubearchivist:v0.5.10
+    environment:
+      ES_URL: http://tubearchivist-es:9200
+      TA_HOST: ${PUBLIC_HOST}
+      HOST_GID: "1000"
+      HOST_UID: "1000"
+      REDIS_HOST: tubearchivist-redis
+      TA_PASSWORD: ${TA_PASSWORD}
+      TA_USERNAME: ${TA_USER}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+    ports:
+      - 8000
+    volumes:
+      - youtube:/youtube
+      - cache:/cache
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  tubearchivist-es:
+    image: elasticsearch:8.18.0
+    environment:
+      path.repo: /usr/share/elasticsearch/data/snapshot
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+      discovery.type: single-node
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      xpack.security.enabled: "true"
+    volumes:
+      - es:/usr/share/elasticsearch/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  tubearchivist-redis:
+    image: redislabs/rejson:latest
+    volumes:
+      - redis-data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+volumes:
+  es:
+    driver_opts:
+      size: 2Gi
+  cache:
+    driver_opts:
+      size: 2Gi
+  youtube:
+    driver_opts:
+      size: 2Gi
+  redis-data:
+    driver_opts:
+      size: 2Gi

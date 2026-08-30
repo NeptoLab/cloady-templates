@@ -1,0 +1,12 @@
+services:
+  anse:
+    image: ddiu8081/anse:v1.1.11
+    environment:
+      PORT: "8014"
+    ports:
+      - 8014
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

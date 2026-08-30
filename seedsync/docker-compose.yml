@@ -1,0 +1,22 @@
+services:
+  seedsync:
+    image: ipsingh06/seedsync:0.8.6
+    environment:
+      TZ: ${TZ}
+    ports:
+      - 8800
+    volumes:
+      - config:/config
+      - complete:/downloads
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi
+  complete:
+    driver_opts:
+      size: 2Gi

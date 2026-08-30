@@ -1,0 +1,89 @@
+services:
+  librephotos:
+    image: reallibrephotos/librephotos-proxy:2023w48
+    ports:
+      - 80
+    volumes:
+      - scan:/data
+      - protected-media:/protected_media
+      - nginx-conf:/etc/nginx/nginx.conf:ro
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  librephotos-db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: librephotos
+      POSTGRES_USER: tipi
+      POSTGRES_PASSWORD: ${LIBREPHOTOS_DB_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  librephotos-redis:
+    image: redis:6
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+  librephotos-backend:
+    image: reallibrephotos/librephotos:2023w48
+    environment:
+      DEBUG: "0"
+      DB_HOST: librephotos-db
+      DB_NAME: librephotos
+      DB_PASS: ${LIBREPHOTOS_DB_PASSWORD}
+      DB_PORT: "5432"
+      DB_USER: tipi
+      DB_BACKEND: postgresql
+      REDIS_HOST: librephotos-redis
+      REDIS_PORT: "6379"
+      SECRET_KEY: ${LIBREPHOTOS_SECRET_KEY}
+      ADMIN_EMAIL: ${LIBREPHOTOS_EMAIL}
+      ALLOW_UPLOAD: "true"
+      BACKEND_HOST: librephotos-backend
+      ADMIN_PASSWORD: ${LIBREPHOTOS_PASSWORD}
+      ADMIN_USERNAME: ${LIBREPHOTOS_USERNAME}
+      CSRF_TRUSTED_ORIGINS: ${APP_PROTOCOL}://${PUBLIC_HOST},http://${INTERNAL_IP}:80
+    volumes:
+      - scan:/data
+      - protected-media:/protected_media
+      - logs:/logs
+      - cache:/root/.cache
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  librephotos-frontend:
+    image: reallibrephotos/librephotos-frontend:2023w48
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  logs:
+    driver_opts:
+      size: 2Gi
+  scan:
+    driver_opts:
+      size: 2Gi
+  cache:
+    driver_opts:
+      size: 2Gi
+  nginx-conf:
+    driver_opts:
+      size: 2Gi
+  protected-media:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,51 @@
+services:
+  calcom:
+    image: calcom/cal.com:v6.2.0
+    environment:
+      LICENSE: agree
+      NODE_ENV: production
+      EMAIL_FROM: ${EMAIL_FROM}
+      POSTGRES_DB: calcom
+      DATABASE_URL: postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@db-calcom/calcom
+      DATABASE_HOST: db-calcom
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      ZOOM_CLIENT_ID: ${ZOOM_CLIENT_ID}
+      NEXTAUTH_SECRET: ${CALCOM_NEXTAUTH_SECRET}
+      EMAIL_SERVER_HOST: ${EMAIL_SERVER_HOST}
+      EMAIL_SERVER_PORT: ${EMAIL_SERVER_PORT}
+      EMAIL_SERVER_USER: ${EMAIL_SERVER_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      MS_GRAPH_CLIENT_ID: ${MS_GRAPH_CLIENT_ID}
+      STRIPE_PRIVATE_KEY: '""'
+      ZOOM_CLIENT_SECRET: ${ZOOM_CLIENT_SECRET}
+      DATABASE_DIRECT_URL: postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@db-calcom/calcom
+      EMAIL_SERVER_PASSWORD: ${EMAIL_SERVER_PASSWORD}
+      GOOGLE_API_CREDENTIALS: ${CALCOM_GOOGLE_API_CREDENTIALS}
+      MS_GRAPH_CLIENT_SECRET: ${MS_GRAPH_CLIENT_SECRET}
+      NEXT_PUBLIC_WEBAPP_URL: https://${PUBLIC_HOST}
+      CALENDSO_ENCRYPTION_KEY: ${CALENDSO_ENCRYPTION_KEY}
+      NEXT_PUBLIC_LICENSE_CONSENT: agree
+    ports:
+      - 3000
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  db-calcom:
+    image: postgres:16.1
+    environment:
+      POSTGRES_DB: calcom
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi

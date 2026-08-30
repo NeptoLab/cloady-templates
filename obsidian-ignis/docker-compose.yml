@@ -1,0 +1,50 @@
+services:
+  ignis:
+    image: nobbe/ignis:latest
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      OBSIDIAN_VERSION: 1.12.7
+    ports:
+      - 8080
+    volumes:
+      - vaults:/vaults
+      - data:/app/data
+      - obsidian-app:/app/obsidian-app
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  git-sync:
+    image: ubuntu/git-sync:4.5-24.04_stable
+    entrypoint:
+      - git-sync
+    command:
+      - --repo=${GITSYNC_REPO:-https://github.com/example/example.git}
+      - --root=/vaults/.git-sync
+      - --link=/vaults/current
+      - --period=${GITSYNC_PERIOD:-30s}
+      - --ref=${GITSYNC_REF:-HEAD}
+      - --max-failures=-1
+      - --verbose=5
+    environment:
+      GITSYNC_PASSWORD: ${GITSYNC_PASSWORD}
+      GITSYNC_USERNAME: ${GITSYNC_USERNAME}
+    volumes:
+      - vaults:/vaults
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  vaults:
+    driver_opts:
+      size: 2Gi
+  obsidian-app:
+    driver_opts:
+      size: 2Gi

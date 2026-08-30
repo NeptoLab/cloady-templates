@@ -1,0 +1,19 @@
+services:
+  suwayomi:
+    image: ghcr.io/suwayomi/tachidesk:v2.3.2231
+    environment:
+      TZ: ${TZ}
+      BIND_IP: 0.0.0.0
+    ports:
+      - 4567
+    volumes:
+      - data:/home/suwayomi/.local/share/Tachidesk
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

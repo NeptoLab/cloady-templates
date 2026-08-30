@@ -1,0 +1,20 @@
+services:
+  seerr:
+    image: ghcr.io/seerr-team/seerr:v3.3.0
+    environment:
+      TZ: ${TZ}
+      PORT: "5055"
+      LOG_LEVEL: debug
+    ports:
+      - 5055
+    volumes:
+      - config:/app/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi

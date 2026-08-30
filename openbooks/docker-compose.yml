@@ -1,0 +1,19 @@
+services:
+  openbooks:
+    image: evanbuss/openbooks:4.5.0
+    command: ./openbooks server --dir /books --port 80 --persist --name ${OPENBOOKS_IRC_USERNAME}
+    environment:
+      BASE_PATH: /openbooks/
+    ports:
+      - 80
+    volumes:
+      - books:/books
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  books:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,4 @@
+name: Vaultwarden
+hint: Bitwarden-compatible password server
+version: "1.36"
+sortOrder: 85

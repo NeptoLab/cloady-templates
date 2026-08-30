@@ -1,0 +1,7 @@
+name: Flightlog
+hint: Flightlog, a web application that keeps track of your personal flight history
+version: 2.1.13
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/flightlog
+  kind: runtipi

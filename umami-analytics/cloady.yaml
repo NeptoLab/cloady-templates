@@ -1,0 +1,7 @@
+name: Umami Analytics
+hint: Umami is a simple, fast, privacy-focused alternative to Google Analytics.
+version: 3.2.0
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/umami-analytics
+  kind: runtipi

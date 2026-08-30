@@ -1,0 +1,35 @@
+services:
+  fireshare:
+    image: shaneisrael/fireshare:1.7.3
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      SECRET_KEY: ${FIRESHARE_SECRET_KEY}
+      ADMIN_PASSWORD: ${FIRESHARE_PASSWORD}
+      ADMIN_USERNAME: ${FIRESHARE_USERNAME}
+      MINUTES_BETWEEN_VIDEO_SCANS: "5"
+    ports:
+      - 80
+    volumes:
+      - fireshare-data:/data
+      - fireshare-processed:/processed
+      - fireshare-videos:/videos
+      - fireshare-images:/images
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  fireshare-data:
+    driver_opts:
+      size: 2Gi
+  fireshare-images:
+    driver_opts:
+      size: 2Gi
+  fireshare-videos:
+    driver_opts:
+      size: 2Gi
+  fireshare-processed:
+    driver_opts:
+      size: 2Gi

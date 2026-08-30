@@ -1,0 +1,7 @@
+name: Paperless-ngx
+hint: Document Management System (DMS)
+version: 2.20.15
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/paperless-ngx
+  kind: runtipi

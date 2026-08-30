@@ -1,0 +1,37 @@
+services:
+  duplicacy-web:
+    image: saspus/duplicacy-web:mini
+    environment:
+      TZ: Europe/Berlin
+      GRP_ID: "1000"
+      USR_ID: "1000"
+      DUPLICACY_WEB_VERSION: latest
+    ports:
+      - 3875
+    volumes:
+      - config:/config
+      - logs:/logs
+      - cache:/cache
+      - dir1:/data/dir1:ro
+      - dir2:/data/dir2:ro
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  dir1:
+    driver_opts:
+      size: 2Gi
+  dir2:
+    driver_opts:
+      size: 2Gi
+  logs:
+    driver_opts:
+      size: 2Gi
+  cache:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,88 @@
+services:
+  lubelogger:
+    image: ghcr.io/hargata/lubelogger:v1.6.8
+    environment:
+      TZ: ${TZ}
+      LANG: ${LUBELOGGER_LOCALE}
+      LC_ALL: ${LUBELOGGER_LOCALE}
+      EnableAuth: ${LUBELOGGER_ENABLE_AUTH}
+      UserNameHash: ${LUBELOGGER_USERNAME_HASH}
+      LUBELOGGER_MOTD: ${LUBELOGGER_MOTD}
+      MailConfig__Port: ${LUBELOGGER_EMAIL_PORT}
+      UserPasswordHash: ${LUBELOGGER_PASSWORD_HASH}
+      LUBELOGGER_WEBHOOK: ${LUBELOGGER_WEBHOOK_URL}
+      MailConfig__UseSSL: ${LUBELOGGER_EMAIL_USE_SSL}
+      OpenIDConfig__Name: ${LUBELOGGER_OPENID_NAME}
+      LUBELOGGER_LOGO_URL: ${LUBELOGGER_CUSTOM_LOGO_URL}
+      OpenIDConfig__Scope: ${LUBELOGGER_OPENID_SCOPE}
+      POSTGRES_CONNECTION: Host=lubelogger-db:5432;Username=tipi;Password=tipi;Database=lubelogger;
+      MailConfig__Password: ${LUBELOGGER_EMAIL_PASSWORD}
+      MailConfig__Username: ${LUBELOGGER_EMAIL_USERNAME}
+      MailConfig__EmailFrom: ${LUBELOGGER_EMAIL_FROM}
+      OpenIDConfig__AuthURL: ${LUBELOGGER_OPENID_AUTH_URL}
+      OpenIDConfig__ClientId: ${LUBELOGGER_OPENID_CLIENT_ID}
+      OpenIDConfig__TokenURL: ${LUBELOGGER_OPENID_TOKEN_URL}
+      MailConfig__EmailServer: ${LUBELOGGER_EMAIL_SERVER}
+      OpenIDConfig__RedirectURL: ${LUBELOGGER_OPENID_REDIRECT_URL}
+      LOGGING__LOGLEVEL__DEFAULT: Error
+      OpenIDConfig__ClientSecret: ${LUBELOGGER_OPENID_CLIENT_SECRET}
+      OpenIDConfig__ValidateState: ${LUBELOGGER_OPENID_VALIDATE_STATE}
+      LUBELOGGER_ALLOWED_FILE_EXTENSIONS: ${LUBELOGGER_ALLOWED_FILE_EXTENSIONS}
+    ports:
+      - 8080
+    volumes:
+      - config:/App/config
+      - data:/App/data
+      - documents:/App/wwwroot/documents
+      - images:/App/wwwroot/images
+      - log:/App/log
+      - keys:/root/.aspnet/DataProtection-Keys
+      - temp:/App/wwwroot/temp
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  lubelogger-db:
+    image: postgres:16.4-alpine
+    environment:
+      TZ: ${TZ}
+      POSTGRES_DB: lubelogger
+      POSTGRES_USER: tipi
+      POSTGRES_PASSWORD: tipi
+    volumes:
+      - init-db-sh:/docker-entrypoint-initdb.d/init-db.sh
+      - postgres:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  log:
+    driver_opts:
+      size: 2Gi
+  data:
+    driver_opts:
+      size: 2Gi
+  keys:
+    driver_opts:
+      size: 2Gi
+  temp:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi
+  images:
+    driver_opts:
+      size: 2Gi
+  postgres:
+    driver_opts:
+      size: 2Gi
+  documents:
+    driver_opts:
+      size: 2Gi
+  init-db-sh:
+    driver_opts:
+      size: 2Gi

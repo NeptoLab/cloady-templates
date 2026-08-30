@@ -1,0 +1,27 @@
+services:
+  caddy:
+    image: caddy:latest
+    environment:
+      TZ: Europe/Berlin
+    ports:
+      - 80
+      - 443
+    volumes:
+      - caddyfile:/etc/caddy/Caddyfile
+      - data:/data
+      - config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi
+  caddyfile:
+    driver_opts:
+      size: 2Gi

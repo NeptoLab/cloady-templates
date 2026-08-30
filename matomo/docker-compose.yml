@@ -1,0 +1,37 @@
+services:
+  matomo:
+    image: matomo:5-fpm-alpine
+    environment:
+      MATOMO_DATABASE_HOST: matomo_db
+    ports:
+      - 80
+    volumes:
+      - apache2-conf:/etc/apache2/apache2.conf:ro
+      - html:/var/www/html
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  matomo-db:
+    image: mariadb:11.8
+    command: --max-allowed-packet=64MB
+    environment:
+      MYSQL_ROOT_PASSWORD: makeitup
+    volumes:
+      - database:/var/lib/mysql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  html:
+    driver_opts:
+      size: 2Gi
+  database:
+    driver_opts:
+      size: 2Gi
+  apache2-conf:
+    driver_opts:
+      size: 2Gi

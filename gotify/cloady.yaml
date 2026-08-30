@@ -1,0 +1,7 @@
+name: Gotify
+hint: Gotify, a simple server for sending and receiving notification messages.
+version: 2.9.1
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/gotify
+  kind: runtipi

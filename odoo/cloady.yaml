@@ -1,0 +1,8 @@
+name: Odoo
+hint: Open-source business management software with modular applications for
+  streamlined operations.
+version: "19"
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/odoo
+  kind: runtipi

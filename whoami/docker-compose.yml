@@ -1,0 +1,10 @@
+services:
+  whoami:
+    image: traefik/whoami:v1.11.0
+    ports:
+      - 80
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

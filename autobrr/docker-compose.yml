@@ -1,0 +1,18 @@
+services:
+  autobrr:
+    image: ghcr.io/autobrr/autobrr:v1.81.0
+    environment:
+      TZ: ${TZ}
+    ports:
+      - 7474
+    volumes:
+      - autobrr-config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  autobrr-config:
+    driver_opts:
+      size: 2Gi

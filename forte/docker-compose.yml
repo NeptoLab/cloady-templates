@@ -1,0 +1,44 @@
+services:
+  app:
+    image: kaangiray26/forte:4.3
+    environment:
+      port: "3000"
+      verbose: "false"
+      version: "4.3"
+      NODE_ENV: production
+      hostname: localhost
+      POSTGRES_DB: forte
+      custom_about: "false"
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: forte
+      POSTGRES_PASSWORD: forte
+    ports:
+      - 3000
+    volumes:
+      - library:/library
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  postgres:
+    image: kaangiray26/postgres:2.0
+    environment:
+      POSTGRES_DB: forte
+      POSTGRES_USER: forte
+      POSTGRES_PASSWORD: forte
+    volumes:
+      - db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi
+  library:
+    driver_opts:
+      size: 2Gi

@@ -1,0 +1,21 @@
+services:
+  netbootxyz:
+    image: ghcr.io/netbootxyz/netbootxyz:0.7.6-nbxyz18
+    ports:
+      - 3000
+      - 69/udp
+    volumes:
+      - config:/config
+      - assets:/assets
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  assets:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi

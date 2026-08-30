@@ -1,0 +1,10 @@
+services:
+  excalidraw:
+    image: excalidraw/excalidraw:latest
+    ports:
+      - 80
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

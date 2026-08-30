@@ -1,0 +1,18 @@
+services:
+  maintainerr:
+    image: ghcr.io/maintainerr/maintainerr:3.16.0
+    environment:
+      TZ: ${TZ}
+    ports:
+      - 6246
+    volumes:
+      - config:/opt/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi

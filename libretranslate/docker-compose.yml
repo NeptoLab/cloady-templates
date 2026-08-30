@@ -1,0 +1,10 @@
+services:
+  libretranslate:
+    image: libretranslate/libretranslate:v1.9.6
+    ports:
+      - 5000
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M

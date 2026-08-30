@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+    volumes:
+      - pg-db:/var/lib/postgresql
+      - pg-data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  sonarqube:
+    image: sonarqube:lts-community
+    environment:
+      sonar.jdbc.password: sonar
+      sonar.jdbc.username: sonar
+      sonar.search.javaAdditionalOpts: -Dbootstrap.system_call_filter=false
+    ports:
+      - 9000
+    volumes:
+      - logs:/opt/sonarqube/logs
+      - data:/opt/sonarqube/data
+      - extensions:/opt/sonarqube/extensions
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  logs:
+    driver_opts:
+      size: 2Gi
+  pg-db:
+    driver_opts:
+      size: 2Gi
+  pg-data:
+    driver_opts:
+      size: 2Gi
+  extensions:
+    driver_opts:
+      size: 2Gi

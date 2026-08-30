@@ -1,0 +1,7 @@
+name: Anse
+hint: Fully optimized UI for AI Chats.
+version: 1.1.11
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/anse
+  kind: runtipi

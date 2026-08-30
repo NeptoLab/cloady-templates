@@ -1,0 +1,29 @@
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:2.3.0
+    environment:
+      TZ: ${TZ}
+      PGID: "0"
+      PUID: "0"
+      SETTINGS_ENCRYPTION_KEY: ${DUPLICATI_ENCRYPTION_KEY}
+    ports:
+      - 8200
+    volumes:
+      - duplicati-config:/config
+      - runtipi-folder:/backups/runtipi-folder
+      - home:/source
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  home:
+    driver_opts:
+      size: 2Gi
+  runtipi-folder:
+    driver_opts:
+      size: 2Gi
+  duplicati-config:
+    driver_opts:
+      size: 2Gi

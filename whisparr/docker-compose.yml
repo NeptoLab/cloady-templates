@@ -1,0 +1,25 @@
+services:
+  whisparr:
+    image: ghcr.io/hotio/whisparr:nightly-2.0.0.548
+    environment:
+      TZ: ${TZ}
+      PGID: ${WHISPARR_PGID-1000}
+      PUID: ${WHISPARR_PUID-1000}
+      UMASK: ${WHISPARR_UMASK-002}
+    ports:
+      - 6969
+    volumes:
+      - data:/config
+      - media:/media
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  media:
+    driver_opts:
+      size: 2Gi

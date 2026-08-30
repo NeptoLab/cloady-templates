@@ -1,0 +1,26 @@
+services:
+  komga:
+    image: ghcr.io/gotson/komga:1.25.0
+    environment:
+      TZ: ${TZ}
+    ports:
+      - 25600
+    volumes:
+      - config:/config
+      - data:/data
+      - media:/media
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi
+  media:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi

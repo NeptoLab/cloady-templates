@@ -1,0 +1,19 @@
+services:
+  gotify:
+    image: gotify/server:2.9.1
+    environment:
+      GOTIFY_DEFAULTUSER_NAME: ${GOTIFY_DEFAULTUSER_NAME}
+      GOTIFY_DEFAULTUSER_PASS: ${GOTIFY_DEFAULTUSER_PASS}
+    ports:
+      - 80
+    volumes:
+      - data:/app/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

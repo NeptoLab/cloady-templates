@@ -1,0 +1,4 @@
+name: Mattermost
+hint: Team chat & collaboration
+version: "11.7"
+sortOrder: 90

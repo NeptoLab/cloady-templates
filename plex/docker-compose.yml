@@ -1,0 +1,27 @@
+services:
+  pms-docker:
+    image: plexinc/pms-docker
+    environment:
+      TZ: Europe/Berlin
+      PLEX_CLAIM: claim-dvmURANy9Z7MbJhmY7V7
+    ports:
+      - 32400
+    volumes:
+      - config:/config
+      - transcode:/transcode
+      - media:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  media:
+    driver_opts:
+      size: 2Gi
+  config:
+    driver_opts:
+      size: 2Gi
+  transcode:
+    driver_opts:
+      size: 2Gi

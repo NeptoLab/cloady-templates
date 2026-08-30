@@ -1,0 +1,7 @@
+name: Mempool
+hint: Bitcoin mempool visualizer and blockchain explorer
+version: 3.3.1
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/mempool
+  kind: runtipi

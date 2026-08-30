@@ -1,0 +1,15 @@
+{
+  "POSTGRES_DB": {
+    "title": "Database",
+    "default": "app"
+  },
+  "POSTGRES_USER": {
+    "title": "Username",
+    "default": "cloady"
+  },
+  "POSTGRES_PASSWORD": {
+    "title": "Password",
+    "secret": true,
+    "generate": "password:24"
+  }
+}

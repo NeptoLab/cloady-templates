@@ -1,0 +1,34 @@
+services:
+  gvm:
+    image: securecompliance/gvm
+    environment:
+      TZ: '"Europe/Berlin"'
+      SSHD: "false"
+      HTTPS: "true"
+      PASSWORD: '"admin"'
+      SMTPPORT: "465"
+      USERNAME: '"admin"'
+      AUTO_SYNC: "true"
+      RELAYHOST: '"smtp.gmail.com"'
+      DB_PASSWORD: '"none"'
+    ports:
+      - 9392
+    volumes:
+      - database:/opt/database
+      - gvm-gvm:/var/lib/gvm
+      - plugins:/var/lib/openvas/plugins
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  gvm-gvm:
+    driver_opts:
+      size: 2Gi
+  plugins:
+    driver_opts:
+      size: 2Gi
+  database:
+    driver_opts:
+      size: 2Gi

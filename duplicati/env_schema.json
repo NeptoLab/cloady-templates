@@ -1,0 +1,10 @@
+{
+  "TZ": {
+    "title": "Timezone",
+    "default": "UTC"
+  },
+  "DUPLICATI_ENCRYPTION_KEY": {
+    "secret": true,
+    "generate": "password:32"
+  }
+}

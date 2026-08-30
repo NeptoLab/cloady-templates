@@ -1,0 +1,12 @@
+{
+  "INTERNAL_IP": {
+    "title": "INTERNAL_IP",
+    "default": ""
+  },
+  "BITCOIND_DIR": {
+    "title": "Bitcoin data folder location (for .cookie file)"
+  },
+  "BITCOIND_HOST": {
+    "title": "Bitcoin node host address"
+  }
+}

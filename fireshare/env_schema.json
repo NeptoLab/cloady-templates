@@ -1,0 +1,14 @@
+{
+  "FIRESHARE_PASSWORD": {
+    "title": "Fireshare password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "FIRESHARE_USERNAME": {
+    "title": "Fireshare username"
+  },
+  "FIRESHARE_SECRET_KEY": {
+    "secret": true,
+    "generate": "password:32"
+  }
+}

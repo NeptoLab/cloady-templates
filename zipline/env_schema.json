@@ -1,0 +1,10 @@
+{
+  "ZIPLINE_CORE_SECRET": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "ZIPLINE_DB_PASSWORD": {
+    "secret": true,
+    "generate": "password:32"
+  }
+}

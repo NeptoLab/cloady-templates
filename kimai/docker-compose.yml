@@ -1,0 +1,52 @@
+services:
+  kimai:
+    image: kimai/kimai2:fpm-2.19.1-prod
+    environment:
+      ADMINMAIL: ${KIMAI_ADMINMAIL}
+      ADMINPASS: ${KIMAI_ADMINPASS}
+      DATABASE_URL: mysql://kimai:${KIMAI_DATABASE_PASSWORD}@kimai-sqldb/kimai?charset=utf8&serverVersion=5.7
+      TRUSTED_HOSTS: kimai-proxy,localhost,127.0.0.1
+    volumes:
+      - public:/opt/kimai/public
+      - var:/opt/kimai/var
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+  nginx:
+    image: tobybatch/nginx-fpm-reverse-proxy:latest
+    ports:
+      - 80
+    volumes:
+      - public:/opt/kimai/public:ro
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  sqldb:
+    image: mysql:5.7
+    command: --default-storage-engine innodb
+    environment:
+      MYSQL_USER: kimai
+      MYSQL_DATABASE: kimai
+      MYSQL_PASSWORD: ${KIMAI_DATABASE_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${KIMAI_DATABASE_ROOT_PASSWORD}
+    volumes:
+      - mysql:/var/lib/mysql
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+volumes:
+  var:
+    driver_opts:
+      size: 2Gi
+  mysql:
+    driver_opts:
+      size: 2Gi
+  public:
+    driver_opts:
+      size: 2Gi

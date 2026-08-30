@@ -1,0 +1,7 @@
+name: flatnotes
+hint: A self-hosted, database-less note taking web app
+version: 5.5.4
+sortOrder: 1000
+source:
+  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/flatnotes
+  kind: runtipi

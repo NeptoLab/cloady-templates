@@ -1,0 +1,22 @@
+services:
+  adguard:
+    image: adguard/adguardhome:latest
+    ports:
+      - 3000
+      - 80
+      - 53
+    volumes:
+      - work:/opt/adguardhome/work
+      - conf:/opt/adguardhome/conf
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  conf:
+    driver_opts:
+      size: 2Gi
+  work:
+    driver_opts:
+      size: 2Gi

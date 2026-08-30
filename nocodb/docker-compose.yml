@@ -1,0 +1,51 @@
+services:
+  nocodb:
+    image: nocodb/nocodb:2026.06.2
+    environment:
+      NC_DB: pg://nocodb-db:5432?u=postgres&p=${NOCODB_DB_PASSWORD}&d=nocodb
+      NC_REDIS_URL: redis://default:${NOCODB_REDIS_PASSWORD}@nocodb-redis:6379
+      NC_PUBLIC_URL: ${APP_PROTOCOL}://${PUBLIC_HOST}
+      NC_AUTH_JWT_SECRET: ${NOCODB_JWT_SECRET}
+      DB_QUERY_LIMIT_DEFAULT: ${NOCODB_TABLE_ROWS-25}
+    ports:
+      - 8080
+    volumes:
+      - nocode-data:/usr/app/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  nocodb-db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: nocodb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${NOCODB_DB_PASSWORD}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  nocodb-redis:
+    image: redis:alpine
+    command: redis-server --requirepass ${NOCODB_REDIS_PASSWORD}
+    volumes:
+      - redis:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 128M
+volumes:
+  redis:
+    driver_opts:
+      size: 2Gi
+  postgres:
+    driver_opts:
+      size: 2Gi
+  nocode-data:
+    driver_opts:
+      size: 2Gi

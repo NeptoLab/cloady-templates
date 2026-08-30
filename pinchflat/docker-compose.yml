@@ -1,0 +1,23 @@
+services:
+  pinchflat:
+    image: keglin/pinchflat:v2025.6.6
+    environment:
+      BASIC_AUTH_PASSWORD: ${PINCHFLAT_BASIC_AUTH_PASSWORD}
+      BASIC_AUTH_USERNAME: ${PINCHFLAT_BASIC_AUTH_USERNAME}
+    ports:
+      - 8945
+    volumes:
+      - config:/config
+      - downloads:/downloads
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi
+  downloads:
+    driver_opts:
+      size: 2Gi

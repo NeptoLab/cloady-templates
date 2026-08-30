@@ -1,0 +1,51 @@
+services:
+  tooljet:
+    image: tooljet/tooljet-client-ce:v2.4.2
+    command: openresty -g "daemon off;"
+    environment:
+      SERVER_HOST: tooljet-server
+    ports:
+      - 80
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+  db-tooljet:
+    image: postgres:11
+    environment:
+      PGDATA: /data/postgres
+      POSTGRES_DB: tooljet
+      POSTGRES_USER: tooljet
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 512M
+  tooljet-server:
+    image: tooljet/tooljet-server-ce:v2.24.0
+    command: npm run start:prod
+    environment:
+      PG_DB: tooljet
+      PG_HOST: db-tooljet
+      PG_PASS: ${DB_PASSWORD}
+      PG_USER: tooljet
+      SERVER_HOST: tooljet-server
+      SERVE_CLIENT: "false"
+      TOOLJET_HOST: https://${PUBLIC_HOST}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      CHECK_FOR_UPDATES: check_if_updates_are_available
+      DEFAULT_FROM_EMAIL: hello@tooljet.io
+      LOCKBOX_MASTER_KEY: ${LOCKBOX_MASTER_KEY}
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.1
+          memory: 256M
+volumes:
+  db:
+    driver_opts:
+      size: 2Gi

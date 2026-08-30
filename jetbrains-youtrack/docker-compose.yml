@@ -1,0 +1,28 @@
+services:
+  youtrack:
+    image: jetbrains/youtrack:2025.3.131383
+    ports:
+      - 8080
+    volumes:
+      - data:/opt/youtrack/data
+      - conf:/opt/youtrack/conf
+      - logs:/opt/youtrack/logs
+      - backups:/opt/youtrack/backups
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  conf:
+    driver_opts:
+      size: 2Gi
+  data:
+    driver_opts:
+      size: 2Gi
+  logs:
+    driver_opts:
+      size: 2Gi
+  backups:
+    driver_opts:
+      size: 2Gi

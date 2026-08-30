@@ -1,0 +1,9 @@
+{
+  "HALO_EXTERNAL_URL": {
+    "title": "External url"
+  },
+  "HALO_DATABASE_PASSWORD": {
+    "secret": true,
+    "generate": "password:32"
+  }
+}

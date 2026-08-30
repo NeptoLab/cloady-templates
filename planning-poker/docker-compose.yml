@@ -1,0 +1,16 @@
+services:
+  planning-poker:
+    image: axeleroy/self-host-planning-poker:1.2.1
+    ports:
+      - 8000
+    volumes:
+      - data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

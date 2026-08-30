@@ -1,0 +1,33 @@
+services:
+  archivebox:
+    image: archivebox/archivebox:0.7.4
+    command: server --quick-init 0.0.0.0:8015
+    environment:
+      PGID: "1000"
+      PORT: "8015"
+      PUID: "1000"
+      TIMEOUT: ${ARCHIVEBOX_TIMEOUT-60}
+      PUBLIC_INDEX: ${ARCHIVEBOX_PUBLIC_INDEX-true}
+      ADMIN_PASSWORD: ${ARCHIVEBOX_PASSWORD}
+      ADMIN_USERNAME: ${ARCHIVEBOX_USERNAME}
+      MEDIA_MAX_SIZE: ${ARCHIVEBOX_MEDIA_MAX_SIZE-750m}
+      PUBLIC_ADD_VIEW: ${ARCHIVEBOX_PUBLIC_ADD_VIEW-false}
+      PUBLIC_SNAPSHOTS: ${ARCHIVEBOX_PUBLIC_SNAPSHOTS-true}
+      CHECK_SSL_VALIDITY: ${ARCHIVEBOX_CHECK_SSL_VALIDITY-true}
+      SAVE_ARCHIVE_DOT_ORG: ${ARCHIVEBOX_SAVE_ARCHIVE_DOT_ORGE-true}
+      SEARCH_BACKEND_ENGINE: ${ARCHIVEBOX_SEARCH_BACKEND_ENGINE}
+      SEARCH_BACKEND_PASSWORD: ${ARCHIVEBOX_SEARCH_BACKEND_PASSWORD}
+      SEARCH_BACKEND_HOST_NAME: ${ARCHIVEBOX_SEARCH_BACKEND_HOST_NAME}
+    ports:
+      - 8015
+    volumes:
+      - data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

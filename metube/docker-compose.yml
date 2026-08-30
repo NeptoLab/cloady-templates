@@ -1,0 +1,16 @@
+services:
+  metube:
+    image: ghcr.io/alexta69/metube:latest
+    ports:
+      - 8081
+    volumes:
+      - complete:/downloads
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  complete:
+    driver_opts:
+      size: 2Gi

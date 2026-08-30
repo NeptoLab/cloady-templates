@@ -1,0 +1,16 @@
+services:
+  beszel:
+    image: henrygd/beszel:0.18.7
+    ports:
+      - 8090
+    volumes:
+      - data:/beszel_data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  data:
+    driver_opts:
+      size: 2Gi

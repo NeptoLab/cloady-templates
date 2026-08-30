@@ -1,0 +1,16 @@
+services:
+  grafana:
+    image: grafana/grafana-oss:13.0.2
+    ports:
+      - 3000
+    volumes:
+      - grafana-grafana:/var/lib/grafana
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  grafana-grafana:
+    driver_opts:
+      size: 2Gi

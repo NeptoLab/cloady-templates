@@ -1,0 +1,20 @@
+services:
+  opengist:
+    image: ghcr.io/thomiceli/opengist:1.12
+    environment:
+      OG_OIDC_SECRET: ${OG_OIDC_SECRET}
+      OG_OIDC_CLIENT_KEY: ${OG_OIDC_CLIENT_KEY}
+      OG_OIDC_DISCOVERY_URL: ${OG_OIDC_DISCOVERY_URL}
+    ports:
+      - 6157
+    volumes:
+      - opengist-opengist:/opengist
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  opengist-opengist:
+    driver_opts:
+      size: 2Gi

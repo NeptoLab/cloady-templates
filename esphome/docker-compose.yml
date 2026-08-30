@@ -1,0 +1,21 @@
+services:
+  esphome:
+    image: ghcr.io/esphome/esphome:2026.6.4
+    environment:
+      TZ: ${TZ}
+      PASSWORD: ${ESPHOME_PASSWORD}
+      USERNAME: ${ESPHOME_USERNAME}
+      ESPHOME_DASHBOARD_USE_PING: ${ESPHOME_PING}
+    ports:
+      - 6052
+    volumes:
+      - config:/config
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.25
+          memory: 256M
+volumes:
+  config:
+    driver_opts:
+      size: 2Gi

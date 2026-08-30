@@ -1,0 +1,26 @@
+{
+  "GTS_SMTP_FROM": {
+    "title": "SMTP From Address"
+  },
+  "GTS_SMTP_HOST": {
+    "title": "SMTP Host"
+  },
+  "GTS_SMTP_PORT": {
+    "title": "SMTP Port"
+  },
+  "GTS_DB_PASSWORD": {
+    "secret": true,
+    "generate": "password:32"
+  },
+  "GTS_SMTP_PASSWORD": {
+    "title": "SMTP Password",
+    "secret": true,
+    "generate": "password:24"
+  },
+  "GTS_SMTP_USERNAME": {
+    "title": "SMTP Username"
+  },
+  "GTS_ACCOUNTS_REGISTRATION_OPEN": {
+    "title": "Sign Ups"
+  }
+}

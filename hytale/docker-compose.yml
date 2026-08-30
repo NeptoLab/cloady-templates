@@ -1,0 +1,27 @@
+services:
+  hytale:
+    image: indifferentbroccoli/hytale-server-docker:v1.0.6
+    environment:
+      AUTH_MODE: ${AUTH_MODE}
+      MAX_MEMORY: ${MAX_MEMORY}
+      MAX_PLAYERS: ${MAX_PLAYERS}
+      SERVER_NAME: ${SERVER_NAME}
+      DEFAULT_PORT: "5520"
+      USE_AOT_CACHE: "true"
+      VIEW_DISTANCE: ${VIEW_DISTANCE}
+      DISABLE_SENTRY: "true"
+      ENABLE_BACKUPS: ${ENABLE_BACKUPS}
+      BACKUP_FREQUENCY: ${BACKUP_FREQUENCY}
+    ports:
+      - 5520/udp
+    volumes:
+      - server-files:/home/hytale/server-files
+    deploy:
+      resources:
+        reservations:
+          cpus: 1
+          memory: 4G
+volumes:
+  server-files:
+    driver_opts:
+      size: 10Gi

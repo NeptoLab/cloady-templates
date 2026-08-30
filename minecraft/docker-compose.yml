@@ -1,0 +1,29 @@
+services:
+  mc:
+    image: itzg/minecraft-server:2026.6.1
+    environment:
+      OPS: ${OPS}
+      EULA: "TRUE"
+      MOTD: ${MOTD}
+      SEED: ${SEED}
+      TYPE: ${TYPE}
+      MEMORY: ${MEMORY}
+      VERSION: "26.2"
+      DATAPACKS: ${DATAPACKS}
+      DIFFICULTY: ${DIFFICULTY}
+      MAX_PLAYERS: ${MAX_PLAYERS}
+      INITIAL_ENABLED_PACKS: ${INITIAL_ENABLED_PACKS}
+      OVERRIDE_SERVER_PROPERTIES: "true"
+    ports:
+      - 25565
+    volumes:
+      - data:/data
+    deploy:
+      resources:
+        reservations:
+          cpus: 0.5
+          memory: 3G
+volumes:
+  data:
+    driver_opts:
+      size: 5Gi
