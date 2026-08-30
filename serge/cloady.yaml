@@ -1,7 +1,0 @@
-name: Serge
-hint: LLaMA made easy
-version: 0.9.0
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/serge
-  kind: runtipi

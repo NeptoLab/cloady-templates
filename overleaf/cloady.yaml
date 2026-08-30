@@ -1,6 +1,0 @@
-name: Overleaf
-version: 6.1.2
-sortOrder: 1000
-source:
-  url: https://github.com/Haxxnet/Compose-Examples/tree/main/examples/overleaf
-  kind: haxxnet

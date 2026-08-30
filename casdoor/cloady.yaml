@@ -1,6 +1,0 @@
-name: Casdoor
-version: 2.353.0
-sortOrder: 1000
-source:
-  url: https://github.com/Haxxnet/Compose-Examples/tree/main/examples/casdoor
-  kind: haxxnet

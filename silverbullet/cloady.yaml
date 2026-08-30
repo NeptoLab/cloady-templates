@@ -1,8 +1,0 @@
-name: Silverbullet
-hint: SilverBullet is a creative space where you collect, create and expand your
-  personal knowledge, while also letting you co
-version: 2.9.0
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/silverbullet
-  kind: runtipi

@@ -1,7 +1,0 @@
-name: Tube Archivist
-hint: Your self-hosted YouTube media server
-version: 0.5.10
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/tubearchivist
-  kind: runtipi

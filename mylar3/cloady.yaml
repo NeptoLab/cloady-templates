@@ -1,8 +1,0 @@
-name: Mylar3
-hint: Mylar3 is an automated Comic Book downloader (cbr/cbz) for use with NZB
-  and torrents written in python.
-version: 0.7.1-ls84
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/mylar3
-  kind: runtipi

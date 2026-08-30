@@ -1,6 +1,0 @@
-name: Sonarqube
-version: lts-community
-sortOrder: 1000
-source:
-  url: https://github.com/Haxxnet/Compose-Examples/tree/main/examples/sonarqube
-  kind: haxxnet

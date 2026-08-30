@@ -1,7 +1,0 @@
-name: Firefly III Data Importer
-hint: The Firefly III Data Importer can import data into Firefly III
-version: ersion-2
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/firefly-iii-data-importer
-  kind: runtipi

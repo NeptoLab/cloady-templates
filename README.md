@@ -10,7 +10,6 @@ supabase/
   docker-compose.yml   the template - vanilla compose, no custom extensions
   configs/             files referenced by the compose configs section
   env_schema.json      Cloady sidecar: env var titles, secrets, generate directives
-  cloady.yaml          Cloady sidecar: catalog name, hint, version, sort order, provenance
   icon.png             catalog tile icon
 ```
 
@@ -38,7 +37,7 @@ install time and are never affected by catalog updates.
 
 ## Provenance
 
-Most templates originate from upstream compose collections; each `cloady.yaml`
-carries a `source` field with the origin. Config files vendored from upstream
-projects (for example Supabase's kong.yml and SQL bootstrap, Apache-2.0) retain
-their original licenses. See LICENSES.md.
+Most templates originate from upstream compose collections; provenance and
+catalog metadata (name, hint, sort order) live in the Cloady control plane.
+Config files vendored from upstream projects (for example Supabase's kong.yml
+and SQL bootstrap, Apache-2.0) retain their original licenses. See LICENSES.md.

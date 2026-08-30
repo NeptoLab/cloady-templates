@@ -1,7 +1,0 @@
-name: Nextcloud Mini
-hint: A safe home for all your data.
-version: 34.0.0
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/nextcloud-mini
-  kind: runtipi

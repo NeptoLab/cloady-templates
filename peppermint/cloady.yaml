@@ -1,7 +1,0 @@
-name: Peppermint
-hint: An open source ticket management & help desk solution.
-version: latest
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/peppermint
-  kind: runtipi

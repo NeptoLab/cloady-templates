@@ -1,8 +1,0 @@
-name: Plausible CE
-hint: Simple, open-source, lightweight (< 1 KB) and privacy-friendly web
-  analytics alternative to Google Analytics.
-version: 2.1.5
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/plausible-ce
-  kind: runtipi

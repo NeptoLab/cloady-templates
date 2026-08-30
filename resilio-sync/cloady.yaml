@@ -1,7 +1,0 @@
-name: Resilio
-hint: Fast, reliable, and simple file sync and share solution.
-version: 3.1.2
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/resilio-sync
-  kind: runtipi

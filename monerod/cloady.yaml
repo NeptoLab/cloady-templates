@@ -1,8 +1,0 @@
-name: Monero Daemon
-hint: Monero is a private, decentralized cryptocurrency that keeps your finances
-  confidential and secure.
-version: 0.18.3.4
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/monerod
-  kind: runtipi

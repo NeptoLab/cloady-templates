@@ -1,8 +1,0 @@
-name: SABnzbd
-hint: Sabnzbd makes Usenet as simple and streamlined as possible by automating
-  everything we can
-version: 5.0.4
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/sabnzbd
-  kind: runtipi

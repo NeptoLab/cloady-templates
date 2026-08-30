@@ -1,6 +1,0 @@
-name: Shiori
-version: latest
-sortOrder: 1000
-source:
-  url: https://github.com/Haxxnet/Compose-Examples/tree/main/examples/shiori
-  kind: haxxnet

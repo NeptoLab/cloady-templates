@@ -1,4 +1,0 @@
-name: Redis
-hint: In-memory KV & pub/sub
-version: "8.8"
-sortOrder: 30

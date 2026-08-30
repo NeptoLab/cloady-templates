@@ -1,7 +1,0 @@
-name: CodeX.docs
-hint: Free Docs app powered by Editor.js ecosystem.
-version: "2.2"
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/codex-docs
-  kind: runtipi

@@ -1,7 +1,0 @@
-name: Moneroblock
-hint: Decentralized and trustless Monero block explorer
-version: 0.1.2
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/moneroblock
-  kind: runtipi

@@ -1,8 +1,0 @@
-name: Owncast
-hint: " Take control over your live stream video by running it yourself.
-  Streaming + chat out of the box. "
-version: 0.2.5
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/owncast
-  kind: runtipi

@@ -1,7 +1,0 @@
-name: Bitmagnet
-hint: A self-hosted BitTorrent indexer.
-version: 0.10.0
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/bitmagnet
-  kind: runtipi

@@ -1,7 +1,0 @@
-name: qDirStat
-hint: A graphical disk usage analyzer
-version: 1.8.1-ls82
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/qdirstat
-  kind: runtipi

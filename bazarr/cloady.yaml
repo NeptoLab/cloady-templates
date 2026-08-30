@@ -1,8 +1,0 @@
-name: Bazarr
-hint: A companion application to Sonarr and Radarr that manages and downloads
-  subtitles
-version: 1.5.6
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/bazarr
-  kind: runtipi

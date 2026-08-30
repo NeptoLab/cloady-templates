@@ -1,4 +1,0 @@
-name: Postgres
-hint: Managed Postgres database
-version: "18.4"
-sortOrder: 20

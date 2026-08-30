@@ -1,7 +1,0 @@
-name: Ghostfolio
-hint: Open Source Wealth Management Software.
-version: 3.18.0
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/ghostfolio
-  kind: runtipi

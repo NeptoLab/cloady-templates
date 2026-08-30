@@ -1,7 +1,0 @@
-name: Smallweb
-hint: Your internet folder
-version: 0.28.4
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/smallweb
-  kind: runtipi

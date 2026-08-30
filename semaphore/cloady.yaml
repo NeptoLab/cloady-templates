@@ -1,7 +1,0 @@
-name: Semaphore
-hint: Modern UI for Ansible, Terraform, OpenTofu, Bash, Pulumi.
-version: 2.18.14
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/semaphore
-  kind: runtipi

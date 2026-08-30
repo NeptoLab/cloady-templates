@@ -1,7 +1,0 @@
-name: Mealie
-hint: Mealie is a self-hosted recipe manager and meal planner.
-version: 3.20.1
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/mealie-1
-  kind: runtipi

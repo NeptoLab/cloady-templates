@@ -1,7 +1,0 @@
-name: Shlink
-hint: Shlink is a self-hosted URL shortener
-version: 5.1.5
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/shlink
-  kind: runtipi

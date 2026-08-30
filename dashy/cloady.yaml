@@ -1,7 +1,0 @@
-name: Dashy
-hint: A self-hostable personal dashboard built for you.
-version: 4.3.12
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/dashy
-  kind: runtipi

@@ -1,7 +1,0 @@
-name: Wekan
-hint: Open-Source, customizable, and privacy-focused kanban
-version: "9.73"
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/wekan
-  kind: runtipi

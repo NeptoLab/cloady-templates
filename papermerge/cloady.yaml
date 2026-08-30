@@ -1,6 +1,0 @@
-name: Papermerge
-version: 2.0.1
-sortOrder: 1000
-source:
-  url: https://github.com/Haxxnet/Compose-Examples/tree/main/examples/papermerge
-  kind: haxxnet

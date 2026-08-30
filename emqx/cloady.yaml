@@ -1,7 +1,0 @@
-name: EMQX Open Source
-hint: Scalable open-source MQTT broker.
-version: 6.2.2
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/emqx
-  kind: runtipi

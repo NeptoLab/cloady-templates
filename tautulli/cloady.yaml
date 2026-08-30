@@ -1,7 +1,0 @@
-name: Tautulli
-hint: Monitoring and tracking tool for Plex Media Server.
-version: 2.17.2
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/tautulli
-  kind: runtipi

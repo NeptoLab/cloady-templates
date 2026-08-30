@@ -1,6 +1,0 @@
-name: Jetbrains Youtrack
-version: 2025.3.131383
-sortOrder: 1000
-source:
-  url: https://github.com/Haxxnet/Compose-Examples/tree/main/examples/jetbrains-youtrack
-  kind: haxxnet

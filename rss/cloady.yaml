@@ -1,7 +1,0 @@
-name: RSS
-hint: A simple, opinionated, RSS feed aggregator.
-version: 2.1.1
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/rss
-  kind: runtipi

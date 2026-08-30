@@ -1,6 +1,0 @@
-name: Obsidian Ignis
-version: latest
-sortOrder: 1000
-source:
-  url: https://github.com/Haxxnet/Compose-Examples/tree/main/examples/obsidian-ignis
-  kind: haxxnet

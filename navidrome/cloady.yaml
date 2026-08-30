@@ -1,7 +1,0 @@
-name: Navidrome
-hint: A selfhosted music server
-version: 0.62.0
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/navidrome
-  kind: runtipi

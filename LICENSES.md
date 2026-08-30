@@ -1,7 +1,7 @@
 # Licenses and provenance
 
 Templates in this repository are derived from publicly documented compose setups.
-Each folder's `cloady.yaml` records its origin in the `source` field, most commonly:
+Templates derive most commonly from:
 
 - https://github.com/runtipi/runtipi-appstore
 - https://github.com/Haxxnet/Compose-Examples

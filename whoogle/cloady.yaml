@@ -1,7 +1,0 @@
-name: Whoogle Search
-hint: A self-hosted, ad-free, privacy-respecting metasearch engine.
-version: 1.2.4
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/whoogle
-  kind: runtipi

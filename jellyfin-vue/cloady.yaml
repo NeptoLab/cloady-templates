@@ -1,7 +1,0 @@
-name: Jellyfin Vue (Beta)
-hint: A modern web client for Jellyfin based on Vue
-version: unstable.2024-10-14.a47a7d5
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/jellyfin-vue
-  kind: runtipi

@@ -1,7 +1,0 @@
-name: HedgeDoc
-hint: A Collaborative Markdown and Note Taking App
-version: 1.11.0
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/hedgedoc
-  kind: runtipi

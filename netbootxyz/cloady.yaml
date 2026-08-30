@@ -1,7 +1,0 @@
-name: Netboot.xyz
-hint: Your favorite operating systems in one place.
-version: 0.7.6
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/netbootxyz
-  kind: runtipi

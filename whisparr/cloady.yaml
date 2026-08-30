@@ -1,7 +1,0 @@
-name: Whisparr
-hint: Adult movie collection manager.
-version: nightly-2.0.0.548
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/whisparr
-  kind: runtipi

@@ -1,6 +1,0 @@
-name: Filerun
-version: "11.8"
-sortOrder: 1000
-source:
-  url: https://github.com/Haxxnet/Compose-Examples/tree/main/examples/filerun
-  kind: haxxnet

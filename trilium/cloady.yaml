@@ -1,7 +1,0 @@
-name: Trilium
-hint: An open-source, self-hosted Notion alterative
-version: 0.103.0
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/trilium
-  kind: runtipi

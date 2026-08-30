@@ -1,8 +1,0 @@
-name: LinkStack
-hint: LinkStack is a highly customizable link sharing platform with an
-  intuitive, easy to use user interface
-version: latest
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/linkstack
-  kind: runtipi

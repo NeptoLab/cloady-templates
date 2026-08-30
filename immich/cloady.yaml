@@ -1,7 +1,0 @@
-name: Immich
-hint: Photo and video backup solution directly from your mobile phone.
-version: 3.0.1
-sortOrder: 1000
-source:
-  url: https://github.com/runtipi/runtipi-appstore/tree/master/apps/immich
-  kind: runtipi
