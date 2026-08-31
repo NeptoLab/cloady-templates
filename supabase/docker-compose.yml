@@ -44,7 +44,7 @@ services:
     deploy:
       resources:
         reservations:
-          cpus: 0.5
+          cpus: 0.3
           memory: 768M
   auth:
     image: supabase/gotrue:v2.189.0
@@ -89,7 +89,7 @@ services:
     deploy:
       resources:
         reservations:
-          cpus: 0.1
+          cpus: 0.05
           memory: 128M
   kong:
     image: kong/kong:3.9.1
@@ -124,7 +124,7 @@ services:
     deploy:
       resources:
         reservations:
-          cpus: 0.1
+          cpus: 0.3
           memory: 384M
   meta:
     image: supabase/postgres-meta:v0.96.6
@@ -141,7 +141,7 @@ services:
     deploy:
       resources:
         reservations:
-          cpus: 0.1
+          cpus: 0.05
           memory: 128M
   rest:
     image: postgrest/postgrest:v14.12
@@ -164,7 +164,7 @@ services:
     deploy:
       resources:
         reservations:
-          cpus: 0.1
+          cpus: 0.2
           memory: 192M
   studio:
     image: supabase/studio:2026.06.03-sha-0bca601
@@ -201,7 +201,7 @@ services:
     deploy:
       resources:
         reservations:
-          cpus: 0.1
+          cpus: 0.4
           memory: 512M
   storage:
     image: supabase/storage-api:v1.60.4
@@ -230,7 +230,7 @@ services:
     deploy:
       resources:
         reservations:
-          cpus: 0.1
+          cpus: 0.05
           memory: 256M
   imgproxy:
     image: darthsim/imgproxy:v3.30.1
@@ -247,7 +247,7 @@ services:
     deploy:
       resources:
         reservations:
-          cpus: 0.1
+          cpus: 0.05
           memory: 64M
   realtime:
     image: supabase/realtime:v2.102.3
@@ -276,7 +276,7 @@ services:
     deploy:
       resources:
         reservations:
-          cpus: 0.25
+          cpus: 0.15
           memory: 384M
   functions:
     image: supabase/edge-runtime:v1.74.0
@@ -307,8 +307,8 @@ services:
     deploy:
       resources:
         reservations:
-          cpus: 0.25
-          memory: 768M
+          cpus: 0.3
+          memory: 896M
   supavisor:
     image: supabase/supavisor:2.9.5
     command:
@@ -343,7 +343,7 @@ services:
     deploy:
       resources:
         reservations:
-          cpus: 0.25
+          cpus: 0.15
           memory: 384M
 volumes:
   data:
