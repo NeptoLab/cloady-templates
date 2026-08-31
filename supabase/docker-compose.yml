@@ -45,7 +45,7 @@ services:
       resources:
         reservations:
           cpus: 0.5
-          memory: 1G
+          memory: 768M
   auth:
     image: supabase/gotrue:v2.189.0
     environment:
@@ -90,7 +90,7 @@ services:
       resources:
         reservations:
           cpus: 0.1
-          memory: 256M
+          memory: 128M
   kong:
     image: kong/kong:3.9.1
     entrypoint:
@@ -125,7 +125,7 @@ services:
       resources:
         reservations:
           cpus: 0.1
-          memory: 256M
+          memory: 384M
   meta:
     image: supabase/postgres-meta:v0.96.6
     environment:
@@ -142,7 +142,7 @@ services:
       resources:
         reservations:
           cpus: 0.1
-          memory: 256M
+          memory: 128M
   rest:
     image: postgrest/postgrest:v14.12
     command:
@@ -165,7 +165,7 @@ services:
       resources:
         reservations:
           cpus: 0.1
-          memory: 256M
+          memory: 192M
   studio:
     image: supabase/studio:2026.06.03-sha-0bca601
     environment:
@@ -202,7 +202,7 @@ services:
       resources:
         reservations:
           cpus: 0.1
-          memory: 256M
+          memory: 512M
   storage:
     image: supabase/storage-api:v1.60.4
     environment:
@@ -248,7 +248,7 @@ services:
       resources:
         reservations:
           cpus: 0.1
-          memory: 256M
+          memory: 64M
   realtime:
     image: supabase/realtime:v2.102.3
     environment:
@@ -277,7 +277,7 @@ services:
       resources:
         reservations:
           cpus: 0.25
-          memory: 512M
+          memory: 384M
   functions:
     image: supabase/edge-runtime:v1.74.0
     command:
@@ -307,8 +307,8 @@ services:
     deploy:
       resources:
         reservations:
-          cpus: 0.1
-          memory: 256M
+          cpus: 0.25
+          memory: 768M
   supavisor:
     image: supabase/supavisor:2.9.5
     command:
@@ -344,7 +344,7 @@ services:
       resources:
         reservations:
           cpus: 0.25
-          memory: 512M
+          memory: 384M
 volumes:
   data:
     driver_opts:
