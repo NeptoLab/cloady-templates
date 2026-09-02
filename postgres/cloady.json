@@ -12,6 +12,15 @@
       "title": "Password",
       "secret": true,
       "generate": "password:24"
+    },
+    "POSTGRES_TLS": {
+      "title": "TLS",
+      "description": "Encrypt connections with a self-signed certificate. Clients connect with sslmode=require.",
+      "enum": [
+        "on",
+        "off"
+      ],
+      "default": "on"
     }
   },
   "icon": "./icon.svg"
